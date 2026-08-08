@@ -1,9 +1,20 @@
 {
+  "name": "tanka-user-guide",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^26.1.1",
+    "cross-env": "^10.1.0",
+    "typescript": "^7.0.2"
+  },
   "dependencies": {
     "dotenv": "^17.4.2"
-  },
-  "devDependencies": {
-    "cross-env": "^10.1.0",
-    "tsx": "^4.23.1"
   }
 }
