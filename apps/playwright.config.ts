@@ -11,9 +11,6 @@ const authFile = path.resolve(
   './auth/admin.json',
 );
 
-console.log(`zzz ${__dirname}`);
-console.log(`zzz ${authFile}`);
-
 export default defineConfig({
   testDir: './tests',
 

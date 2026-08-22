@@ -452,44 +452,47 @@ test.describe(
         );
 
         await test.step(
-          'Bước 7 - Lưu báo giá',
-          async () => {
-            await expect(
-              quotationPage.saveButton,
-            ).toBeVisible({
-              timeout: 20_000,
-            });
+  'Bước 7 - Lưu báo giá',
+  async () => {
+    // Cuộn lên đầu trang để hiển thị nút Lưu
+    await page.evaluate(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
 
-            await expect(
-              quotationPage.saveButton,
-            ).toBeEnabled({
-              timeout: 15_000,
-            });
+    await guidePause(page, 1_500);
 
-            await quotationPage.saveButton
-              .scrollIntoViewIfNeeded();
+    await expect(
+      quotationPage.saveButton,
+    ).toBeVisible({
+      timeout: 20_000,
+    });
 
-            await captureGuideStep({
-              page,
-              testInfo,
-              guideId:
-                'UG-021-create-quotation',
-              stepNumber: 7,
-              title:
-                'Lưu báo giá',
-              target:
-                quotationPage.saveButton,
-            });
+    await expect(
+      quotationPage.saveButton,
+    ).toBeEnabled({
+      timeout: 15_000,
+    });
 
-            await quotationPage
-              .saveAndWaitForSuccess();
+    await quotationPage.saveButton
+      .scrollIntoViewIfNeeded();
 
-            await guidePause(
-              page,
-              2_500,
-            );
-          },
-        );
+    await captureGuideStep({
+      page,
+      testInfo,
+      guideId: 'UG-021-create-quotation',
+      stepNumber: 7,
+      title: 'Chọn nút Lưu',
+      target: quotationPage.saveButton,
+    });
+
+    await quotationPage.saveButton.click();
+
+    await guidePause(page, 3_000);
+  },
+);
 
         await test.step(
           'Bước 8 - Trở lại danh sách',

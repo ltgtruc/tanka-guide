@@ -50,7 +50,7 @@ export class QuotationPage {
 
     this.saveButton = page
       .getByRole('button', {
-        name: /^lưu$|^save$/i,
+        name: /lưu|save/i,
       })
       .first();
 
@@ -366,8 +366,8 @@ export class QuotationPage {
    * Tìm ô input hoặc dropdown theo nhãn.
    */
   private findDropdownInput(
-        labelPattern: RegExp,
-      ): Locator {
+    labelPattern: RegExp,
+  ): Locator {
     const byAccessibleLabel =
       this.page
         .getByLabel(labelPattern)
@@ -1631,7 +1631,7 @@ export class QuotationPage {
     });
   }
 
-  
+
 
   /**
    * ============================================================
@@ -1644,267 +1644,267 @@ export class QuotationPage {
    *
    * Giữ hàm save() để tương thích code cũ.
    */
-  async save(): Promise < void> {
-  await expect(
-    this.saveButton,
+  async save(): Promise<void> {
+    await expect(
+      this.saveButton,
     ).toBeVisible({
       timeout: 15_000,
     });
 
-  await expect(
-    this.saveButton,
+    await expect(
+      this.saveButton,
     ).toBeEnabled({
       timeout: 15_000,
     });
 
-  await this.saveButton.click();
-}
+    await this.saveButton.click();
+  }
 
   /**
    * Lưu và chờ thông báo thành công.
    */
-  async saveAndWaitForSuccess(): Promise < void> {
-  await this.saveButton
-    .scrollIntoViewIfNeeded();
+  async saveAndWaitForSuccess(): Promise<void> {
+    await this.saveButton
+      .scrollIntoViewIfNeeded();
 
-  await this.save();
+    await this.save();
 
-  const successMessage =
-    this.page
-      .getByText(
-        /lưu thành công|thành công/i,
-      )
-      .first();
+    const successMessage =
+      this.page
+        .getByText(
+          /lưu thành công|thành công/i,
+        )
+        .first();
 
-  await expect(
-    successMessage,
-  ).toBeVisible({
-    timeout: 20_000,
-  });
-}
+    await expect(
+      successMessage,
+    ).toBeVisible({
+      timeout: 20_000,
+    });
+  }
 
   /**
    * Trở lại danh sách.
    *
    * Giữ hàm backToList() để tương thích code cũ.
    */
-  async backToList(): Promise < void> {
-  await expect(
-    this.backButton,
+  async backToList(): Promise<void> {
+    await expect(
+      this.backButton,
     ).toBeVisible({
       timeout: 15_000,
     });
 
-  await expect(
-    this.backButton,
+    await expect(
+      this.backButton,
     ).toBeEnabled({
       timeout: 15_000,
     });
 
-  await this.backButton.click();
-}
+    await this.backButton.click();
+  }
 
   /**
    * Trở lại và chờ trang danh sách xuất hiện.
    */
-  async backToQuotationList(): Promise < void> {
-  await this.backToList();
+  async backToQuotationList(): Promise<void> {
+    await this.backToList();
 
-  await this.page.waitForURL(
-    /sales-quote-list|sales-order-list/i,
-    {
-      timeout: 30_000,
-    },
-  );
-}
+    await this.page.waitForURL(
+      /sales-quote-list|sales-order-list/i,
+      {
+        timeout: 30_000,
+      },
+    );
+  }
 
   /**
    * Escape nội dung để dùng an toàn trong RegExp.
    */
   private escapeRegExp(
-  value: string,
-): string {
-  return value.replace(
-    /[.*+?^${}()|[\]\\]/g,
-    '\\$&',
-  );
-}
+    value: string,
+  ): string {
+    return value.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      '\\$&',
+    );
+  }
   /**
  * Mở tab Các lựa chọn thuộc tính để xem.
  *
  * Sau khi xem xong, giữ nguyên tab hiện tại
  * và tiếp tục bấm nút Cập nhật.
  */
-  async reviewAttributeOptions(): Promise < void> {
-  await expect(
-    this.attributeOptionsTab,
+  async reviewAttributeOptions(): Promise<void> {
+    await expect(
+      this.attributeOptionsTab,
     ).toBeVisible({
       timeout: 15_000,
     });
 
-  await this.attributeOptionsTab
-    .scrollIntoViewIfNeeded();
+    await this.attributeOptionsTab
+      .scrollIntoViewIfNeeded();
 
-  await this.attributeOptionsTab.click();
+    await this.attributeOptionsTab.click();
 
-  /*
-   * Giữ nội dung tab hiển thị đủ lâu
-   * để video ghi lại.
-   */
-  await this.page.waitForTimeout(
-    1_200,
-  );
+    /*
+     * Giữ nội dung tab hiển thị đủ lâu
+     * để video ghi lại.
+     */
+    await this.page.waitForTimeout(
+      1_200,
+    );
 
-  /*
-   * Không quay lại generalInfoTab.
-   * Bước tiếp theo sẽ bấm Cập nhật trực tiếp.
-   */
-}
+    /*
+     * Không quay lại generalInfoTab.
+     * Bước tiếp theo sẽ bấm Cập nhật trực tiếp.
+     */
+  }
   /**
  * Trả về đúng nút Thêm dòng hàng đang hiển thị.
  *
  * Nút nằm ở bên phải khu vực tab phía trên bảng Các dòng.
  */
   private getVisibleAddButton(): Locator {
-  /*
-   * Cách 1:
-   * tìm button hoặc a đang hiển thị và có text Thêm.
-   */
-  const visibleButton = this.page
-    .locator(
-      [
-        'button:visible',
-        'a:visible',
-        '[role="button"]:visible',
-      ].join(', '),
-    )
-    .filter({
-      hasText: /^\s*thêm\s*$/i,
-    })
-    .last();
+    /*
+     * Cách 1:
+     * tìm button hoặc a đang hiển thị và có text Thêm.
+     */
+    const visibleButton = this.page
+      .locator(
+        [
+          'button:visible',
+          'a:visible',
+          '[role="button"]:visible',
+        ].join(', '),
+      )
+      .filter({
+        hasText: /^\s*thêm\s*$/i,
+      })
+      .last();
 
-  /*
-   * Cách 2:
-   * tìm text Thêm rồi lấy ancestor có thể click.
-   */
-  const buttonFromText = this.page
-    .getByText(
-      /^\s*thêm\s*$/i,
-    )
-    .last()
-    .locator(
-      'xpath=ancestor-or-self::*[self::button or self::a or @role="button"][1]',
-    );
+    /*
+     * Cách 2:
+     * tìm text Thêm rồi lấy ancestor có thể click.
+     */
+    const buttonFromText = this.page
+      .getByText(
+        /^\s*thêm\s*$/i,
+      )
+      .last()
+      .locator(
+        'xpath=ancestor-or-self::*[self::button or self::a or @role="button"][1]',
+      );
 
-  return visibleButton
-    .or(buttonFromText)
-    .first();
-}
+    return visibleButton
+      .or(buttonFromText)
+      .first();
+  }
   /**
  * Bấm nút Thêm để tạo một dòng HTK mới.
  */
-  async clickAddLineButton(): Promise < void> {
-  const addButton =
-    this.getVisibleAddButton();
+  async clickAddLineButton(): Promise<void> {
+    const addButton =
+      this.getVisibleAddButton();
 
-  await expect(
-    addButton,
-  ).toBeVisible({
-    timeout: 20_000,
-  });
+    await expect(
+      addButton,
+    ).toBeVisible({
+      timeout: 20_000,
+    });
 
-  await addButton
+    await addButton
       .scrollIntoViewIfNeeded();
 
-  await expect(
-    addButton,
-  ).toBeEnabled({
-    timeout: 15_000,
-  });
+    await expect(
+      addButton,
+    ).toBeEnabled({
+      timeout: 15_000,
+    });
 
-  /*
-   * Click thông thường trước.
-   */
-  try {
-    await addButton.click({
-      timeout: 10_000,
-    });
-  } catch {
     /*
-     * Nếu icon hoặc lớp giao diện che nút,
-     * dùng force click.
+     * Click thông thường trước.
      */
-    await addButton.click({
-      force: true,
-    });
+    try {
+      await addButton.click({
+        timeout: 10_000,
+      });
+    } catch {
+      /*
+       * Nếu icon hoặc lớp giao diện che nút,
+       * dùng force click.
+       */
+      await addButton.click({
+        force: true,
+      });
+    }
   }
-}
   /**
  * Popup Thông số chi tiết đang hiển thị.
  */
   private getVisibleItemDetailDialog(): Locator {
-  return this.page
-    .locator(
-      [
-        '.p-dialog:visible',
-        '[role="dialog"]:visible',
-        '.modal:visible',
-      ].join(', '),
-    )
-    .filter({
-      hasText: /thông số chi tiết cho/i,
-    })
-    .first();
-}
+    return this.page
+      .locator(
+        [
+          '.p-dialog:visible',
+          '[role="dialog"]:visible',
+          '.modal:visible',
+        ].join(', '),
+      )
+      .filter({
+        hasText: /thông số chi tiết cho/i,
+      })
+      .first();
+  }
 
   /**
    * Nội dung cảnh báo HTK chưa có giá.
    */
   private getMissingPriceMessage(): Locator {
-  return this.getVisibleItemDetailDialog()
-    .getByText(
-      /chưa có giá/i,
-    )
-    .first();
-}
+    return this.getVisibleItemDetailDialog()
+      .getByText(
+        /chưa có giá/i,
+      )
+      .first();
+  }
 
   /**
    * Kiểm tra popup hiện tại có phải cảnh báo
    * "Chưa có giá" hay không.
    */
-  private async isMissingPriceDialog(): Promise < boolean > {
-  return this.getMissingPriceMessage()
-    .isVisible()
-    .catch(() => false);
-}
+  private async isMissingPriceDialog(): Promise<boolean> {
+    return this.getMissingPriceMessage()
+      .isVisible()
+      .catch(() => false);
+  }
 
   /**
    * Đóng popup cảnh báo chưa có giá.
    */
-  private async closeMissingPriceDialog(): Promise < void> {
-  const warningDialog =
-    this.getVisibleItemDetailDialog();
+  private async closeMissingPriceDialog(): Promise<void> {
+    const warningDialog =
+      this.getVisibleItemDetailDialog();
 
-  const closeButton = warningDialog
-    .getByRole('button', {
-      name: /đóng/i,
-    })
-    .last();
+    const closeButton = warningDialog
+      .getByRole('button', {
+        name: /đóng/i,
+      })
+      .last();
 
-  await expect(
-    closeButton,
-  ).toBeVisible({
-    timeout: 10_000,
-  });
+    await expect(
+      closeButton,
+    ).toBeVisible({
+      timeout: 10_000,
+    });
 
-  await closeButton.click();
+    await closeButton.click();
 
-  await expect(
-    warningDialog,
-  ).toBeHidden({
-    timeout: 10_000,
-  });
-}
+    await expect(
+      warningDialog,
+    ).toBeHidden({
+      timeout: 10_000,
+    });
+  }
 
   /**
    * Tìm input Mã bản vẽ trong popup hợp lệ.
@@ -1913,35 +1913,35 @@ export class QuotationPage {
    * tránh nhầm với popup cảnh báo chưa có giá.
    */
   private getVisibleDrawingCodeInput(): Locator {
-  const detailDialog =
-    this.getVisibleItemDetailDialog();
+    const detailDialog =
+      this.getVisibleItemDetailDialog();
 
-  const byLabel = detailDialog
-    .getByLabel(/mã bản vẽ/i)
-    .first();
+    const byLabel = detailDialog
+      .getByLabel(/mã bản vẽ/i)
+      .first();
 
-  const byText = detailDialog
-    .getByText(
-      /mã bản vẽ/i,
-    )
-    .first()
-    .locator(
-      'xpath=following::input[1]',
-    );
+    const byText = detailDialog
+      .getByText(
+        /mã bản vẽ/i,
+      )
+      .first()
+      .locator(
+        'xpath=following::input[1]',
+      );
 
-  const byLabelElement = detailDialog
-    .locator('label')
-    .filter({
-      hasText: /mã bản vẽ/i,
-    })
-    .first()
-    .locator(
-      'xpath=following::input[1]',
-    );
+    const byLabelElement = detailDialog
+      .locator('label')
+      .filter({
+        hasText: /mã bản vẽ/i,
+      })
+      .first()
+      .locator(
+        'xpath=following::input[1]',
+      );
 
-  return byLabel
-    .or(byLabelElement)
-    .or(byText)
-    .first();
-}
+    return byLabel
+      .or(byLabelElement)
+      .or(byText)
+      .first();
+  }
 }

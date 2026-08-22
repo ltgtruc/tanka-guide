@@ -4,7 +4,6 @@ node_modules/
 # report files
 user-guide-output/
 playwright-report/
-user-guide-output/videos/
 test-results/
 auth/
 
