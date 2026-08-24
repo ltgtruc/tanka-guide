@@ -1,8 +1,6 @@
-import {
-  expect,
-  Locator,
-  Page,
-} from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
+
+import { waitAndClick, waitToSeeText } from '../../helpers/action.helper';
 
 export class CustomerPage {
   readonly page: Page;
@@ -57,52 +55,22 @@ export class CustomerPage {
   }
 
   async verifyPageOpened(): Promise<void> {
-    await expect(
-      this.page.getByText(
-        /khách hàng|chi tiết khách hàng/i,
-      ),
-    ).toBeVisible({
-      timeout: 10000,
-    });
+    await waitToSeeText(this.page, /khách hàng|chi tiết khách hàng/i);
   }
 
   async openCreateForm(): Promise<void> {
-    await expect(
-      this.createButton,
-    ).toBeVisible({
-      timeout: 10000,
-    });
-
-    await this.createButton.click();
+    await waitAndClick(this.createButton);
   }
 
   async save(): Promise<void> {
-    await expect(
-      this.saveButton,
-    ).toBeVisible({
-      timeout: 10000,
-    });
-
-    await this.saveButton.click();
+    await waitAndClick(this.saveButton);
   }
 
   async backToList(): Promise<void> {
-    await expect(
-      this.backButton,
-    ).toBeVisible({
-      timeout: 10000,
-    });
-
-    await this.backButton.click();
+    await waitAndClick(this.backButton);
   }
 
-  async verifyCreated(
-    customerName: string,
-  ): Promise<void> {
-    await expect(
-      this.page.getByText(customerName),
-    ).toBeVisible({
-      timeout: 10000,
-    });
+  async verifyCreated(customerName: string): Promise<void> {
+    await waitToSeeText(this.page, customerName);
   }
 }

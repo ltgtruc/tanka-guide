@@ -1,45 +1,75 @@
 import { Locator, Page } from '@playwright/test';
 
-export async function highlightElement(
-  locator: Locator,
+const DETACHED_ELEMENT_PATTERN = /not attached to the DOM/i;
+
+/**
+ * Sau khi Lưu/submit, app hay re-render vùng chứa nút (toast, disabled
+ * state...) khiến node đã resolve trước đó bị gỡ khỏi DOM giữa chừng.
+ * Retry để Locator resolve lại node mới thay vì fail ngay.
+ */
+async function retryOnDetached(
+  action: () => Promise<void>,
+  attempts = 3,
+  delayMs = 300,
 ): Promise<void> {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      await action();
+      return;
+    } catch (error) {
+      const isDetached =
+        error instanceof Error &&
+        DETACHED_ELEMENT_PATTERN.test(error.message);
+
+      if (!isDetached || attempt === attempts) {
+        throw error;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+}
+
+export async function highlightElement(locator: Locator): Promise<void> {
   const target = locator.first();
 
-  await target.scrollIntoViewIfNeeded();
+  await retryOnDetached(async () => {
+    await target.scrollIntoViewIfNeeded();
 
-  await target.evaluate((element) => {
-    const htmlElement = element as HTMLElement;
+    await target.evaluate((element) => {
+      const htmlElement = element as HTMLElement;
 
-    htmlElement.dataset.originalOutline =
-      htmlElement.style.outline;
+      htmlElement.dataset.originalOutline =
+        htmlElement.style.outline;
 
-    htmlElement.dataset.originalOutlineOffset =
-      htmlElement.style.outlineOffset;
+      htmlElement.dataset.originalOutlineOffset =
+        htmlElement.style.outlineOffset;
 
-    htmlElement.dataset.originalBoxShadow =
-      htmlElement.style.boxShadow;
+      htmlElement.dataset.originalBoxShadow =
+        htmlElement.style.boxShadow;
 
-    htmlElement.style.outline = '4px solid #ff9800';
-    htmlElement.style.outlineOffset = '4px';
-    htmlElement.style.boxShadow =
-      '0 0 0 8px rgba(255, 152, 0, 0.25)';
+      htmlElement.style.outline = '4px solid #ff9800';
+      htmlElement.style.outlineOffset = '4px';
+      htmlElement.style.boxShadow =
+        '0 0 0 8px rgba(255, 152, 0, 0.25)';
+    });
   });
 }
 
-export async function removeHighlight(
-  locator: Locator,
-): Promise<void> {
-  await locator.evaluate((element) => {
-    const htmlElement = element as HTMLElement;
+export async function removeHighlight(locator: Locator): Promise<void> {
+  await retryOnDetached(async () => {
+    await locator.evaluate((element) => {
+      const htmlElement = element as HTMLElement;
 
-    htmlElement.style.outline =
-      htmlElement.dataset.originalOutline || '';
+      htmlElement.style.outline =
+        htmlElement.dataset.originalOutline || '';
 
-    htmlElement.style.outlineOffset =
-      htmlElement.dataset.originalOutlineOffset || '';
+      htmlElement.style.outlineOffset =
+        htmlElement.dataset.originalOutlineOffset || '';
 
-    delete htmlElement.dataset.originalOutline;
-    delete htmlElement.dataset.originalOutlineOffset;
+      delete htmlElement.dataset.originalOutline;
+      delete htmlElement.dataset.originalOutlineOffset;
+    });
   });
 }
 
