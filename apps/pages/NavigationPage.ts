@@ -13,47 +13,12 @@ export class NavigationPage {
   constructor(page: Page) {
     this.page = page;
 
-    this.catalogsMenu = page.getByText(
-      /danh mục|catalogs/i,
-      {
-        exact: true,
-      },
-    );
-
-    this.salesMenu = page.getByText(
-      /bán hàng|sales/i,
-      {
-        exact: true,
-      },
-    );
-
-    this.productionMenu = page.getByText(
-      /sản xuất|production/i,
-      {
-        exact: true,
-      },
-    );
-
-    this.purchasingMenu = page.getByText(
-      /mua hàng|purchasing/i,
-      {
-        exact: true,
-      },
-    );
-
-    this.accountingMenu = page.getByText(
-      /quyết toán|accounting/i,
-      {
-        exact: true,
-      },
-    );
-
-    this.systemMenu = page.getByText(
-      /hệ thống|system/i,
-      {
-        exact: true,
-      },
-    );
+    this.catalogsMenu = page.getByText(/danh mục|catalogs/i, { exact: true });
+    this.salesMenu = page.getByText(/bán hàng|sales/i, { exact: true });
+    this.productionMenu = page.getByText(/sản xuất|production/i, { exact: true });
+    this.purchasingMenu = page.getByText(/mua hàng|purchasing/i, { exact: true });
+    this.accountingMenu = page.getByText(/quyết toán|accounting/i, { exact: true });
+    this.systemMenu = page.getByText(/hệ thống|system/i, { exact: true });
   }
 
   async openSales(): Promise<void> {
@@ -63,12 +28,7 @@ export class NavigationPage {
   async openCustomers(): Promise<void> {
     await this.openSales();
 
-    const customerMenu = this.page.getByText(
-      /khách hàng|customer/i,
-      {
-        exact: true,
-      },
-    );
+    const customerMenu = this.page.getByText(/khách hàng|customer/i, { exact: true });
 
     await expect(customerMenu).toBeVisible();
     await customerMenu.click();
@@ -77,12 +37,7 @@ export class NavigationPage {
   async openQuotation(): Promise<void> {
     await this.openSales();
 
-    const quotationMenu = this.page.getByText(
-      /báo giá|quotation/i,
-      {
-        exact: true,
-      },
-    );
+    const quotationMenu = this.page.getByText(/báo giá|quotation/i, { exact: true });
 
     await expect(quotationMenu).toBeVisible();
     await quotationMenu.click();

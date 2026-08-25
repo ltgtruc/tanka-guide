@@ -14,17 +14,9 @@ export class LoginPage {
      * Các locator dưới đây là mẫu.
      * Bạn cần kiểm tra DOM thực tế của Tanka và điều chỉnh.
      */
-    this.emailInput = page
-      .getByLabel(/email/i)
-      .or(page.locator('input[type="email"]'));
-
-    this.passwordInput = page
-      .getByLabel(/mật khẩu|password/i)
-      .or(page.locator('input[type="password"]'));
-
-    this.loginButton = page.getByRole('button', {
-      name: /đăng nhập|login/i,
-    });
+    this.emailInput = page.getByLabel(/email/i).or(page.locator('input[type="email"]'));
+    this.passwordInput = page.getByLabel(/mật khẩu|password/i).or(page.locator('input[type="password"]'));
+    this.loginButton = page.getByRole('button', { name: /đăng nhập|login/i });
   }
 
   async open(): Promise<void> {
@@ -40,11 +32,6 @@ export class LoginPage {
 
   async verifyLoginSuccess(): Promise<void> {
     await expect(this.page).not.toHaveURL(/login/i);
-
-    await expect(
-      this.page
-        .getByText(/dashboard|tổng quan|danh mục/i)
-        .first(),
-    ).toBeVisible();
+    await expect(this.page.getByText(/dashboard|tổng quan|danh mục/i).first()).toBeVisible();
   }
 }
