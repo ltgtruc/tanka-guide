@@ -57,8 +57,10 @@ export async function highlightElement(locator: Locator): Promise<void> {
 }
 
 export async function removeHighlight(locator: Locator): Promise<void> {
+  const target = locator.first();
+
   await retryOnDetached(async () => {
-    await locator.evaluate((element) => {
+    await target.evaluate((element) => {
       const htmlElement = element as HTMLElement;
 
       htmlElement.style.outline =

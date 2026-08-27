@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 
+import { waitToSeeText } from '../../helpers/action.helper';
 import { BasePage } from '../BasePage';
 
 export class InventoryPage extends BasePage {
@@ -22,7 +23,7 @@ export class InventoryPage extends BasePage {
   }
 
   async verifyPageOpened(): Promise<void> {
-    await expect(this.page.getByText(/vật liệu|inventory|item/i)).toBeVisible();
+    await waitToSeeText(this.page, /danh sách hàng tồn kho/i);
   }
 
   async openCreateForm(): Promise<void> {

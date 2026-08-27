@@ -10,6 +10,6 @@ export class DoorTypePage extends BasePage {
     super(page);
 
     this.nameInput = page.getByRole('textbox').nth(0);
-    this.reportTypeDropdown = page.locator('input').nth(1);
+    this.reportTypeDropdown = page.getByRole('combobox');
   }
 }

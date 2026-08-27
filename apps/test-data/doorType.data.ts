@@ -8,6 +8,6 @@ export function createGuideDoorType(): DoorTypeData {
 
   return {
     name: `Loại cửa tự động ${timestamp}`,
-    reportType: 'Báo cáo tiêu chuẩn',
+    reportType: 'Hình thể',
   };
 }

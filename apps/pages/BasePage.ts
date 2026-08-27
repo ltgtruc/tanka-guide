@@ -16,8 +16,11 @@ export class BasePage {
   constructor(page: Page, options: BasePageOptions = {}) {
     this.page = page;
 
+    const createButtonName = options.createButtonName ?? /tạo mới|create new|create/i;
+
     this.createButton = page
-      .getByRole('button', { name: options.createButtonName ?? /tạo mới|create new|create/i })
+      .getByRole('button', { name: createButtonName })
+      .or(page.getByRole('link', { name: createButtonName }))
       .first();
     this.saveButton = page.getByRole('button', { name: options.saveButtonName ?? /lưu|save/i }).first();
     this.backButton = page.getByRole('button', { name: options.backButtonName ?? /trở lại|back/i }).first();

@@ -10,9 +10,7 @@ const GUIDE_ID = 'UG-020-create-customer';
 test.describe('UG-020 - Tạo khách hàng', () => {
   test(
     'Hướng dẫn tạo khách hàng mới',
-    {
-      tag: ['@user-guide', '@sales', '@customer'],
-    },
+    { tag: ['@user-guide', '@sales', '@customer'] },
     async ({ page }, testInfo) => {
       const customerPage = new CustomerPage(page);
 
@@ -21,14 +19,7 @@ test.describe('UG-020 - Tạo khách hàng', () => {
       let stepNumber = 0;
 
       const capture = (title: string, target?: Locator) =>
-        captureGuideStep({
-          page,
-          testInfo,
-          guideId: GUIDE_ID,
-          stepNumber: ++stepNumber,
-          title,
-          target,
-        });
+        captureGuideStep({ page, testInfo, guideId: GUIDE_ID, stepNumber: ++stepNumber, title, target });
 
       await test.step('Bước 1 - Mở hệ thống', async () => {
         await page.goto('/');
@@ -38,16 +29,12 @@ test.describe('UG-020 - Tạo khách hàng', () => {
       });
 
       await test.step('Bước 2 - Mở module Bán hàng', async () => {
-        const salesMenu = page
-          .getByRole('link', {
-            name: /bán hàng/i,
-          })
-          .first();
+        const salesMenu = page.getByRole('link', { name: /bán hàng/i }).first();
 
         await waitVisible(salesMenu);
         await capture('Chọn module Bán hàng', salesMenu);
         await salesMenu.click();
-        await guidePause(page, 1500);
+        await guidePause(page, 1_500);
       });
 
       await test.step('Bước 3 - Mở chức năng Khách hàng', async () => {
@@ -55,7 +42,7 @@ test.describe('UG-020 - Tạo khách hàng', () => {
         await waitVisible(customerMenu);
         await capture('Chọn chức năng Khách hàng', customerMenu);
         await customerMenu.click();
-        await guidePause(page, 2000);
+        await guidePause(page, 2_000);
       });
 
       await test.step('Bước 4 - Chọn Tạo mới', async () => {
@@ -63,7 +50,7 @@ test.describe('UG-020 - Tạo khách hàng', () => {
         await capture('Chọn nút Tạo mới', customerPage.createButton);
         await customerPage.openCreateForm();
         await waitVisible(customerPage.nameInput);
-        await guidePause(page, 1000);
+        await guidePause(page, 1_000);
       });
 
       await test.step('Bước 5 - Nhập tên khách hàng', async () => {
@@ -89,17 +76,14 @@ test.describe('UG-020 - Tạo khách hàng', () => {
       await test.step('Bước 8 - Lưu khách hàng', async () => {
         await capture('Chọn nút Lưu', customerPage.saveButton);
         await customerPage.save();
-        await guidePause(page, 3000);
+        await guidePause(page, 3_000);
       });
 
       await test.step('Bước 9 - Kiểm tra kết quả', async () => {
         await waitVisible(customerPage.backButton, 30_000);
-        await capture(
-          'Trở lại danh sách khách hàng để kiểm tra kết quả lưu thành công',
-          customerPage.backButton,
-        );
+        await capture('Trở lại danh sách khách hàng để kiểm tra kết quả lưu thành công', customerPage.backButton);
         await customerPage.backToList();
-        await guidePause(page, 2000);
+        await guidePause(page, 2_000);
       });
     },
   );
