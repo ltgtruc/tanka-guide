@@ -22,6 +22,7 @@ export async function slowFill(
     : import('@playwright/test').Locator,
   value: string,
 ): Promise<void> {
+  await locator.scrollIntoViewIfNeeded();
   await locator.click();
 
   if (isGuideMode()) {

@@ -7,19 +7,58 @@ export class InventoryPage extends BasePage {
   readonly codeInput: Locator;
   readonly nameInput: Locator;
   readonly descriptionInput: Locator;
+  readonly groupDropdown: Locator;
+  readonly unitDropdown: Locator;
   readonly cancelButton: Locator;
 
   constructor(page: Page) {
     /*
-     * Các locator dưới đây là mẫu.
-     * Bạn cần kiểm tra DOM thực tế của Tanka và điều chỉnh.
+     * Đã kiểm tra DOM thực tế: các <label> trên form "Chi tiết hàng tồn kho"
+     * không có thuộc tính for/id liên kết tới input (PrimeVue float label),
+     * nên getByLabel() không tìm ra field — phải dò theo text label rồi lấy
+     * input/textarea liền sau bằng xpath, giống cách BasePage.findDropdownInput làm.
      */
     super(page, { createButtonName: /tạo mới|create|add/i });
 
-    this.codeInput = page.getByLabel(/mã|code/i).or(page.locator('input[name*="code"]'));
-    this.nameInput = page.getByLabel(/tên|name/i).or(page.locator('input[name*="name"]'));
-    this.descriptionInput = page.getByLabel(/mô tả|description/i).or(page.locator('textarea[name*="description"]'));
+    const inputAfterLabel = (labelPattern: RegExp): Locator =>
+      page
+        .locator('label')
+        .filter({ hasText: labelPattern })
+        .first()
+        .locator('xpath=following::*[self::input or self::textarea][1]');
+
+    this.codeInput = inputAfterLabel(/^mã\s*\*?$/i);
+    this.nameInput = inputAfterLabel(/^tên\s*\*?$/i);
+    this.descriptionInput = inputAfterLabel(/^diễn giải\s*$/i);
+    this.groupDropdown = this.findDropdownInput(/^nhóm htk\s*\*?$/i);
+    this.unitDropdown = this.findDropdownInput(/^đvt lưu kho\s*\*?$/i);
     this.cancelButton = page.getByRole('button', { name: /hủy|cancel/i });
+  }
+
+  private getVisibleDropdownOptions(): Locator {
+    return this.page.locator(
+      [
+        '.p-select-overlay:visible .p-select-option',
+        '.p-dropdown-panel:visible .p-dropdown-item',
+        '[role="listbox"]:visible [role="option"]',
+        '[role="option"]:visible',
+      ].join(', '),
+    );
+  }
+
+  async selectFirstOption(dropdown: Locator): Promise<string> {
+    await dropdown.scrollIntoViewIfNeeded();
+    await dropdown.click({ force: true });
+
+    const option = this.getVisibleDropdownOptions().first();
+
+    await expect(option).toBeVisible({ timeout: 15_000 });
+
+    const text = (await option.innerText()).trim();
+
+    await option.click();
+
+    return text;
   }
 
   async verifyPageOpened(): Promise<void> {

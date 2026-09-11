@@ -35,7 +35,13 @@ export function createGuideSalesOrder(): GuideSalesOrder {
      * chọn kính và xem Các lựa chọn thuộc tính.
      */
     lineItem: {
-      inventorySearch: 'SQ-01-XF',
+      /*
+       * Chỉ để "XF-55" (không giới hạn dòng SH/SQ cụ thể) vì nhiều biến thể
+       * hệ 55 hiện thiếu giá phụ kiện (vd. SH-01/SH-02/SQ-01/SQ-02-XF-55-1.4
+       * đều báo "chưa có giá") — để rộng hơn cho searchAndSelectInventory tự
+       * thử các biến thể khác còn giá (đã kiểm chứng: SQ-03-XF-55-1.4 có giá).
+       */
+      inventorySearch: 'XF-55',
       drawingCode: 'D1',
       glass: '08-CL-KD-VIFG/CL',
 

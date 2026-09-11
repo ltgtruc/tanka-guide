@@ -61,9 +61,18 @@ test.describe('UG-010 - Tạo vật liệu tồn kho', () => {
         await capture('Nhập tên vật liệu', inventoryPage.nameInput);
       });
 
-      await test.step('Bước 7 - Nhập mô tả', async () => {
-        await guideFill(page, inventoryPage.descriptionInput, inventoryItem.description);
-        await capture('Nhập mô tả vật liệu', inventoryPage.descriptionInput);
+      await test.step('Bước 7 - Chọn Nhóm HTK và ĐVT lưu kho', async () => {
+        await capture('Chọn Nhóm HTK và ĐVT lưu kho', inventoryPage.groupDropdown);
+
+        const selectedGroup = await inventoryPage.selectFirstOption(inventoryPage.groupDropdown);
+
+        console.log(`Nhóm HTK đã chọn: ${selectedGroup}`);
+        await guidePause(page, 500);
+
+        const selectedUnit = await inventoryPage.selectFirstOption(inventoryPage.unitDropdown);
+
+        console.log(`ĐVT lưu kho đã chọn: ${selectedUnit}`);
+        await guidePause(page, 500);
       });
 
       await test.step('Bước 8 - Lưu vật liệu', async () => {

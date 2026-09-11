@@ -44,28 +44,30 @@ export class BaseSalesDocumentPage extends BasePage {
   }
 
   protected getVisibleDropdownOptions(): Locator {
-    return this.page.locator(
-      [
-        '[role="listbox"]:visible [role="option"]',
-        '[role="option"]:visible',
-        '.p-select-overlay:visible .p-select-option',
-        '.p-select-list:visible .p-select-option',
-        '.p-dropdown-panel:visible .p-dropdown-item',
-        '.p-autocomplete-panel:visible .p-autocomplete-item',
-        '.p-overlay:visible [role="option"]',
-        '.ng-dropdown-panel:visible .ng-option',
-        '.ng-option:visible',
-        '.mat-mdc-select-panel:visible mat-option',
-        '.mat-select-panel:visible mat-option',
-        'mat-option:visible',
-        '.ant-select-dropdown:visible .ant-select-item-option',
-        '.dropdown-menu.show .dropdown-item',
-        '.dropdown-menu:visible .dropdown-item',
-        '.autocomplete-menu:visible > *',
-        '.suggestion-list:visible > *',
-        'ul[role="listbox"]:visible li',
-      ].join(', '),
-    );
+    return this.page
+      .locator(
+        [
+          '[role="listbox"]:visible [role="option"]',
+          '[role="option"]:visible',
+          '.p-select-overlay:visible .p-select-option',
+          '.p-select-list:visible .p-select-option',
+          '.p-dropdown-panel:visible .p-dropdown-item',
+          '.p-autocomplete-panel:visible .p-autocomplete-item',
+          '.p-overlay:visible [role="option"]',
+          '.ng-dropdown-panel:visible .ng-option',
+          '.ng-option:visible',
+          '.mat-mdc-select-panel:visible mat-option',
+          '.mat-select-panel:visible mat-option',
+          'mat-option:visible',
+          '.ant-select-dropdown:visible .ant-select-item-option',
+          '.dropdown-menu.show .dropdown-item',
+          '.dropdown-menu:visible .dropdown-item',
+          '.autocomplete-menu:visible > *',
+          '.suggestion-list:visible > *',
+          'ul[role="listbox"]:visible li',
+        ].join(', '),
+      )
+      .filter({ hasNotText: /no available options|no results found|không có (dữ liệu|kết quả|tùy chọn)/i });
   }
 
   protected async closeExistingDropdown(): Promise<void> {
@@ -236,6 +238,12 @@ export class BaseSalesDocumentPage extends BasePage {
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       if (attempt > 0) {
+        // Đóng popup "chưa có giá" cũng xoá luôn dòng HTK vừa thêm khỏi bảng,
+        // nên phải bấm Thêm để tạo dòng mới trước khi mở lại dropdown HTK.
+        if ((await this.getLineItemRows().count()) === 0) {
+          await this.addNewLineItem();
+        }
+
         await this.openNewestInventoryDropdown();
       }
 
@@ -274,7 +282,20 @@ export class BaseSalesDocumentPage extends BasePage {
 
       await optionToSelect.click();
 
-      await this.page.waitForTimeout(1_000);
+      /*
+       * Popup "Thông số chi tiết" kiểm tra giá phụ kiện (tay nắm, bản lề...) bất
+       * đồng bộ sau khi mở — có lúc cảnh báo "chưa có giá" hiện ngay, có lúc trường
+       * Mã bản vẽ hiện trước rồi mới bị thay bằng cảnh báo. Poll cả hai tín hiệu
+       * thay vì chỉ check một lần, để không bắt nhầm lúc popup đang load dở.
+       */
+      const drawingInput = this.getVisibleDrawingCodeInput();
+
+      await expect(async () => {
+        const missing = await this.isMissingPriceDialog();
+        const drawingVisible = await drawingInput.isVisible().catch(() => false);
+
+        expect(missing || drawingVisible).toBeTruthy();
+      }).toPass({ timeout: 10_000 });
 
       if (await this.isMissingPriceDialog()) {
         console.log(`Bỏ qua HTK chưa có giá: ${selectedText}`);
@@ -285,7 +306,18 @@ export class BaseSalesDocumentPage extends BasePage {
         continue;
       }
 
-      const drawingInput = this.getVisibleDrawingCodeInput();
+      // Đợi thêm rồi kiểm tra lại, phòng trường hợp cảnh báo "chưa có giá" của phụ
+      // kiện xuất hiện muộn hơn, sau khi trường Mã bản vẽ đã kịp hiển thị.
+      await this.page.waitForTimeout(1_500);
+
+      if (await this.isMissingPriceDialog()) {
+        console.log(`Bỏ qua HTK chưa có giá (phụ kiện thiếu giá): ${selectedText}`);
+
+        await this.closeMissingPriceDialog();
+        await this.page.waitForTimeout(500);
+
+        continue;
+      }
 
       if (await drawingInput.isVisible().catch(() => false)) {
         console.log(`HTK hợp lệ đã chọn: ${selectedText}`);
@@ -453,6 +485,21 @@ export class BaseSalesDocumentPage extends BasePage {
     await expect(closeButton).toBeVisible({ timeout: 10_000 });
 
     await closeButton.click();
+
+    // Đóng popup "chưa có giá" khi chưa nhập gì sẽ hiện thêm popup "Xác nhận thoát
+    // mà không lưu" — cần bấm Đồng ý thì popup chi tiết mới thực sự đóng.
+    const confirmDialog = this.page
+      .locator(['.p-dialog:visible', '[role="dialog"]:visible', '.modal:visible'].join(', '))
+      .filter({ hasText: /xác nhận|bạn có chắc chắn/i })
+      .last();
+
+    if (await confirmDialog.isVisible({ timeout: 3_000 }).catch(() => false)) {
+      const agreeButton = confirmDialog.getByRole('button', { name: /đồng ý|xác nhận|yes/i }).last();
+
+      await expect(agreeButton).toBeVisible({ timeout: 5_000 });
+      await agreeButton.click();
+      await expect(confirmDialog).toBeHidden({ timeout: 10_000 });
+    }
 
     await expect(warningDialog).toBeHidden({ timeout: 10_000 });
   }
