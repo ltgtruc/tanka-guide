@@ -10,7 +10,7 @@ Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo loại c
 
 | Trường | Giá trị |
 | --- | --- |
-| Tên | Loại cửa tự động 1787933707427 |
+| Tên | Loại cửa tự động 1791468748956 |
 | Loại báo cáo | Hình thể |
 
 ## 2. Sơ đồ quy trình tóm tắt

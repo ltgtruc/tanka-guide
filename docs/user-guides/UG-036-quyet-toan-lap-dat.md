@@ -6,12 +6,13 @@
 
 ## 1. Dữ liệu mẫu dùng trong hướng dẫn
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Điều kiện "đã lắp đặt 100%, có ngày HTLĐ và HTVS" của mã sản xuất được ghi nhận ở màn hình Sản xuất > Quản lý SX > nút "Giám sát tiến độ SX" (bấm vào ô Đội LĐ / Ngày HTVS tương ứng để nhập).
+Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Điều kiện "đã lắp đặt 100%, có ngày HTLĐ và HTVS" của mã sản xuất được ghi nhận ở màn hình **Sản xuất > Giám sát tiến độ SX** (bấm vào ô Đội LĐ / Ngày HTVS tương ứng để nhập) — xem hướng dẫn UG-033 "Sản xuất, giao hàng và lắp đặt".
 
 | Trường | Giá trị |
 | --- | --- |
 | Đội lắp đặt | Đạt LD |
-| Mã sản xuất được chọn | SX_202609_0003 (đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội Đạt LD) |
+| Mã sản xuất được chọn | SX_202610_0012 (đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội Đạt LD) |
+| Mã quyết toán sinh ra | QTLD_202610_0004 |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -68,7 +69,7 @@ Bấm vào ô **Chọn mã sản xuất** để chọn 1 mã sản xuất của 
 
 *Hình 6: Chọn mã sản xuất.*
 
-> Chỉ chọn được mã SX có dòng đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội đã chọn — nếu danh sách hiện "No available options" nghĩa là đội này chưa có mã sản xuất nào đủ điều kiện. Để ghi nhận các điều kiện này, vào Sản xuất > Quản lý SX > bấm nút "Giám sát tiến độ SX", bấm vào ô Đội LĐ và Ngày HTVS tương ứng với dòng SX cần cập nhật.
+> Chỉ chọn được mã SX có dòng đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội đã chọn — nếu danh sách hiện "No available options" nghĩa là đội này chưa có mã sản xuất nào đủ điều kiện. Để ghi nhận các điều kiện này, vào **Sản xuất > Giám sát tiến độ SX** (xem hướng dẫn UG-033), bấm vào ô Đội LĐ và Ngày HTVS tương ứng với dòng SX cần cập nhật.
 
 ### Bước 7. Thêm mã sản xuất vào bảng
 
@@ -162,7 +163,7 @@ Bản ghi quyết toán lắp đặt vừa tạo xuất hiện trong danh sách 
 | Ô hiện viền đỏ kèm thông báo lỗi | Đọc đúng thông báo dưới ô, sửa lại giá trị rồi bấm ra ngoài ô để hệ thống kiểm tra lại. |
 | Gõ vào dropdown nhưng không thấy dữ liệu | Xóa bớt từ khóa, gõ lại đúng một phần mã/tên và chờ vài giây để danh sách tải xong. |
 | Bấm Lưu nhưng không thấy phản hồi | Không bấm thêm lần nữa; chờ hệ thống xử lý xong rồi tìm lại bản ghi trong danh sách. |
-| Ô "Chọn mã sản xuất" hiện "No available options" | Đội lắp đặt đã chọn chưa có mã SX nào có dòng đã lắp đặt 100% và đủ ngày HTLĐ, HTVS. Vào Sản xuất > Quản lý SX > "Giám sát tiến độ SX", bấm vào ô Đội LĐ và Ngày HTVS của dòng SX cần quyết toán để nhập. |
+| Ô "Chọn mã sản xuất" hiện "No available options" | Đội lắp đặt đã chọn chưa có mã SX nào có dòng đã lắp đặt 100% và đủ ngày HTLĐ, HTVS. Vào **Sản xuất > Giám sát tiến độ SX** (xem hướng dẫn UG-033), bấm vào ô Đội LĐ và Ngày HTVS của dòng SX cần quyết toán để nhập. |
 | Nút Thêm bên cạnh mã sản xuất bị mờ | Phải chọn xong 1 mã sản xuất hợp lệ ở ô "Chọn mã sản xuất" trước khi nút Thêm sáng lên. |
 | Sửa ô Đội SX/Đội LĐ/Ngày HTVS ở Giám sát tiến độ SX báo lỗi "Không thể chỉnh sửa..." | Lệnh sản xuất đó đã ở trạng thái hoàn tất/từ chối — chỉ có thể chỉnh sửa các ô này khi lệnh SX chưa hoàn tất. |
 

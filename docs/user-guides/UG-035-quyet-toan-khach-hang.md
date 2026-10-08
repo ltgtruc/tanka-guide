@@ -11,7 +11,8 @@ Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa.
 | Trường | Giá trị |
 | --- | --- |
 | Khách hàng | Anh Kỳ |
-| Lệnh SX được chọn | SX_202609_0001 (trạng thái: Đã lắp đặt) |
+| Lệnh SX được chọn | SX_202610_0012 (đơn BH_202610_0013, trạng thái: Đã lắp đặt) |
+| Mã quyết toán sinh ra | QTKH_202610_0004 |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -162,7 +163,7 @@ Bản ghi quyết toán khách hàng vừa tạo xuất hiện trong danh sách 
 | Ô hiện viền đỏ kèm thông báo lỗi | Đọc đúng thông báo dưới ô, sửa lại giá trị rồi bấm ra ngoài ô để hệ thống kiểm tra lại. |
 | Gõ vào dropdown nhưng không thấy dữ liệu | Xóa bớt từ khóa, gõ lại đúng một phần mã/tên và chờ vài giây để danh sách tải xong. |
 | Bấm Lưu nhưng không thấy phản hồi | Không bấm thêm lần nữa; chờ hệ thống xử lý xong rồi tìm lại bản ghi trong danh sách. |
-| Ô "Chọn sản xuất để quyết toán" không có dữ liệu | Kiểm tra khách hàng đã chọn có lệnh sản xuất nào ở trạng thái "Đã lắp đặt" chưa — chỉ các lệnh SX đã lắp đặt mới hiển thị. |
+| Ô "Chọn sản xuất để quyết toán" không có dữ liệu | Kiểm tra khách hàng đã chọn có lệnh sản xuất nào ở trạng thái "Đã lắp đặt" và đã nhập Ngày HTVS ở **Sản xuất > Giám sát tiến độ SX** chưa — xem hướng dẫn UG-033 "Sản xuất, giao hàng và lắp đặt". |
 | Nút Thêm bên cạnh mã sản xuất bị mờ | Phải chọn xong 1 mã sản xuất trong ô "Chọn sản xuất để quyết toán" trước khi nút Thêm sáng lên. |
 
 ## 5. Dấu hiệu hoàn thành

@@ -4,19 +4,21 @@
 **Mục tiêu:** Tạo một quyết toán sản xuất cho 1 đội sản xuất từ các lệnh sản xuất đủ điều kiện, rồi chuyển trạng thái từ Nháp đến Hoàn thành.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
+
 ## 1. Dữ liệu mẫu dùng trong hướng dẫn
 
-Các bước 1-6 dưới đây minh họa bằng ảnh chụp thật trên hệ thống. Từ bước 7 trở đi, giao diện chuyển trạng thái giống hệt hướng dẫn "Quyết toán khách hàng" nên được mô tả theo đúng thao tác thật đã kiểm chứng ở đó, chưa kèm ảnh riêng vì tại thời điểm biên soạn chưa có lệnh sản xuất nào đủ điều kiện (có ngày HTSX và hoàn thành) để minh họa trọn vẹn — hãy tự đối chiếu ảnh thực tế khi hệ thống có dữ liệu phù hợp.
+Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Ô "Chọn mã sản xuất" chỉ hiện các lệnh SX có dòng đã có ngày HTSX (ngày hoàn thành sản xuất — hệ thống tự ghi khi lệnh SX chuyển sang Đã SX) và đã gán **Đội SX** ở màn hình **Sản xuất > Giám sát tiến độ SX** — xem hướng dẫn UG-033 "Sản xuất, giao hàng và lắp đặt".
 
 | Trường | Giá trị |
 | --- | --- |
 | Đội sản xuất | Anh Danh - GC Sản xuất |
-| Điều kiện lệnh sản xuất | Chỉ chọn được lệnh SX có dòng đã có ngày HTSX và hoàn thành (theo đội đã chọn) |
+| Mã sản xuất được chọn | SX_202610_0012 (đã SX, có ngày HTSX, Đội SX: Anh Danh - GC Sản xuất) |
+| Mã quyết toán sinh ra | QTSX_202610_0004 |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
-BẮT ĐẦU → Tạo mới, chọn Đội sản xuất và lệnh sản xuất đủ điều kiện → Bấm Thêm, rồi Lưu → Chuyển trạng thái Nháp → Đã gửi → Đã duyệt → Hoàn thành → Trở lại kiểm tra kết quả
+BẮT ĐẦU → Tạo mới, chọn Đội sản xuất và mã sản xuất đủ điều kiện → Bấm Thêm, rồi Lưu → Chuyển trạng thái Nháp → Đã gửi → Đã duyệt → Hoàn thành → Trở lại kiểm tra kết quả
 
 ## 3. Quy trình thao tác từng bước
 
@@ -54,7 +56,7 @@ Bấm nút **Tạo mới** ở góc phải màn hình để mở màn hình **Ch
 
 ### Bước 5. Chọn Đội sản xuất
 
-Bấm vào ô **Đội sản xuất**, chọn 1 đội từ danh sách sổ xuống hiện ra.
+Bấm vào ô **Đội sản xuất**, chọn 1 đội từ danh sách sổ xuống hiện ra, ví dụ `Anh Danh - GC Sản xuất`.
 
 ![Hình 5: Chọn Đội sản xuất.](images/UG-037-quyet-toan-san-xuat/05-bam-vao-doi-san-xuat-de-chon-tu-danh-sach.png)
 
@@ -62,37 +64,97 @@ Bấm vào ô **Đội sản xuất**, chọn 1 đội từ danh sách sổ xu�
 
 ### Bước 6. Chọn mã sản xuất
 
-Bấm vào ô **Chọn lệnh sản xuất** để chọn 1 lệnh sản xuất của đội đó.
+Bấm vào ô **Chọn mã sản xuất** để chọn 1 mã sản xuất của đội vừa chọn.
 
-![Hình 6: Chọn lệnh sản xuất.](images/UG-037-quyet-toan-san-xuat/06-bam-chon-ma-san-xuat-va-chon-1-ma-san-xuat-cua-doi-do.png)
+![Hình 6: Chọn mã sản xuất.](images/UG-037-quyet-toan-san-xuat/06-bam-chon-ma-san-xuat-cua-doi-vua-chon.png)
 
-*Hình 6: Chọn lệnh sản xuất.*
+*Hình 6: Chọn mã sản xuất.*
 
-> Chỉ chọn được lệnh SX có dòng đã có ngày HTSX (Hoàn thành sản xuất) và hoàn thành, theo đội đã chọn — nếu danh sách hiện "No available options" nghĩa là đội này chưa có lệnh sản xuất nào đủ điều kiện.
+> Chỉ chọn được mã SX có dòng đã có ngày HTSX và đã gán đúng Đội SX vừa chọn — nếu danh sách hiện "No available options" nghĩa là đội này chưa có mã sản xuất nào đủ điều kiện. Để gán đội, vào **Sản xuất > Giám sát tiến độ SX** (xem hướng dẫn UG-033), bấm vào ô Đội SX tương ứng với dòng SX cần cập nhật.
 
 ### Bước 7. Thêm mã sản xuất vào bảng
 
-Bấm nút **Thêm** bên cạnh mã sản xuất vừa chọn để đưa dòng vào bảng quyết toán. Nếu có phụ thu thì bấm nút Thêm ở khung Phụ thu; nếu có giảm trừ thì bấm nút Thêm ở khung Giảm trừ.
+Bấm nút **Thêm** bên cạnh mã sản xuất vừa chọn để đưa dòng vào bảng quyết toán.
+
+![Hình 7: Bấm nút Thêm.](images/UG-037-quyet-toan-san-xuat/07-bam-nut-them-ben-canh-ma-san-xuat-vua-chon.png)
+
+*Hình 7: Bấm nút Thêm.*
+
+> Nếu có phụ thu thì bấm nút Thêm ở khung Phụ thu; nếu có giảm trừ thì bấm nút Thêm ở khung Giảm trừ.
 
 ### Bước 8. Bấm Lưu để hoàn thành tạo mới
 
-Kiểm tra lại dòng vừa thêm rồi bấm nút **Lưu** đúng một lần để hoàn thành việc tạo mới quyết toán. Sau khi Lưu, màn hình hiện thêm khung **Trạng thái** với giá trị ban đầu là **Nháp**.
+Kiểm tra lại dòng vừa thêm rồi bấm nút **Lưu** đúng một lần để hoàn thành việc tạo mới quyết toán.
+
+![Hình 8: Bấm Lưu.](images/UG-037-quyet-toan-san-xuat/08-bam-nut-luu-de-hoan-thanh-viec-tao-moi-quyet-toan.png)
+
+*Hình 8: Bấm Lưu.*
+
+> Sau khi Lưu, màn hình hiện thêm khung Trạng thái với giá trị ban đầu là Nháp.
 
 ### Bước 9. Chuyển trạng thái sang Đã gửi
 
-Ở khung Trạng thái, bấm nút mũi tên (⇄) bên cạnh chữ Nháp, chọn **Đã gửi**. Màn hình chuyển trạng thái hiện ra, nhập ghi chú (ví dụ "đã hoàn thành bước này") vào ô text, bấm **Cập nhật**, rồi bấm **Đồng ý** ở popup xác nhận.
+Ở khung **Trạng thái**, bấm nút mũi tên (⇄) bên cạnh chữ Nháp, chọn **Đã gửi**. Màn hình chuyển trạng thái hiện ra, nhập ghi chú vào ô text, bấm **Cập nhật**, rồi bấm **Đồng ý** ở popup xác nhận.
 
-### Bước 10. Chuyển trạng thái sang Đã duyệt
+![Hình 9: Chuyển trạng thái sang Đã gửi.](images/UG-037-quyet-toan-san-xuat/09-bam-nut-chuyen-trang-thai-chon-da-gui.png)
+
+*Hình 9: Chuyển trạng thái sang Đã gửi.*
+
+### Bước 10. Xác nhận đã chuyển sang Đã gửi
+
+Ô Trạng thái nay hiển thị **Đã gửi**.
+
+![Hình 10: Trạng thái đã là Đã gửi.](images/UG-037-quyet-toan-san-xuat/10-trang-thai-da-chuyen-sang-da-gui.png)
+
+*Hình 10: Trạng thái đã là Đã gửi.*
+
+### Bước 11. Chuyển trạng thái sang Đã duyệt
 
 Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã duyệt**, nhập ghi chú, bấm Cập nhật rồi Đồng ý.
 
-### Bước 11. Chuyển trạng thái sang Hoàn thành
+![Hình 11: Chuyển trạng thái sang Đã duyệt.](images/UG-037-quyet-toan-san-xuat/11-bam-nut-chuyen-trang-thai-chon-da-duyet.png)
+
+*Hình 11: Chuyển trạng thái sang Đã duyệt.*
+
+### Bước 12. Xác nhận đã chuyển sang Đã duyệt
+
+Ô Trạng thái nay hiển thị **Đã duyệt**.
+
+![Hình 12: Trạng thái đã là Đã duyệt.](images/UG-037-quyet-toan-san-xuat/12-trang-thai-da-chuyen-sang-da-duyet.png)
+
+*Hình 12: Trạng thái đã là Đã duyệt.*
+
+### Bước 13. Chuyển trạng thái sang Hoàn thành
 
 Lặp lại thao tác lần cuối: bấm nút chuyển trạng thái, chọn **Hoàn thành**, nhập ghi chú, bấm Cập nhật rồi Đồng ý.
 
-### Bước 12. Bấm nút Trở lại
+![Hình 13: Chuyển trạng thái sang Hoàn thành.](images/UG-037-quyet-toan-san-xuat/13-bam-nut-chuyen-trang-thai-chon-hoan-thanh.png)
 
-Bấm nút **Trở lại** ở góc trên bên phải để quay về danh sách và kiểm tra đơn quyết toán sản xuất vừa hoàn thành.
+*Hình 13: Chuyển trạng thái sang Hoàn thành.*
+
+### Bước 14. Xác nhận đã Hoàn thành
+
+Ô Trạng thái nay hiển thị **Hoàn thành** — quyết toán sản xuất đã xử lý xong.
+
+![Hình 14: Trạng thái đã là Hoàn thành.](images/UG-037-quyet-toan-san-xuat/14-trang-thai-da-chuyen-sang-hoan-thanh.png)
+
+*Hình 14: Trạng thái đã là Hoàn thành.*
+
+### Bước 15. Bấm nút Trở lại
+
+Bấm nút **Trở lại** ở góc trên bên phải để quay về danh sách.
+
+![Hình 15: Bấm Trở lại.](images/UG-037-quyet-toan-san-xuat/15-bam-nut-tro-lai.png)
+
+*Hình 15: Bấm Trở lại.*
+
+### Bước 16. Kiểm tra kết quả trong danh sách
+
+Bản ghi quyết toán sản xuất vừa tạo xuất hiện trong danh sách với trạng thái **Hoàn thành**.
+
+![Hình 16: Danh sách sau khi hoàn thành.](images/UG-037-quyet-toan-san-xuat/16-danh-sach-quyet-toan-san-xuat-sau-khi-hoan-thanh.png)
+
+*Hình 16: Danh sách sau khi hoàn thành.*
 
 ## 4. Khi không thao tác được
 
@@ -102,8 +164,9 @@ Bấm nút **Trở lại** ở góc trên bên phải để quay về danh sách
 | Ô hiện viền đỏ kèm thông báo lỗi | Đọc đúng thông báo dưới ô, sửa lại giá trị rồi bấm ra ngoài ô để hệ thống kiểm tra lại. |
 | Gõ vào dropdown nhưng không thấy dữ liệu | Xóa bớt từ khóa, gõ lại đúng một phần mã/tên và chờ vài giây để danh sách tải xong. |
 | Bấm Lưu nhưng không thấy phản hồi | Không bấm thêm lần nữa; chờ hệ thống xử lý xong rồi tìm lại bản ghi trong danh sách. |
-| Ô "Chọn lệnh sản xuất" hiện "No available options" | Đội sản xuất đã chọn chưa có lệnh SX nào có dòng đã có ngày HTSX và hoàn thành — cần hoàn tất ghi nhận sản xuất cho lệnh SX trước. |
-| Nút Thêm bên cạnh mã sản xuất bị mờ | Phải chọn xong 1 lệnh sản xuất hợp lệ ở ô "Chọn lệnh sản xuất" trước khi nút Thêm sáng lên. |
+| Ô "Chọn mã sản xuất" hiện "No available options" | Đội sản xuất đã chọn chưa có mã SX nào đã có ngày HTSX và được gán đội. Kiểm tra lệnh SX đã qua trạng thái Đã SX, rồi vào **Sản xuất > Giám sát tiến độ SX** (xem hướng dẫn UG-033), bấm vào ô Đội SX của dòng SX cần quyết toán để chọn đội. |
+| Nút Thêm bên cạnh mã sản xuất bị mờ | Phải chọn xong 1 mã sản xuất hợp lệ ở ô "Chọn mã sản xuất" trước khi nút Thêm sáng lên. |
+| Sửa ô Đội SX/Đội LĐ/Ngày HTVS ở Giám sát tiến độ SX báo lỗi "Không thể chỉnh sửa..." | Lệnh sản xuất đó đã ở trạng thái hoàn tất/từ chối — chỉ có thể chỉnh sửa các ô này khi lệnh SX chưa hoàn tất. |
 
 ## 5. Dấu hiệu hoàn thành
 
@@ -112,7 +175,7 @@ Bấm nút **Trở lại** ở góc trên bên phải để quay về danh sách
 
 ## 6. Checklist dành cho người mới
 
-- [ ] Đã chọn đúng Đội sản xuất và đúng lệnh sản xuất đủ điều kiện cần quyết toán.
+- [ ] Đã chọn đúng Đội sản xuất và đúng mã sản xuất đủ điều kiện cần quyết toán.
 - [ ] Đã bấm Thêm để đưa dòng vào bảng trước khi Lưu.
 - [ ] Đã chuyển đủ chuỗi trạng thái Nháp → Đã gửi → Đã duyệt → Hoàn thành.
 - [ ] Đã bấm Trở lại và thấy bản ghi trong danh sách với trạng thái Hoàn thành.

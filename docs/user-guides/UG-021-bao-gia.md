@@ -6,22 +6,22 @@
 
 ## 1. Dữ liệu mẫu dùng trong hướng dẫn
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo báo giá minh họa (mã hệ thống sinh ra: BG_202608_0005/L1). Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác vì phụ thuộc dữ liệu thực tế — cứ chọn giá trị phù hợp trong dropdown.
+Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo báo giá minh họa (mã hệ thống sinh ra: BG_202610_0003/L1). Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác vì phụ thuộc dữ liệu thực tế — cứ chọn giá trị phù hợp trong dropdown.
 
 | Trường | Giá trị |
 | --- | --- |
 | Khách hàng | Anh A |
-| Kho hàng | Hóc Môn |
+| Chi nhánh | Hóc Môn |
 | Nhân viên BG (báo giá) | Nguyễn Hà Mỹ Linh |
 | Nhân viên kinh doanh | Nguyễn Chí Thanh |
 | Nhân viên thiết kế | Nguyễn Chí Thanh |
-| HTK (hàng tồn kho) | SQ-01-TDA-55-1.2 — Cửa sổ mở quay 1 cánh - Tiến Đạt 55 - 1.2mm |
+| HTK (hàng tồn kho) | SQ-03-XF-55-1.4 — Cửa sổ mở quay 3 cánh - Xingfa 55 - 1.4mm |
 | Mã bản vẽ | D1 |
 | Kính | 08-CL-KD-VIFG/CL |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
-BẮT ĐẦU → Mở Bán hàng > Báo giá → Bấm Tạo mới, chọn Khách hàng/Kho/Nhân viên → Bấm Thêm, chọn HTK → Mã bản vẽ → Kính → Cập nhật → Đóng → Bấm Lưu, trở lại danh sách kiểm tra
+BẮT ĐẦU → Mở Bán hàng > Báo giá → Bấm Tạo mới, chọn Khách hàng/Chi nhánh/Nhân viên → Bấm Thêm, chọn HTK → Mã bản vẽ → Kính → Cập nhật → Đóng → Bấm Lưu, trở lại danh sách kiểm tra
 
 ## 3. Quy trình thao tác từng bước
 
@@ -61,7 +61,7 @@ Trước khi tạo mới, có thể dùng các ô lọc phía trên bảng để
 
 Hệ thống mở màn hình **Chi tiết báo giá**. Các ô có dấu ***** là bắt buộc:
 
-- **Khách hàng ***, **Kho hàng *** — chọn trong danh sách sổ xuống.
+- **Khách hàng ***, **Chi nhánh *** — chọn trong danh sách sổ xuống.
 - **Nhân viên BG ***, **Nhân viên kinh doanh ***, **Nhân viên thiết kế *** — chọn nhân viên phụ trách.
 - Ô **Ngày tạo BG** hệ thống tự điền sẵn ngày hôm nay. Các ô còn lại (Tên dự án, Thuế suất, Giảm giá...) là tùy chọn.
 
@@ -71,9 +71,9 @@ Hệ thống mở màn hình **Chi tiết báo giá**. Các ô có dấu ***** l
 
 ### Bước 6. Bấm nút Thêm để thêm dòng HTK
 
-Sau khi chọn đủ Khách hàng, Kho hàng và các nhân viên, cuộn xuống tab **Các dòng** và bấm nút **Thêm** ở góc phải bảng dòng.
+Sau khi chọn đủ Khách hàng, Chi nhánh và các nhân viên, cuộn xuống tab **Các dòng** và bấm nút **Thêm** ở góc phải bảng dòng.
 
-- Popup **"Thông số chi tiết cho ..."** mở ra: chọn HTK (gõ mã, ví dụ `SQ-01-TDA`, rồi chọn dòng có giá).
+- Popup **"Thông số chi tiết cho ..."** mở ra: chọn HTK (gõ mã, ví dụ `SQ-03-XF-55`, rồi chọn dòng có giá).
 - **Lưu ý:** nếu dòng HTK báo _"Chưa có giá"_, đóng cảnh báo và chọn dòng khác.
 - Nhập **Mã bản vẽ** (ví dụ D1), chọn **Kính** (ví dụ 08-CL-KD-VIFG/CL).
 - Xem thêm tab **Các lựa chọn thuộc tính** nếu cần kiểm tra thông số phụ.
@@ -117,7 +117,7 @@ Báo giá mới xuất hiện ở đầu danh sách với mã hệ thống tự 
 | Ô hiện viền đỏ kèm thông báo lỗi | Đọc đúng thông báo dưới ô, sửa lại giá trị rồi bấm ra ngoài ô để hệ thống kiểm tra lại. |
 | Gõ vào dropdown nhưng không thấy dữ liệu | Xóa bớt từ khóa, gõ lại đúng một phần mã/tên và chờ vài giây để danh sách tải xong. |
 | Bấm Lưu nhưng không thấy phản hồi | Không bấm thêm lần nữa; chờ hệ thống xử lý xong rồi tìm lại bản ghi trong danh sách. |
-| Chọn HTK xong nhưng popup báo "Chưa có giá" | Bấm Đóng ở cảnh báo, mở lại ô chọn HTK và chọn một dòng khác cùng mã nhưng có giá. |
+| Chọn HTK xong nhưng popup báo "Chưa có giá" | Giá được khai báo theo từng **Chi nhánh** — kiểm tra đã chọn đúng Chi nhánh trước khi thêm dòng. Bấm Đóng ở cảnh báo, mở lại ô chọn HTK và chọn một dòng khác cùng mã nhưng có giá. |
 | Popup "Thông số chi tiết" không đóng được | Bấm đúng nút Đóng ở cuối popup (không bấm ra ngoài popup); chờ popup biến mất rồi mới thao tác tiếp. |
 
 ## 5. Dấu hiệu hoàn thành
@@ -125,7 +125,7 @@ Báo giá mới xuất hiện ở đầu danh sách với mã hệ thống tự 
 - Thông báo xanh "Thành công — Lưu thành công" xuất hiện sau khi bấm Lưu.
 - Ô Trạng thái của báo giá chuyển thành "Nháp".
 - Báo giá xuất hiện ở đầu danh sách với mã hệ thống tự sinh.
-- Mở lại báo giá vẫn thấy đúng Khách hàng, Kho hàng, nhân viên phụ trách và dòng HTK đã nhập.
+- Mở lại báo giá vẫn thấy đúng Khách hàng, Chi nhánh, nhân viên phụ trách và dòng HTK đã nhập.
 
 ## 6. Checklist dành cho người mới
 

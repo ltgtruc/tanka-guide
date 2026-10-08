@@ -10,9 +10,9 @@ Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo khách h
 
 | Trường | Giá trị |
 | --- | --- |
-| Tên | Khách hàng tự động 1787933737181 |
+| Tên | Khách hàng tự động 1791468788772 |
 | Số ĐT | 0901234567 |
-| Email | customer1787933737181@test.com |
+| Email | customer1791468788772@test.com |
 
 ## 2. Sơ đồ quy trình tóm tắt
 

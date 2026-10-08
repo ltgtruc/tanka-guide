@@ -1,22 +1,28 @@
-# HƯỚNG DẪN SỬ DỤNG — TỐI ƯU, CHUYỂN TRẠNG THÁI VÀ TẠO ĐƠN MUA HÀNG CHO LỆNH SX
+# HƯỚNG DẪN SỬ DỤNG — TỐI ƯU, CHUYỂN TRẠNG THÁI VÀ MUA HÀNG CHO LỆNH SX
 
-**Đường dẫn:** Sản xuất > Quản lý SX > (mở 1 lệnh SX đang Nháp)  
-**Mục tiêu:** Tính tối ưu cắt vật tư, lưu kết quả, rồi chuyển lệnh sản xuất qua toàn bộ chuỗi trạng thái Đã duyệt → Đã kế hoạch → (tạo đơn mua hàng) → Đã mua hàng → Đang SX → Đã SX → Đang lắp đặt → Đã lắp đặt.  
+**Đường dẫn:** Sản xuất > Quản lý SX > (mở 1 lệnh SX đang Nháp); Mua hàng > Yêu cầu mua hàng  
+**Mục tiêu:** Tính tối ưu cắt vật tư, chuyển lệnh sản xuất qua Đã duyệt → Đã kế hoạch, tạo **yêu cầu mua hàng** → duyệt → lập **đơn mua hàng**, rồi chuyển lệnh SX sang Đã mua hàng.  
 **Dành cho:** Người mới sử dụng TANKA Door
+
+> Hướng dẫn này nối tiếp **UG-030 Tạo lệnh sản xuất**. Sau khi lệnh SX "Đã mua hàng", làm tiếp **UG-040 Duyệt đơn mua hàng và nhận hàng nhập kho**, rồi **UG-033 Sản xuất, giao hàng và lắp đặt**.
 
 ## 1. Dữ liệu mẫu dùng trong hướng dẫn
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa (lệnh sản xuất SX_202609_0002, tạo từ đơn bán hàng theo hướng dẫn "Quản lý sản xuất"). Khi tự thao tác, hãy dùng đúng mã lệnh sản xuất bạn đang xử lý.
+Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Khi tự thao tác, hãy dùng đúng mã lệnh sản xuất bạn đang xử lý.
 
 | Trường | Giá trị |
 | --- | --- |
-| Lệnh SX nguồn | SX_202609_0002 (trạng thái ban đầu: Nháp) |
+| Lệnh SX nguồn | SX_202610_0012 (trạng thái ban đầu: Nháp, đơn BH_202610_0013) |
 | Giá bán phế liệu (đồng/kg) | 5.000 |
+| Yêu cầu mua hàng sinh ra | YCMH_202610_0011 |
+| Đơn mua hàng sinh ra | MH_202610_0031, MH_202610_0032, MH_202610_0033, MH_202610_0034 (mỗi nhà cung cấp một đơn) |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
-BẮT ĐẦU (lệnh SX ở trạng thái Nháp) → Tab Tối ưu: nhập Giá bán phế liệu → Tính tối ưu → Lưu → Chuyển trạng thái Đã duyệt → Đã kế hoạch → Tab Đơn mua hàng: Tiến hành tạo đơn mua hàng (2 lần) → Chuyển trạng thái Đã mua hàng → Đang SX → Đã SX → Đang lắp đặt → Đã lắp đặt
+BẮT ĐẦU (lệnh SX ở trạng thái Nháp) → Tab Tối ưu: nhập Giá bán phế liệu → Tính tối ưu → Lưu → Chuyển trạng thái Đã duyệt → Đã kế hoạch → Tab Đơn mua hàng: **Tạo yêu cầu mua hàng** → Đồng ý → **Duyệt** yêu cầu mua hàng → **Lập đơn mua hàng** (chọn NCC cho từng nhóm vật tư) → Quay lại lệnh SX → Chuyển trạng thái **Đã mua hàng**
+
+> **Thay đổi so với phiên bản trước:** tab Đơn mua hàng không còn nút "Tiến hành tạo đơn mua hàng". Đơn mua hàng giờ được lập từ **Yêu cầu mua hàng** (YCMH) đã duyệt, và lệnh SX chỉ chuyển được sang "Đã mua hàng" khi đã có đơn mua hàng.
 
 ## 3. Quy trình thao tác từng bước
 
@@ -46,7 +52,7 @@ Màn hình **Quản lý SX** hiện danh sách các lệnh sản xuất đã có
 
 ### Bước 4. Chọn mã sản xuất có trạng thái Nháp
 
-Bấm vào mã lệnh sản xuất (ví dụ `SX_202609_0002`) đang ở trạng thái **Nháp** để mở màn hình **Chi tiết SX**.
+Bấm vào mã lệnh sản xuất (ví dụ `SX_202610_0012`) đang ở trạng thái **Nháp** để mở màn hình **Chi tiết SX**.
 
 ![Hình 4: Chi tiết SX, trạng thái hiện tại là Nháp.](images/UG-032-quy-trinh-san-xuat/04-mo-lenh-san-xuat-dang-o-trang-thai-nhap.png)
 
@@ -104,86 +110,109 @@ Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã kế ho�
 
 *Hình 10: Chuyển trạng thái sang Đã kế hoạch.*
 
-### Bước 11. Tạo đơn mua hàng
+### Bước 11. Tạo yêu cầu mua hàng
 
-Bấm tab **Đơn mua hàng**, bấm nút **Tiến hành tạo đơn mua hàng**. Màn hình chuyển sang trang chọn nhà cung cấp cho từng nhóm vật tư.
+Bấm tab **Đơn mua hàng**, bấm nút **Tạo yêu cầu mua hàng**.
 
-![Hình 11: Bấm Tiến hành tạo đơn mua hàng.](images/UG-032-quy-trinh-san-xuat/13-bam-tien-hanh-tao-don-mua-hang.png)
+![Hình 11: Bấm Tạo yêu cầu mua hàng.](images/UG-032-quy-trinh-san-xuat/13-bam-tao-yeu-cau-mua-hang.png)
 
-*Hình 11: Bấm Tiến hành tạo đơn mua hàng.*
+*Hình 11: Bấm Tạo yêu cầu mua hàng.*
 
-### Bước 12. Hoàn thành tạo đơn mua hàng
+### Bước 12. Xác nhận tạo yêu cầu mua hàng
 
-Cuộn xuống cuối trang chọn nhà cung cấp, bấm lại nút **Tiến hành tạo đơn mua hàng** để hoàn thành việc tạo đơn mua hàng. Hệ thống quay lại màn hình Chi tiết SX.
+Popup **Xác nhận** hiện ra: _"Tạo yêu cầu mua hàng cho lệnh sản xuất này? Tồn kho và đơn đang đặt được trừ tại thời điểm này."_ Bấm **Đồng ý**. Hệ thống tạo phiếu **Yêu cầu mua hàng** (mã YCMH_YYYYMM_xxxx, trạng thái Nháp) và mở màn hình phiếu đó. Số lượng **Cần mua** đã trừ tồn kho khả dụng và hàng đang đặt.
 
-![Hình 12: Bấm Tiến hành tạo đơn mua hàng lần nữa để hoàn tất.](images/UG-032-quy-trinh-san-xuat/14-bam-tien-hanh-tao-don-mua-hang-de-hoan-thanh.png)
+![Hình 12: Bấm Đồng ý để tạo yêu cầu mua hàng.](images/UG-032-quy-trinh-san-xuat/14-bam-dong-y-de-tao-yeu-cau-mua-hang.png)
 
-*Hình 12: Bấm Tiến hành tạo đơn mua hàng lần nữa để hoàn tất.*
+*Hình 12: Bấm Đồng ý để tạo yêu cầu mua hàng.*
 
-### Bước 13. Chuyển trạng thái sang Đã mua hàng
+### Bước 13. Duyệt yêu cầu mua hàng
 
-Tiếp tục chuyển trạng thái: bấm nút chuyển trạng thái, chọn **Đã mua hàng**, nhập ghi chú, bấm Cập nhật rồi Đồng ý.
+Trên màn hình **Yêu cầu mua hàng**, kiểm tra các tab vật tư (Profile, PKSX, PKLĐ, VTPSX, VTPLĐ, Gioăng, Kính / Lá nhôm) rồi bấm nút **Duyệt** ở góc phải phía trên, sau đó bấm **Đồng ý** ở popup _"Duyệt yêu cầu mua hàng này? Sau khi duyệt không sửa được số lượng."_
 
-![Hình 13: Chuyển trạng thái sang Đã mua hàng.](images/UG-032-quy-trinh-san-xuat/15-chuyen-trang-thai-sang-da-mua-hang.png)
+![Hình 13: Bấm Duyệt yêu cầu mua hàng.](images/UG-032-quy-trinh-san-xuat/15-bam-duyet-yeu-cau-mua-hang.png)
 
-*Hình 13: Chuyển trạng thái sang Đã mua hàng.*
+*Hình 13: Bấm Duyệt yêu cầu mua hàng.*
 
-### Bước 14. Chuyển trạng thái sang Đang SX
+### Bước 14. Mở màn hình lập đơn mua hàng
 
-Lặp lại thao tác chuyển trạng thái, chọn **Đang SX**.
+Sau khi duyệt, bấm nút **Lập đơn mua hàng**. Màn hình **Chọn nhà cung cấp và lập đơn mua hàng** mở ra.
 
-![Hình 14: Chuyển trạng thái sang Đang SX.](images/UG-032-quy-trinh-san-xuat/17-chuyen-trang-thai-sang-dang-sx.png)
+![Hình 14: Bấm Lập đơn mua hàng.](images/UG-032-quy-trinh-san-xuat/16-bam-lap-don-mua-hang.png)
 
-*Hình 14: Chuyển trạng thái sang Đang SX.*
+*Hình 14: Bấm Lập đơn mua hàng.*
 
-### Bước 15. Chuyển trạng thái sang Đã SX
+### Bước 15. Chọn nhà cung cấp cho từng nhóm vật tư
 
-Lặp lại thao tác chuyển trạng thái, chọn **Đã SX**.
+Lần lượt ở **từng tab** vật tư:
 
-![Hình 15: Chuyển trạng thái sang Đã SX.](images/UG-032-quy-trinh-san-xuat/18-chuyen-trang-thai-sang-da-sx.png)
+1. Tích ô ở dòng tiêu đề bảng để chọn tất cả các dòng của tab.
+2. Ở ô **Áp NCC đồng loạt**, chọn nhà cung cấp (danh sách NCC khác nhau theo nhóm vật tư).
+3. Bấm **Áp dụng**. Ô **Thành tiền (chưa VAT)** cuối trang tăng lên theo các dòng đã chọn.
 
-*Hình 15: Chuyển trạng thái sang Đã SX.*
+Lựa chọn được giữ khi chuyển tab, nên chỉ cần bấm "Lập đơn mua hàng" một lần sau khi làm xong tất cả các tab.
 
-### Bước 16. Chuyển trạng thái sang Đang lắp đặt
+![Hình 15: Tích chọn các dòng và chọn nhà cung cấp.](images/UG-032-quy-trinh-san-xuat/17-tich-chon-cac-dong-va-chon-nha-cung-cap.png)
 
-Lặp lại thao tác chuyển trạng thái, chọn **Đang lắp đặt**.
+*Hình 15: Tích chọn các dòng và chọn nhà cung cấp.*
 
-![Hình 16: Chuyển trạng thái sang Đang lắp đặt.](images/UG-032-quy-trinh-san-xuat/19-chuyen-trang-thai-sang-dang-lap-dat.png)
+### Bước 16. Bấm Lập đơn mua hàng để hoàn thành
 
-*Hình 16: Chuyển trạng thái sang Đang lắp đặt.*
+Cuộn xuống cuối trang, bấm **Lập đơn mua hàng**. Hệ thống tạo **mỗi nhà cung cấp một đơn mua hàng** và quay lại phiếu Yêu cầu mua hàng.
 
-### Bước 17. Chuyển trạng thái sang Đã lắp đặt
+![Hình 16: Bấm Lập đơn mua hàng để hoàn thành.](images/UG-032-quy-trinh-san-xuat/18-bam-lap-don-mua-hang-de-hoan-thanh.png)
 
-Chuyển trạng thái lần cuối, chọn **Đã lắp đặt**. Đây là trạng thái hoàn tất toàn bộ quy trình sản xuất của lệnh SX này.
+*Hình 16: Bấm Lập đơn mua hàng để hoàn thành.*
 
-![Hình 17: Trạng thái cuối cùng — Đã lắp đặt.](images/UG-032-quy-trinh-san-xuat/21-trang-thai-cuoi-cung-da-lap-dat.png)
+### Bước 17. Kiểm tra các đơn mua hàng đã lập
 
-*Hình 17: Trạng thái cuối cùng — Đã lắp đặt.*
+Thông báo **"Thành công — Đã lập đơn mua hàng"** hiện ra. Phiếu YCMH chuyển trạng thái **Đã lập đơn** và mục **Đơn mua hàng** liệt kê các mã MH_... vừa tạo. Bấm vào mã **Lệnh sản xuất** (SX_...) trên phiếu để quay lại lệnh SX.
+
+![Hình 17: Các đơn mua hàng đã được lập từ yêu cầu mua hàng.](images/UG-032-quy-trinh-san-xuat/19-cac-don-mua-hang-da-duoc-lap-tu-yeu-cau-mua-hang.png)
+
+*Hình 17: Các đơn mua hàng đã được lập từ yêu cầu mua hàng.*
+
+### Bước 18. Chuyển trạng thái sang Đã mua hàng
+
+Trên lệnh SX, bấm nút chuyển trạng thái, chọn **Đã mua hàng**, nhập ghi chú, bấm **Cập nhật** rồi **Đồng ý**.
+
+![Hình 18: Chuyển trạng thái sang Đã mua hàng.](images/UG-032-quy-trinh-san-xuat/20-chuyen-trang-thai-sang-da-mua-hang.png)
+
+*Hình 18: Chuyển trạng thái sang Đã mua hàng.*
+
+### Bước 19. Xác nhận trạng thái Đã mua hàng
+
+Ô Trạng thái hiển thị **Đã mua hàng**. Bước tiếp theo là duyệt các đơn mua hàng và nhận hàng vào kho (UG-040) — lệnh SX chỉ chuyển được sang "Đang SX" khi vật tư đã có trong kho.
+
+![Hình 19: Trạng thái đã chuyển sang Đã mua hàng.](images/UG-032-quy-trinh-san-xuat/21-trang-thai-da-chuyen-sang-da-mua-hang.png)
+
+*Hình 19: Trạng thái đã chuyển sang Đã mua hàng.*
 
 ## 4. Khi không thao tác được
 
 | Hiện tượng | Cách xử lý ngay |
 | --- | --- |
 | Nút Lưu đang mờ / không bấm được | Tìm ô có dấu * chưa nhập hoặc dropdown chưa chọn; cuộn hết form để kiểm tra. |
-| Ô hiện viền đỏ kèm thông báo lỗi | Đọc đúng thông báo dưới ô, sửa lại giá trị rồi bấm ra ngoài ô để hệ thống kiểm tra lại. |
-| Gõ vào dropdown nhưng không thấy dữ liệu | Xóa bớt từ khóa, gõ lại đúng một phần mã/tên và chờ vài giây để danh sách tải xong. |
-| Bấm Lưu nhưng không thấy phản hồi | Không bấm thêm lần nữa; chờ hệ thống xử lý xong rồi tìm lại bản ghi trong danh sách. |
-| Không thấy lệnh SX nào ở trạng thái Nháp | Cần tạo đơn bán hàng mới và chuyển đến "Đã yêu cầu SX" rồi tạo hồ sơ SX trước — xem hướng dẫn "Quản lý sản xuất". |
+| Không thấy lệnh SX nào ở trạng thái Nháp | Cần tạo lệnh SX trước — xem hướng dẫn UG-030 "Tạo lệnh sản xuất". |
 | Không chuyển được trạng thái sau khi tính tối ưu | Kiểm tra đã bấm nút Lưu ở tab Tối ưu chưa — bắt buộc phải Lưu dữ liệu tối ưu trước khi chuyển trạng thái. |
+| Không thấy nút "Tạo yêu cầu mua hàng" | Lệnh SX phải ở trạng thái "Đã kế hoạch" và đang mở tab **Đơn mua hàng**. |
+| Ô "Áp NCC đồng loạt" bị mờ | Chưa tích dòng nào trong tab đang mở — tích ô ở dòng tiêu đề bảng trước. |
+| Chuyển "Đã mua hàng" báo "Bạn phải tạo đơn mua hàng cho SX này trước..." | Chưa lập đơn mua hàng từ yêu cầu mua hàng — làm lại bước 13–16. |
 | Bấm nút chuyển trạng thái nhưng không có phản ứng | Kiểm tra lệnh SX đã ở đúng trạng thái liền trước trong chuỗi; không thể nhảy cóc trạng thái. |
 
 ## 5. Dấu hiệu hoàn thành
 
-- Ô Trạng thái hiển thị "Đã lắp đặt".
-- Tab Đơn mua hàng đã có đơn mua hàng được tạo cho các nhóm vật tư.
-- Toàn bộ chuỗi trạng thái Đã duyệt → Đã kế hoạch → Đã mua hàng → Đang SX → Đã SX → Đang lắp đặt → Đã lắp đặt đã được đi qua tuần tự.
+- Ô Trạng thái của lệnh SX hiển thị "Đã mua hàng".
+- Phiếu Yêu cầu mua hàng của lệnh SX ở trạng thái "Đã lập đơn" và liệt kê các đơn mua hàng MH_... .
+- Mục Mua hàng > Đơn mua hàng có các đơn mới (trạng thái Nháp, Chưa nhận) gắn với lệnh SX này.
 
 ## 6. Checklist dành cho người mới
 
 - [ ] Đã nhập Giá bán phế liệu, bấm Tính tối ưu và bấm Lưu ở tab Tối ưu.
-- [ ] Đã tạo đơn mua hàng ở tab Đơn mua hàng (bấm Tiến hành tạo đơn mua hàng 2 lần).
-- [ ] Đã chuyển đủ chuỗi trạng thái, mỗi lần đều nhập ghi chú, bấm Cập nhật rồi Đồng ý.
-- [ ] Trạng thái cuối cùng đã là "Đã lắp đặt".
+- [ ] Đã chuyển Đã duyệt → Đã kế hoạch.
+- [ ] Đã tạo, duyệt yêu cầu mua hàng và lập đơn mua hàng cho **tất cả** các tab vật tư.
+- [ ] Trạng thái lệnh SX đã là "Đã mua hàng".
+- [ ] Đã chuyển sang UG-040 để duyệt đơn mua hàng và nhận hàng vào kho.
 
 ---
 
