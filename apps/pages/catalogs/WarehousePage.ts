@@ -5,23 +5,15 @@ import { BasePage } from '../BasePage';
 export class WarehousePage extends BasePage {
   readonly nameInput: Locator;
   readonly activeCheckbox: Locator;
-  readonly address1Input: Locator;
-  readonly address2Input: Locator;
-  readonly cityInput: Locator;
-  readonly phoneInput: Locator;
+  readonly siteDropdown: Locator;
 
   constructor(page: Page) {
     super(page);
 
-    this.nameInput = page.getByLabel(/^tên\s*\*?$/i).or(page.locator('input[type="text"]').nth(0)).first();
+    // Form Kho hàng (warehouse-details) hiện chỉ còn: Tên, Chi nhánh, Hoạt động.
+    this.nameInput = this.formInput(/^\s*tên\s*\*?\s*$/i);
     this.activeCheckbox = page.getByRole('checkbox', { name: /hoạt động/i }).first();
-    this.address1Input = page.getByLabel(/địa chỉ 1/i).or(page.locator('input[type="text"]').nth(1)).first();
-    this.address2Input = page.getByLabel(/địa chỉ 2/i).or(page.locator('input[type="text"]').nth(2)).first();
-    this.cityInput = page.getByLabel(/thành phố/i).or(page.locator('input[type="text"]').nth(3)).first();
-    this.phoneInput = page
-      .getByLabel(/số đt|số điện thoại|phone/i)
-      .or(page.locator('input[type="text"]').nth(4))
-      .first();
+    this.siteDropdown = this.formDropdown(/chi nhánh/i);
   }
 
   async verifyPageOpened(): Promise<void> {
@@ -31,9 +23,19 @@ export class WarehousePage extends BasePage {
   async openCreateForm(): Promise<void> {
     await super.openCreateForm();
 
-    await expect(this.page).toHaveURL(/\/catalogs\/site-details/i, { timeout: 10_000 });
+    await expect(this.page).toHaveURL(/\/catalogs\/warehouse-details/i, { timeout: 10_000 });
     await expect(this.nameInput).toBeVisible({ timeout: 10_000 });
     await expect(this.saveButton).toBeVisible({ timeout: 10_000 });
+  }
+
+  async selectSite(site: string): Promise<void> {
+    await expect(this.siteDropdown).toBeVisible({ timeout: 10_000 });
+    await this.siteDropdown.click();
+
+    const option = this.page.getByRole('option', { name: site, exact: true });
+
+    await expect(option).toBeVisible({ timeout: 10_000 });
+    await option.click();
   }
 
   async verifyCreated(name: string): Promise<void> {

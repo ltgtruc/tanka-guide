@@ -6,7 +6,7 @@ import { createGuidePriceStatus } from '../../test-data/priceStatus.data';
 
 const GUIDE_ID = 'UG-031-create-price-status';
 
-test.describe('UG-031 - Chuyển trạng thái và tạo lệnh sản xuất', () => {
+test.describe('UG-031 - Chuyển trạng thái đơn bán hàng đến Đã yêu cầu SX', () => {
   test(
     'Hướng dẫn yêu cầu sản xuất từ đơn bán hàng',
     { tag: ['@user-guide', '@sales', '@production', '@price-status'] },
@@ -60,47 +60,6 @@ test.describe('UG-031 - Chuyển trạng thái và tạo lệnh sản xuất', (
         await priceStatusPage.changeStatus(priceStatus.productionRequestedStatus, priceStatus.statusNote);
         await priceStatusPage.expectCurrentStatus(priceStatus.productionRequestedStatus);
         await guidePause(page, 1_500);
-      });
-
-      await test.step('Bước 7 - Mở Quản lý sản xuất', async () => {
-        await priceStatusPage.openProductionManagement();
-        await capture('Mở màn hình Quản lý sản xuất', priceStatusPage.productionHeading);
-        await guidePause(page, 1_500);
-      });
-
-      await test.step('Bước 8 - Chọn Tạo mới', async () => {
-        await expect(priceStatusPage.createButton).toBeVisible({ timeout: 15_000 });
-        await expect(priceStatusPage.createButton).toBeEnabled({ timeout: 15_000 });
-        await capture('Chọn nút Tạo mới', priceStatusPage.createButton);
-        await priceStatusPage.openProductionCreateForm();
-        await guidePause(page, 1_000);
-      });
-
-      await test.step('Bước 9 - Chọn kho hàng', async () => {
-        await capture(`Chọn kho hàng ${priceStatus.warehouse}`, priceStatusPage.warehouseDropdown);
-
-        const selectedWarehouse = await priceStatusPage.selectDropdownOption(
-          priceStatusPage.warehouseDropdown,
-          priceStatus.warehouse,
-        );
-
-        console.log(`Kho hàng đã chọn: ${selectedWarehouse}`);
-        await guidePause(page, 1_000);
-      });
-
-      await test.step('Bước 10 - Chọn các dòng của đơn bán hàng', async () => {
-        await capture('Chọn các đơn bán hàng để sản xuất', priceStatusPage.chooseSalesOrdersButton);
-        await priceStatusPage.chooseSalesOrderLines(salesOrderCode);
-        await guidePause(page, 1_500);
-      });
-
-      await test.step('Bước 11 - Lưu đơn sản xuất', async () => {
-        await expect(priceStatusPage.saveButton).toBeVisible({ timeout: 20_000 });
-        await expect(priceStatusPage.saveButton).toBeEnabled({ timeout: 15_000 });
-        await priceStatusPage.saveButton.scrollIntoViewIfNeeded();
-        await capture('Chọn nút Lưu', priceStatusPage.saveButton);
-        await priceStatusPage.saveProductionOrder();
-        await guidePause(page, 2_000);
       });
     },
   );

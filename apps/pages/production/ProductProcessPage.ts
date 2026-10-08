@@ -17,7 +17,11 @@ export class ProductProcessPage extends BasePage {
   readonly statusActionButton: Locator;
   readonly currentStatusValue: Locator;
 
-  readonly createPurchaseOrderButton: Locator;
+  readonly createPurchaseRequisitionButton: Locator;
+  readonly purchaseRequisitionConfirmButton: Locator;
+  readonly approveRequisitionButton: Locator;
+  readonly convertRequisitionButton: Locator;
+  readonly supplierBulkDropdown: Locator;
 
   constructor(page: Page) {
     super(page, { createButtonName: /tạo mới|create new/i });
@@ -70,10 +74,18 @@ export class ProductProcessPage extends BasePage {
 
     this.statusActionButton = resolvedStatusField.locator('button:visible').first();
 
-    this.createPurchaseOrderButton = page
-      .locator('button:visible')
-      .filter({ hasText: /tiến hành tạo đơn mua hàng/i })
-      .first();
+    // Tab "Đơn mua hàng" của lệnh SX không còn "Tiến hành tạo đơn mua hàng";
+    // thay bằng "Tạo yêu cầu mua hàng" + hộp thoại xác nhận "Đồng ý".
+    this.createPurchaseRequisitionButton = page.getByRole('button', { name: /tạo yêu cầu mua hàng/i }).first();
+    this.purchaseRequisitionConfirmButton = page
+      .getByRole('alertdialog', { name: /xác nhận/i })
+      .getByRole('button', { name: /đồng ý/i });
+
+    // Màn hình Yêu cầu mua hàng: tên nút có ký tự icon font phía trước nên
+    // neo cuối chuỗi; "Từ chối" không khớp /duyệt$/.
+    this.approveRequisitionButton = page.locator('main').getByRole('button', { name: /duyệt\s*$/i });
+    this.convertRequisitionButton = page.locator('main').getByRole('button', { name: /lập đơn mua hàng/i });
+    this.supplierBulkDropdown = page.getByRole('combobox', { name: /chọn nhà cung cấp/i });
   }
 
   async openProductionManagement(): Promise<void> {
@@ -82,14 +94,17 @@ export class ProductProcessPage extends BasePage {
       .or(this.page.getByText(/^sản xuất$/i))
       .first();
 
-    await expect(productionMenu).toBeVisible({ timeout: 15_000 });
-
-    await productionMenu.click();
-
     const managementMenu = this.page
       .getByRole('link', { name: /quản lý sx|quản lý sản xuất/i })
       .or(this.page.getByText(/^(quản lý sx|quản lý sản xuất)$/i))
       .first();
+
+    // Bấm "Sản xuất" khi menu con đang mở (vd. vừa ở Phiếu giao hàng) sẽ thu
+    // gọn menu và ẩn mất "Quản lý SX" — chỉ bấm khi menu con chưa hiện.
+    if (!(await managementMenu.isVisible().catch(() => false))) {
+      await expect(productionMenu).toBeVisible({ timeout: 15_000 });
+      await productionMenu.click();
+    }
 
     await expect(managementMenu).toBeVisible({ timeout: 15_000 });
 
@@ -120,6 +135,55 @@ export class ProductProcessPage extends BasePage {
     await expect(this.currentStatusValue).toBeVisible({ timeout: 20_000 });
 
     return productionCode;
+  }
+
+  /**
+   * Mở lệnh SX mới nhất có ô Trạng thái đúng bằng `status` (không fallback
+   * sang dòng khác như openDraftProductionOrder).
+   */
+  async openProductionOrderByStatus(status: string): Promise<string> {
+    const rows = this.page.locator('main table tbody tr');
+
+    await expect(rows.first()).toBeVisible({ timeout: 20_000 });
+
+    const targetRow = rows
+      .filter({ has: this.page.locator('td').filter({ hasText: new RegExp(`^\\s*${escapeRegExp(status)}\\s*$`, 'i') }) })
+      .first();
+
+    await expect(targetRow, `Không có lệnh SX nào ở trạng thái "${status}"`).toBeVisible({ timeout: 20_000 });
+
+    const detailLink = targetRow.locator('a[href*="production-details"]').first();
+    const productionCode = (await detailLink.innerText()).replace(/\s+/g, '');
+
+    await detailLink.click();
+
+    await expect(this.page.getByText(/chi tiết sx/i).first()).toBeVisible({ timeout: 20_000 });
+    await expect(this.currentStatusValue).toBeVisible({ timeout: 20_000 });
+
+    return productionCode;
+  }
+
+  async openProductionOrder(productionCode: string): Promise<void> {
+    const detailLink = this.page.locator('main a[href*="production-details"]').filter({ hasText: productionCode }).first();
+
+    await expect(detailLink).toBeVisible({ timeout: 20_000 });
+    await detailLink.click();
+
+    await expect(this.page.getByText(/chi tiết sx/i).first()).toBeVisible({ timeout: 20_000 });
+    await expect(this.currentStatusValue).toBeVisible({ timeout: 20_000 });
+  }
+
+  /** Đơn BH và khách hàng của dòng đầu tiên ở tab "Các dòng" của lệnh SX đang mở. */
+  async getSalesOrderInfo(): Promise<{ salesOrderCode: string; customer: string }> {
+    const salesOrderLink = this.page.locator('main a[href*="sales-order-details"]').first();
+    const customerLink = this.page.locator('main a[href*="customer-details"]').first();
+
+    await expect(salesOrderLink).toBeVisible({ timeout: 20_000 });
+
+    return {
+      salesOrderCode: (await salesOrderLink.innerText()).replace(/\s+/g, ''),
+      customer: (await customerLink.innerText()).trim(),
+    };
   }
 
   async openOptimizeTab(): Promise<void> {
@@ -233,29 +297,97 @@ export class ProductProcessPage extends BasePage {
 
     await this.purchaseOrderTab.click();
 
-    await expect(this.createPurchaseOrderButton).toBeVisible({ timeout: 15_000 });
+    await expect(this.createPurchaseRequisitionButton).toBeVisible({ timeout: 15_000 });
   }
 
-  /** Bấm "Tiến hành tạo đơn mua hàng" ở tab Đơn mua hàng — mở màn hình chọn nhà cung cấp. */
-  async startCreatePurchaseOrder(): Promise<void> {
-    await expect(this.createPurchaseOrderButton).toBeVisible({ timeout: 15_000 });
-    await expect(this.createPurchaseOrderButton).toBeEnabled({ timeout: 15_000 });
+  /** Bấm "Tạo yêu cầu mua hàng" ở tab Đơn mua hàng — mở hộp thoại xác nhận. */
+  async startCreatePurchaseRequisition(): Promise<void> {
+    await expect(this.createPurchaseRequisitionButton).toBeVisible({ timeout: 15_000 });
+    await expect(this.createPurchaseRequisitionButton).toBeEnabled({ timeout: 15_000 });
 
-    await this.createPurchaseOrderButton.click();
+    await this.createPurchaseRequisitionButton.click();
 
-    await this.page.waitForURL(/production-purchase-orders/i, { timeout: 30_000 });
-    await expect(this.page.getByText(/chọn nhà cung cấp/i).first()).toBeVisible({ timeout: 20_000 });
+    await expect(this.purchaseRequisitionConfirmButton).toBeVisible({ timeout: 15_000 });
   }
 
-  /** Cuộn xuống cuối màn hình chọn NCC rồi bấm lại "Tiến hành tạo đơn mua hàng" để hoàn thành. */
-  async confirmCreatePurchaseOrder(): Promise<void> {
-    await this.page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
-    await this.page.waitForTimeout(500);
+  /**
+   * Bấm "Đồng ý" — app tạo phiếu YCMH (trạng thái Nháp) và chuyển sang màn
+   * hình Yêu cầu mua hàng; bấm link mã lệnh SX trên phiếu để quay lại lệnh SX.
+   */
+  async confirmCreatePurchaseRequisition(): Promise<void> {
+    await this.purchaseRequisitionConfirmButton.click();
 
-    await expect(this.createPurchaseOrderButton).toBeVisible({ timeout: 15_000 });
-    await expect(this.createPurchaseOrderButton).toBeEnabled({ timeout: 15_000 });
+    await this.page.waitForURL(/purchases\/purchase-requisition\//i, { timeout: 30_000 });
 
-    await this.createPurchaseOrderButton.click();
+    const productionLink = this.page.locator('main a[href*="production-details"]').first();
+
+    await expect(productionLink).toBeVisible({ timeout: 20_000 });
+  }
+
+  /** Màn hình Yêu cầu mua hàng (Nháp): bấm "Duyệt" rồi "Đồng ý" ở hộp thoại xác nhận. */
+  async approvePurchaseRequisition(): Promise<void> {
+    await expect(this.approveRequisitionButton).toBeVisible({ timeout: 15_000 });
+    await this.approveRequisitionButton.click();
+
+    await expect(this.purchaseRequisitionConfirmButton).toBeVisible({ timeout: 15_000 });
+    await this.purchaseRequisitionConfirmButton.click();
+
+    await expect(this.convertRequisitionButton).toBeVisible({ timeout: 20_000 });
+  }
+
+  /** Bấm "Lập đơn mua hàng" trên YCMH đã duyệt — mở màn hình chọn nhà cung cấp. */
+  async openConvertRequisition(): Promise<void> {
+    await expect(this.convertRequisitionButton).toBeVisible({ timeout: 15_000 });
+    await this.convertRequisitionButton.click();
+
+    await this.page.waitForURL(/purchase-requisition\/.+\/convert/i, { timeout: 30_000 });
+    await expect(this.supplierBulkDropdown).toBeVisible({ timeout: 20_000 });
+  }
+
+  /**
+   * Ở từng tab nhóm vật tư: tích chọn tất cả dòng, chọn NCC đầu tiên của
+   * tab (danh sách NCC khác nhau theo nhóm) và bấm "Áp dụng". Lựa chọn
+   * được giữ khi đổi tab, nên cuối cùng chỉ cần bấm "Lập đơn mua hàng" một lần.
+   */
+  async applySupplierToAllTabs(): Promise<void> {
+    const tabs = this.page.locator('main').getByRole('tab');
+    const tabCount = await tabs.count();
+
+    for (let index = 0; index < tabCount; index += 1) {
+      await tabs.nth(index).click();
+
+      const selectAll = this.page.getByRole('checkbox', { name: /all items/i });
+
+      await expect(selectAll).toBeVisible({ timeout: 15_000 });
+      await selectAll.click();
+
+      await expect(this.supplierBulkDropdown).toBeEnabled({ timeout: 10_000 });
+      await this.supplierBulkDropdown.click();
+
+      const firstSupplier = this.page.locator('[role="option"]:visible').first();
+
+      await expect(firstSupplier).toBeVisible({ timeout: 15_000 });
+      await firstSupplier.click();
+
+      await this.page.getByRole('button', { name: /áp dụng/i }).click();
+    }
+
+    await tabs.first().click();
+  }
+
+  async submitConvertRequisition(): Promise<void> {
+    await expect(this.convertRequisitionButton).toBeEnabled({ timeout: 15_000 });
+    await this.convertRequisitionButton.click();
+
+    await expect(this.page.getByText(/đã lập đơn mua hàng/i).first()).toBeVisible({ timeout: 30_000 });
+    await expect(this.page.locator('main a[href*="purchase-order-view"]').first()).toBeVisible({ timeout: 20_000 });
+  }
+
+  async backToProductionFromRequisition(): Promise<void> {
+    const productionLink = this.page.locator('main a[href*="production-details"]').first();
+
+    await expect(productionLink).toBeVisible({ timeout: 20_000 });
+    await productionLink.click();
 
     await this.page.waitForURL(/production-details/i, { timeout: 30_000 });
     await expect(this.currentStatusValue).toBeVisible({ timeout: 20_000 });

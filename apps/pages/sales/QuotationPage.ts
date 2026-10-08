@@ -4,7 +4,7 @@ import { BaseSalesDocumentPage } from './BaseSalesDocumentPage';
 
 export class QuotationPage extends BaseSalesDocumentPage {
   readonly customerDropdown: Locator;
-  readonly warehouseDropdown: Locator;
+  readonly siteDropdown: Locator;
   readonly quotationEmployeeDropdown: Locator;
   readonly salesEmployeeDropdown: Locator;
   readonly designerEmployeeDropdown: Locator;
@@ -20,7 +20,7 @@ export class QuotationPage extends BaseSalesDocumentPage {
     super(page, { createButtonName: /tạo mới|create new/i });
 
     this.customerDropdown = this.findDropdownInput(/khách hàng/i);
-    this.warehouseDropdown = this.findDropdownInput(/kho hàng /i);
+    this.siteDropdown = this.formField(/^\s*chi nhánh\s*\*?\s*$/i);
     this.quotationEmployeeDropdown = this.findDropdownInput(/nhân viên\s*(bg|báo giá)/i);
     this.salesEmployeeDropdown = this.findDropdownInput(/nhân viên\s*(kd|kinh doanh)/i);
     this.designerEmployeeDropdown = this.findDropdownInput(/nhân viên\s*thiết kế/i);

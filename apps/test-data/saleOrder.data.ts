@@ -1,6 +1,6 @@
 export interface GuideSalesOrder {
   customer: string;
-  warehouse: string;
+  site: string;
   quotationEmployee: string;
   salesEmployee: string;
   designerEmployee: string;
@@ -20,11 +20,11 @@ export function createGuideSalesOrder(): GuideSalesOrder {
     /*
      * Theo video:
      * - Khách hàng: chọn dòng đầu tiên.
-     * - Kho hàng: Hóc Môn.
+     * - Chi nhánh: Hóc Môn.
      * - Các nhân viên: chọn dòng đầu tiên nếu không truyền tên cụ thể.
      */
     customer: 'Anh Kỳ',
-    warehouse: 'Hóc Môn',
+    site: 'Hóc Môn',
     quotationEmployee: '',
     salesEmployee: '',
     designerEmployee: '',
@@ -43,7 +43,9 @@ export function createGuideSalesOrder(): GuideSalesOrder {
        */
       inventorySearch: 'XF-55',
       drawingCode: 'D1',
-      glass: '08-CL-KD-VIFG/CL',
+      // 08-CL-KD-VIFG/CL đang bị lệnh SX cũ (SX_202610_0002) giữ vượt tồn kho,
+      // lệnh SX mới dùng kính này sẽ không chuyển được sang "Đang SX".
+      glass: '10-CL-KD-VIFG/CL',
 
     },
   };

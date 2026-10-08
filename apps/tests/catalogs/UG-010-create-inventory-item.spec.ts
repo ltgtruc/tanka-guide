@@ -69,9 +69,7 @@ test.describe('UG-010 - Tạo vật liệu tồn kho', () => {
         console.log(`Nhóm HTK đã chọn: ${selectedGroup}`);
         await guidePause(page, 500);
 
-        const selectedUnit = await inventoryPage.selectFirstOption(inventoryPage.unitDropdown);
-
-        console.log(`ĐVT lưu kho đã chọn: ${selectedUnit}`);
+        await inventoryPage.selectOption(inventoryPage.unitDropdown, inventoryItem.storageUnit);
         await guidePause(page, 500);
       });
 

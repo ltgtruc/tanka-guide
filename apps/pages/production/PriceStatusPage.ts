@@ -9,7 +9,7 @@ export class PriceStatusPage extends BasePage {
   readonly statusActionButton: Locator;
 
   readonly productionHeading: Locator;
-  readonly warehouseDropdown: Locator;
+  readonly siteDropdown: Locator;
   readonly chooseSalesOrdersButton: Locator;
 
   constructor(page: Page) {
@@ -37,7 +37,7 @@ export class PriceStatusPage extends BasePage {
     this.statusActionButton = resolvedStatusField.locator('button:visible').first();
 
     this.productionHeading = page.getByText(/^(quản lý sx|quản lý sản xuất)$/i).first();
-    this.warehouseDropdown = this.findDropdownInput(/kho hàng /i);
+    this.siteDropdown = this.formField(/^\s*chi nhánh\s*\*?\s*$/i);
 
     this.chooseSalesOrdersButton = page.getByRole('button', { name: /chọn các đơn bh|chọn.*đơn bán hàng/i }).first();
   }
@@ -72,21 +72,20 @@ export class PriceStatusPage extends BasePage {
     if (preferredCode?.trim()) {
       targetRow = rows.filter({ hasText: new RegExp(escapeRegExp(preferredCode.trim()), 'i') }).first();
     } else {
-      const draftRows = rows.filter({ hasText: /nháp/i });
+      // Cột "Trạng thái SX" cũng có thể chứa "Nháp (1)" — chỉ lấy dòng có
+      // ô Trạng thái đúng bằng "Nháp".
+      const draftRows = rows.filter({ has: this.page.locator('td').filter({ hasText: /^\s*nháp\s*$/i }) });
 
       targetRow = (await draftRows.count()) > 0 ? draftRows.first() : rows.first();
     }
 
     await expect(targetRow).toBeVisible({ timeout: 20_000 });
 
-    const detailLink = targetRow
-      .locator('a')
-      .filter({ hasText: /BH[_-]|BH\d|\d{4}/i })
-      .first()
-      .or(targetRow.locator('a').first())
-      .first();
+    // Dòng đơn BH tạo từ báo giá có thêm link "Từ báo giá" (BG_...) đứng
+    // trước mã BH — chỉ lấy link tới trang chi tiết đơn BH.
+    const detailLink = targetRow.locator('a[href*="sales-order-details"]').first();
 
-    const salesOrderCode = (await detailLink.innerText()).trim();
+    const salesOrderCode = (await detailLink.innerText()).replace(/\s+/g, '');
 
     await detailLink.click();
 
@@ -196,7 +195,7 @@ export class PriceStatusPage extends BasePage {
     await this.createButton.click();
 
     await expect(this.page.getByText(/chi tiết sx/i).first()).toBeVisible({ timeout: 20_000 });
-    await expect(this.warehouseDropdown).toBeVisible({ timeout: 20_000 });
+    await expect(this.siteDropdown).toBeVisible({ timeout: 20_000 });
   }
 
   async chooseSalesOrderLines(salesOrderCode?: string): Promise<void> {
@@ -216,11 +215,13 @@ export class PriceStatusPage extends BasePage {
     let targetRows = rows;
 
     if (salesOrderCode?.trim()) {
-      const matchedRows = rows.filter({ hasText: new RegExp(escapeRegExp(salesOrderCode.trim()), 'i') });
+      // Mã BH có thể bị ngắt dòng khi render ("BH_202610 _0004"), nên cho
+      // phép khoảng trắng quanh dấu "_". Không còn fallback "chọn tất cả":
+      // nếu không khớp thì fail, tránh gộp nhầm dòng của các đơn BH khác
+      // vào lệnh SX (khiến lệnh SX giữ vật tư của đơn khác).
+      const codePattern = escapeRegExp(salesOrderCode.replace(/\s+/g, '')).replace(/_/g, '\\s*_\\s*');
 
-      if ((await matchedRows.count()) > 0) {
-        targetRows = matchedRows;
-      }
+      targetRows = rows.filter({ hasText: new RegExp(codePattern, 'i') });
     }
 
     await expect(targetRows.first()).toBeVisible({ timeout: 20_000 });

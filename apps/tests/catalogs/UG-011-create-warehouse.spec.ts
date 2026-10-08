@@ -51,19 +51,10 @@ test.describe('UG-011 - Tạo kho hàng', () => {
       });
 
       await test.step('Bước 4 - Chọn Tạo mới', async () => {
-        const createButton = page.getByRole('button', { name: /tạo mới|create new|create/i }).first();
-        const warehouseNameInput = page
-          .getByLabel(/^tên\s*\*?$/i)
-          .or(page.locator('input[type="text"]').first())
-          .first();
-        const saveButton = page.getByRole('button', { name: /lưu|save/i }).first();
-
-        await expect(createButton).toBeVisible({ timeout: 10_000 });
-        await expect(createButton).toBeEnabled();
-        await capture('Chọn nút Tạo mới', createButton);
-        await createButton.click();
-        await expect(warehouseNameInput).toBeVisible({ timeout: 10_000 });
-        await expect(saveButton).toBeVisible({ timeout: 10_000 });
+        await expect(warehousePage.createButton).toBeVisible({ timeout: 10_000 });
+        await expect(warehousePage.createButton).toBeEnabled();
+        await capture('Chọn nút Tạo mới', warehousePage.createButton);
+        await warehousePage.openCreateForm();
         await guidePause(page, 900);
       });
 
@@ -73,29 +64,19 @@ test.describe('UG-011 - Tạo kho hàng', () => {
         await capture('Nhập tên kho', warehousePage.nameInput);
       });
 
-      await test.step('Bước 6 - Nhập địa chỉ kho', async () => {
-        await guideFill(page, warehousePage.address1Input, warehouse.address1);
-        await guideFill(page, warehousePage.address2Input, warehouse.address2);
-        await capture('Nhập địa chỉ kho', warehousePage.address1Input);
+      await test.step('Bước 6 - Chọn chi nhánh', async () => {
+        await warehousePage.selectSite(warehouse.site);
+        await capture('Chọn chi nhánh', warehousePage.siteDropdown);
+        await guidePause(page, 900);
       });
 
-      await test.step('Bước 7 - Nhập thành phố', async () => {
-        await guideFill(page, warehousePage.cityInput, warehouse.city);
-        await capture('Nhập thành phố', warehousePage.cityInput);
-      });
-
-      await test.step('Bước 8 - Nhập số điện thoại', async () => {
-        await guideFill(page, warehousePage.phoneInput, warehouse.phone);
-        await capture('Nhập số điện thoại', warehousePage.phoneInput);
-      });
-
-      await test.step('Bước 9 - Lưu kho', async () => {
+      await test.step('Bước 7 - Lưu kho', async () => {
         await capture('Chọn nút Lưu', warehousePage.saveButton);
         await warehousePage.save();
         await guidePause(page, 1_500);
       });
 
-      await test.step('Bước 10 - Trở lại danh sách kho hàng', async () => {
+      await test.step('Bước 8 - Trở lại danh sách kho hàng', async () => {
         await capture('Chọn nút Trở lại', warehousePage.backButton);
         await warehousePage.backToList();
         await warehousePage.verifyCreated(warehouse.name);

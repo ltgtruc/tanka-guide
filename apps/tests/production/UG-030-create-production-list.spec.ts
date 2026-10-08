@@ -52,10 +52,11 @@ test.describe('UG-030 - Tạo đơn theo dõi sản xuất', () => {
       });
 
       await test.step('Bước 5 - Nhập thông tin bắt buộc', async () => {
-        await productionPage.warehouseDropdown.click();
-        await page.getByText(production.warehouse).click();
+        await expect(productionPage.siteDropdown).toBeVisible({ timeout: 10_000 });
+        await productionPage.siteDropdown.click();
+        await page.getByRole('option', { name: production.site, exact: true }).click();
         await guideFill(page, productionPage.descriptionInput, production.description);
-        await capture('Chọn kho hàng và nhập diễn giải', productionPage.descriptionInput);
+        await capture('Chọn chi nhánh và nhập diễn giải', productionPage.descriptionInput);
         await guidePause(page, 1_000);
       });
 
@@ -66,8 +67,11 @@ test.describe('UG-030 - Tạo đơn theo dõi sản xuất', () => {
       });
 
       await test.step('Bước 7 - Chọn đơn hàng', async () => {
-        await capture('Tích chọn dòng đơn hàng', productionPage.salesOrderCheckbox);
-        await productionPage.salesOrderCheckbox.check();
+        const { salesOrderCode, checkbox } = await productionPage.newestSalesOrderGroupCheckbox();
+
+        console.log(`Đơn bán hàng được chọn để sản xuất: ${salesOrderCode}`);
+        await capture('Tích chọn đơn hàng cần sản xuất', checkbox);
+        await checkbox.check();
         await guidePause(page, 1_000);
       });
 

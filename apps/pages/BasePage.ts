@@ -48,6 +48,26 @@ export class BasePage {
     await this.backButton.click();
   }
 
+  /**
+   * Ô nhập theo nhãn. Label của Tanka không gắn `for` với input nên
+   * getByLabel không bắt được; DOM thật mỗi field là
+   * `.c-component > label.c-component-label + (input | .p-select ...)`.
+   */
+  protected formField(labelPattern: RegExp): Locator {
+    return this.page
+      .locator('.c-component')
+      .filter({ has: this.page.locator('label.c-component-label', { hasText: labelPattern }) })
+      .first();
+  }
+
+  protected formInput(labelPattern: RegExp): Locator {
+    return this.formField(labelPattern).locator('input, textarea').first();
+  }
+
+  protected formDropdown(labelPattern: RegExp): Locator {
+    return this.formField(labelPattern).locator('[role="combobox"]').first();
+  }
+
   protected findDropdownInput(labelPattern: RegExp): Locator {
     const byAccessibleLabel = this.page.getByLabel(labelPattern).first();
 

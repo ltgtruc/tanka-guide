@@ -1,6 +1,6 @@
 export interface GuidePriceStatus {
   salesOrderCode: string;
-  warehouse: string;
+  site: string;
 
   sentStatus: string;
   approvedStatus: string;
@@ -12,7 +12,7 @@ export interface GuidePriceStatus {
 export function createGuidePriceStatus(): GuidePriceStatus {
   return {
     salesOrderCode: '',
-    warehouse: 'Hóc Môn',
+    site: 'Hóc Môn',
 
     /*
      * Nội dung button trong dropdown là "Đã gửi".

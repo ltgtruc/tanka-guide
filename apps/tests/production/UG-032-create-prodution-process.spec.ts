@@ -8,7 +8,7 @@ const GUIDE_ID = 'UG-032-create-prodution-process';
 
 test.describe('UG-032 - Tối ưu, chuyển trạng thái và tạo đơn mua hàng cho lệnh SX', () => {
   test(
-    'Hướng dẫn xử lý một lệnh sản xuất từ Nháp đến Đã lắp đặt',
+    'Hướng dẫn xử lý một lệnh sản xuất từ Nháp đến Đã mua hàng',
     { tag: ['@user-guide', '@production', '@product-process'] },
     async ({ page }, testInfo) => {
       const productProcessPage = new ProductProcessPage(page);
@@ -93,47 +93,59 @@ test.describe('UG-032 - Tối ưu, chuyển trạng thái và tạo đơn mua h�
         await guidePause(page, 1_000);
       });
 
-      await test.step('Bước 10 - Mở tab Đơn mua hàng và tiến hành tạo đơn mua hàng', async () => {
+      await test.step('Bước 10 - Mở tab Đơn mua hàng và tạo yêu cầu mua hàng', async () => {
         await productProcessPage.openPurchaseOrderTab();
-        await capture('Bấm Tiến hành tạo đơn mua hàng', productProcessPage.createPurchaseOrderButton);
-        await productProcessPage.startCreatePurchaseOrder();
+        await capture('Bấm Tạo yêu cầu mua hàng', productProcessPage.createPurchaseRequisitionButton);
+        await productProcessPage.startCreatePurchaseRequisition();
         await guidePause(page, 1_500);
       });
 
-      await test.step('Bước 11 - Cuộn xuống cuối trang và hoàn thành tạo đơn mua hàng', async () => {
-        await capture('Bấm Tiến hành tạo đơn mua hàng để hoàn thành', productProcessPage.createPurchaseOrderButton);
-        await productProcessPage.confirmCreatePurchaseOrder();
+      await test.step('Bước 11 - Xác nhận tạo yêu cầu mua hàng', async () => {
+        await capture('Bấm Đồng ý để tạo yêu cầu mua hàng', productProcessPage.purchaseRequisitionConfirmButton);
+        await productProcessPage.confirmCreatePurchaseRequisition();
         await guidePause(page, 1_500);
       });
 
-      await test.step('Bước 12 - Chuyển trạng thái sang Đã mua hàng', async () => {
+      await test.step('Bước 12 - Duyệt yêu cầu mua hàng', async () => {
+        await capture('Bấm Duyệt yêu cầu mua hàng', productProcessPage.approveRequisitionButton);
+        await productProcessPage.approvePurchaseRequisition();
+        await guidePause(page, 1_500);
+      });
+
+      await test.step('Bước 13 - Mở màn hình lập đơn mua hàng', async () => {
+        await capture('Bấm Lập đơn mua hàng', productProcessPage.convertRequisitionButton);
+        await productProcessPage.openConvertRequisition();
+        await guidePause(page, 1_500);
+      });
+
+      await test.step('Bước 14 - Chọn nhà cung cấp cho từng nhóm vật tư', async () => {
+        await capture('Tích chọn các dòng và chọn nhà cung cấp', productProcessPage.supplierBulkDropdown);
+        await productProcessPage.applySupplierToAllTabs();
+        await guidePause(page, 1_000);
+      });
+
+      await test.step('Bước 15 - Lập đơn mua hàng', async () => {
+        await capture('Bấm Lập đơn mua hàng để hoàn thành', productProcessPage.convertRequisitionButton);
+        await productProcessPage.submitConvertRequisition();
+        await guidePause(page, 1_500);
+        await capture('Các đơn mua hàng đã được lập từ yêu cầu mua hàng');
+      });
+
+      await test.step('Bước 16 - Quay lại lệnh sản xuất', async () => {
+        await productProcessPage.backToProductionFromRequisition();
+        await guidePause(page, 1_500);
+      });
+
+      await test.step('Bước 17 - Chuyển trạng thái sang Đã mua hàng', async () => {
         await capture('Chuyển trạng thái sang Đã mua hàng', productProcessPage.statusActionButton);
         await productProcessPage.changeStatus(productProcess.purchasedStatus, productProcess.statusNote);
         await productProcessPage.expectCurrentStatus(productProcess.purchasedStatus);
         await guidePause(page, 1_500);
       });
 
-      await test.step('Bước 13 - Xác nhận chuyển trạng thái Đã mua hàng', async () => {
+      await test.step('Bước 18 - Xác nhận chuyển trạng thái Đã mua hàng', async () => {
         await capture('Trạng thái đã chuyển sang Đã mua hàng', productProcessPage.currentStatusValue);
         await guidePause(page, 1_000);
-      });
-
-      await test.step('Bước 14 - Chuyển tiếp trạng thái đến Đang SX, Đã SX, Đang lắp đặt, Đã lắp đặt', async () => {
-        const remainingStatuses = [
-          productProcess.inProductionStatus,
-          productProcess.producedStatus,
-          productProcess.installingStatus,
-          productProcess.installedStatus,
-        ];
-
-        for (const status of remainingStatuses) {
-          await capture(`Chuyển trạng thái sang ${status}`, productProcessPage.statusActionButton);
-          await productProcessPage.changeStatus(status, productProcess.statusNote);
-          await productProcessPage.expectCurrentStatus(status);
-          await guidePause(page, 1_200);
-        }
-
-        await capture('Trạng thái cuối cùng: Đã lắp đặt', productProcessPage.currentStatusValue);
       });
     },
   );

@@ -1,6 +1,6 @@
 export interface GuideQuotation {
   customer: string;
-  warehouse: string;
+  site: string;
   quotationEmployee: string;
   salesEmployee: string;
   designerEmployee: string;
@@ -21,7 +21,7 @@ export function createGuideQuotation(): GuideQuotation {
      * Giữ nguyên dữ liệu bước 5 đang chạy ổn.
      */
     customer: '',
-    warehouse: 'Hóc Môn',
+    site: 'Hóc Môn',
     quotationEmployee: '',
     salesEmployee: '',
     designerEmployee: '',
@@ -33,7 +33,9 @@ export function createGuideQuotation(): GuideQuotation {
      * trong danh sách HTK.
      */
     lineItem: {
-      inventorySearch: 'SQ-01-TDA',
+      // SQ-01-TDA-55-1.2 ở chi nhánh Hóc Môn thiếu giá tay nắm CZH33-D-L
+      // ("Chưa có giá"); SQ-03-XF-55-1.4 đã kiểm chứng có đủ giá.
+      inventorySearch: 'SQ-03-XF-55',
       drawingCode: 'D1',
       glass:
         '08-CL-KD-VIFG/CL',    },

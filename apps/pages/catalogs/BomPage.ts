@@ -5,7 +5,7 @@ import { BasePage } from '../BasePage';
 
 export class BomPage extends BasePage {
   readonly productDropdown: Locator;
-  readonly warehouseDropdown: Locator;
+  readonly siteDropdown: Locator;
   readonly totalWidthInput: Locator;
   readonly totalHeightInput: Locator;
   readonly profileTab: Locator;
@@ -19,21 +19,11 @@ export class BomPage extends BasePage {
      *   <label>, nên cả getByLabel() lẫn findDropdownInput() (dò theo
      *   <label>) đều không tìm ra field này — phải lấy theo vị trí: đây
      *   luôn là combobox ĐẦU TIÊN trên form khi vừa mở "Tạo mới".
-     * - "Kho hàng" thì có thẻ <label> thật nên dùng được findDropdownInput().
+     * - "Chi nhánh" (trước đây là "Kho hàng") có thẻ <label> thật trong .c-component.
      */
     this.productDropdown = page.locator('[role="combobox"], .p-select, .p-dropdown').first();
 
-    // BasePage.findDropdownInput() đi qua ancestor div/td/section rồi lấy
-    // combobox đầu tiên bên trong — trên form này ancestor đó lại bao luôn
-    // cả cột "Định mức - HTK", nên trả nhầm combobox đầu tiên của trang.
-    // Đi thẳng theo "following" từ label "Kho hàng" cho ra đúng field hơn.
-    const warehouseLabel = page.locator('label').filter({ hasText: /^kho hàng\s*\*?$/i }).first();
-
-    this.warehouseDropdown = warehouseLabel.locator(
-      ['xpath=following::*[', 'contains(@class,"p-select") or ', 'contains(@class,"p-dropdown") or ', '@role="combobox"', '][1]'].join(
-        '',
-      ),
-    );
+    this.siteDropdown = this.formDropdown(/^\s*chi nhánh\s*\*?\s*$/i);
 
     // "Tổng số W/H mặc định" cũng không phải thẻ <label> (giống "Định mức -
     // HTK" ở trên), nên dò theo text bằng getByText() thay vì locator('label').
@@ -43,7 +33,7 @@ export class BomPage extends BasePage {
     this.totalWidthInput = inputAfterLabel(/^tổng số w mặc định\s*\*?$/i);
     this.totalHeightInput = inputAfterLabel(/^tổng số h mặc định\s*\*?$/i);
 
-    // Tab "Profile" là tab mặc định được chọn khi vừa chọn xong HTK + Kho hàng.
+    // Tab "Profile" là tab mặc định được chọn khi vừa chọn xong HTK + Chi nhánh.
     this.profileTab = page.getByRole('tab', { name: /^profile$/i }).or(page.getByText(/^profile$/i)).first();
   }
 
@@ -86,15 +76,56 @@ export class BomPage extends BasePage {
     await dropdown.click({ force: true });
   }
 
-  /** Tìm và chọn Định mức - HTK (thành phẩm) theo mã, ví dụ "SQ-01-TDA-55-1.2". */
-  async selectProduct(searchCode: string): Promise<string> {
+  /**
+   * Trên trang danh sách: tìm theo `searchCode` và trả về mã HTK đã có định
+   * mức ở chi nhánh `site` (mỗi cặp HTK + chi nhánh chỉ tạo được 1 định mức).
+   * Xoá ô tìm kiếm sau khi đọc xong.
+   */
+  async getExistingProductCodes(searchCode: string, site: string): Promise<string[]> {
+    // Ô "Từ khóa tìm kiếm" là textbox đầu tiên của trang danh sách.
+    const searchInput = this.page.locator('main').getByRole('textbox').first();
+    const rows = this.page.locator('main table tbody tr');
+
+    await expect(searchInput).toBeVisible({ timeout: 15_000 });
+    await searchInput.fill(searchCode);
+    await searchInput.press('Enter');
+    await expect(rows.filter({ hasText: new RegExp(escapeRegExp(searchCode), 'i') }).first()).toBeVisible({
+      timeout: 15_000,
+    });
+
+    const codes = (await rows.filter({ hasText: site }).allInnerTexts())
+      .map((text) => text.match(/[A-Z]{2}-\d{2}-[A-Z0-9-]+?-\d\.\d/)?.[0] ?? '')
+      .filter(Boolean);
+
+    await searchInput.fill('');
+    await searchInput.press('Enter');
+
+    return codes;
+  }
+
+  /**
+   * Tìm và chọn Định mức - HTK (thành phẩm) theo mã, ví dụ "TDA-55". Bỏ qua
+   * các mã trong `excludeCodes` (đã có định mức ở chi nhánh định chọn).
+   */
+  async selectProduct(searchCode: string, excludeCodes: string[] = []): Promise<string> {
     await this.productDropdown.scrollIntoViewIfNeeded();
     await this.clickDropdownControl(this.productDropdown);
 
     await this.page.keyboard.type(searchCode, { delay: 40 });
     await this.page.waitForTimeout(900);
 
-    const option = this.getVisibleDropdownOptions().filter({ hasText: new RegExp(escapeRegExp(searchCode), 'i') }).first();
+    const matchingOptions = this.getVisibleDropdownOptions().filter({ hasText: new RegExp(escapeRegExp(searchCode), 'i') });
+
+    await expect(matchingOptions.first()).toBeVisible({ timeout: 15_000 });
+
+    const optionTexts = await matchingOptions.allInnerTexts();
+    const freeIndex = optionTexts.findIndex((text) => !excludeCodes.some((code) => text.trim().startsWith(code)));
+
+    if (freeIndex < 0) {
+      throw new Error(`Tất cả HTK chứa "${searchCode}" đều đã có định mức ở chi nhánh này — đổi productSearch/site.`);
+    }
+
+    const option = matchingOptions.nth(freeIndex);
 
     await expect(option).toBeVisible({ timeout: 15_000 });
 
@@ -106,16 +137,16 @@ export class BomPage extends BasePage {
     return selectedText;
   }
 
-  /** Chọn Kho hàng theo tên, ví dụ "Hóc Môn". */
-  async selectWarehouse(warehouseName: string): Promise<string> {
-    await this.warehouseDropdown.scrollIntoViewIfNeeded();
-    await this.clickDropdownControl(this.warehouseDropdown);
+  /** Chọn Chi nhánh theo tên, ví dụ "Hóc Môn". */
+  async selectSite(siteName: string): Promise<string> {
+    await this.siteDropdown.scrollIntoViewIfNeeded();
+    await this.clickDropdownControl(this.siteDropdown);
 
     const options = this.getVisibleDropdownOptions();
 
     await expect(options.first()).toBeVisible({ timeout: 15_000 });
 
-    const option = options.filter({ hasText: new RegExp(`^${escapeRegExp(warehouseName)}$`, 'i') }).first();
+    const option = options.filter({ hasText: new RegExp(`^${escapeRegExp(siteName)}$`, 'i') }).first();
 
     await expect(option).toBeVisible({ timeout: 15_000 });
 

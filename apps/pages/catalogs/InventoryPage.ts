@@ -61,6 +61,16 @@ export class InventoryPage extends BasePage {
     return text;
   }
 
+  async selectOption(dropdown: Locator, optionName: string): Promise<void> {
+    await dropdown.scrollIntoViewIfNeeded();
+    await dropdown.click({ force: true });
+
+    const option = this.page.getByRole('option', { name: optionName, exact: true });
+
+    await expect(option).toBeVisible({ timeout: 15_000 });
+    await option.click();
+  }
+
   async verifyPageOpened(): Promise<void> {
     await waitToSeeText(this.page, /danh sách hàng tồn kho/i);
   }
@@ -75,6 +85,9 @@ export class InventoryPage extends BasePage {
   }
 
   async verifyCreated(name: string): Promise<void> {
-    await expect(this.page.getByText(name)).toBeVisible();
+    // Sau khi lưu, app ở lại form chi tiết và hiện toast "Lưu thành công"
+    // (tên chỉ nằm trong value của input, không phải text).
+    await expect(this.page.getByText(/lưu thành công/i).first()).toBeVisible({ timeout: 15_000 });
+    await expect(this.nameInput).toHaveValue(name);
   }
 }

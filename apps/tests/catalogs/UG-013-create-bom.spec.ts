@@ -18,6 +18,7 @@ test.describe('UG-013 - Tạo định mức vật tư (BOM)', () => {
       const bom = createGuideBom();
 
       let stepNumber = 0;
+      let existingProductCodes: string[] = [];
 
       const capture = (title: string, target?: Locator) =>
         captureGuideStep({ page, testInfo, guideId: GUIDE_ID, stepNumber: ++stepNumber, title, target });
@@ -43,6 +44,8 @@ test.describe('UG-013 - Tạo định mức vật tư (BOM)', () => {
         await capture('Chọn chức năng Định mức NVL', bomMenu);
         await bomMenu.click();
         await bomPage.verifyPageOpened();
+        existingProductCodes = await bomPage.getExistingProductCodes(bom.productSearch, bom.site);
+        console.log(`HTK đã có định mức ở ${bom.site}: ${existingProductCodes.join(', ') || '(không có)'}`);
         await guidePause(page, 1_000);
       });
 
@@ -57,18 +60,18 @@ test.describe('UG-013 - Tạo định mức vật tư (BOM)', () => {
       await test.step('Bước 5 - Chọn Định mức - HTK (thành phẩm)', async () => {
         await capture('Chọn Định mức - HTK', bomPage.productDropdown);
 
-        const selectedProduct = await bomPage.selectProduct(bom.productSearch);
+        const selectedProduct = await bomPage.selectProduct(bom.productSearch, existingProductCodes);
 
         console.log(`Định mức - HTK đã chọn: ${selectedProduct}`);
         await guidePause(page, 1_000);
       });
 
-      await test.step('Bước 6 - Chọn Kho hàng', async () => {
-        await capture('Chọn Kho hàng', bomPage.warehouseDropdown);
+      await test.step('Bước 6 - Chọn Chi nhánh', async () => {
+        await capture('Chọn Chi nhánh', bomPage.siteDropdown);
 
-        const selectedWarehouse = await bomPage.selectWarehouse(bom.warehouse);
+        const selectedSite = await bomPage.selectSite(bom.site);
 
-        console.log(`Kho hàng đã chọn: ${selectedWarehouse}`);
+        console.log(`Chi nhánh đã chọn: ${selectedSite}`);
         await guidePause(page, 1_000);
       });
 

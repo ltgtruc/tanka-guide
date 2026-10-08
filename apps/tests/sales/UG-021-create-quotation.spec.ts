@@ -64,12 +64,12 @@ test.describe('UG-021 - Tạo báo giá', () => {
         console.log(`Khách hàng đã chọn: ${selectedCustomer}`);
         await guidePause(page, 700);
 
-        const selectedWarehouse = await quotationPage.selectDropdownOption(
-          quotationPage.warehouseDropdown,
-          quotation.warehouse,
+        const selectedSite = await quotationPage.selectDropdownOption(
+          quotationPage.siteDropdown,
+          quotation.site,
         );
 
-        console.log(`Kho hàng đã chọn: ${selectedWarehouse}`);
+        console.log(`Chi nhánh đã chọn: ${selectedSite}`);
         await guidePause(page, 700);
 
         const selectedQuotationEmployee = await quotationPage.selectDropdownOption(
