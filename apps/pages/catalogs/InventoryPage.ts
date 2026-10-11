@@ -10,6 +10,9 @@ export class InventoryPage extends BasePage {
   readonly groupDropdown: Locator;
   readonly unitDropdown: Locator;
   readonly cancelButton: Locator;
+  readonly lotTrackingDropdown: Locator;
+  readonly lotPickingDropdown: Locator;
+  readonly shelfLifeInput: Locator;
 
   constructor(page: Page) {
     /*
@@ -33,6 +36,24 @@ export class InventoryPage extends BasePage {
     this.groupDropdown = this.findDropdownInput(/^nhóm htk\s*\*?$/i);
     this.unitDropdown = this.findDropdownInput(/^đvt lưu kho\s*\*?$/i);
     this.cancelButton = page.getByRole('button', { name: /hủy|cancel/i });
+
+    // Nhóm cài đặt lô (tab Thông tin chung): "Cách chọn lô khi xuất" chỉ mở
+    // khi Theo dõi lô/serial khác "Không theo dõi".
+    this.lotTrackingDropdown = this.formField(/^\s*theo dõi lô\/serial\s*$/i).locator('.p-select').first();
+    this.lotPickingDropdown = this.formField(/^\s*cách chọn lô khi xuất\s*$/i).locator('.p-select').first();
+    this.shelfLifeInput = this.formInput(/^\s*hạn dùng \(ngày\)\s*$/i);
+  }
+
+  /** Bật theo dõi lô: chọn kiểu theo dõi, cách chọn lô khi xuất và số ngày hạn dùng. */
+  async setLotTracking(tracking: string, picking: string, shelfLifeDays: string): Promise<void> {
+    await this.selectOption(this.lotTrackingDropdown, tracking);
+    await expect(this.lotPickingDropdown).not.toHaveClass(/p-disabled/, { timeout: 10_000 });
+    await this.selectOption(this.lotPickingDropdown, picking);
+
+    await this.shelfLifeInput.click();
+    await this.shelfLifeInput.press('Control+A');
+    await this.shelfLifeInput.pressSequentially(shelfLifeDays, { delay: 30 });
+    await this.shelfLifeInput.press('Tab');
   }
 
   private getVisibleDropdownOptions(): Locator {

@@ -22,6 +22,7 @@ export class PurchaseOrderPage extends BasePage {
   readonly confirmButton: Locator;
   readonly receiptLink: Locator;
   readonly postReceiptButton: Locator;
+  readonly returnToSupplierButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -38,6 +39,21 @@ export class PurchaseOrderPage extends BasePage {
     this.confirmButton = page.getByRole('alertdialog', { name: /xác nhận/i }).getByRole('button', { name: /đồng ý/i });
     this.receiptLink = page.locator('main a[href*="/purchases/purchase-receipt/"]').first();
     this.postReceiptButton = page.locator('main').getByRole('button', { name: /ghi sổ/i });
+    // Chỉ hiện trên đơn đã nhận hàng; mở form Phiếu trả hàng NCC (chưa lưu).
+    this.returnToSupplierButton = page.locator('main').getByRole('button', { name: /trả hàng ncc/i });
+  }
+
+  async openReturnForm(): Promise<void> {
+    await expect(this.returnToSupplierButton).toBeVisible({ timeout: 15_000 });
+    await this.returnToSupplierButton.click();
+
+    await this.page.waitForURL(/returnFromPurchaseOrderId=/i, { timeout: 30_000 });
+    await expect(this.page.getByText(/phiếu trả hàng ncc/i).first()).toBeVisible({ timeout: 20_000 });
+  }
+
+  async waitForOrderOpened(): Promise<void> {
+    await this.page.waitForURL(/purchase-order-view/i, { timeout: 30_000 });
+    await expect(this.statusValue).toBeVisible({ timeout: 20_000 });
   }
 
   async openPurchaseOrderList(): Promise<void> {

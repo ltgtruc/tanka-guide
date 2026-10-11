@@ -163,6 +163,51 @@ export class ProductProcessPage extends BasePage {
     return productionCode;
   }
 
+  /**
+   * Mở lệnh SX mới nhất đã qua bước mua hàng (Đã mua hàng → Đã hoàn tất),
+   * tức là đã có đơn mua hàng được nhận vào kho.
+   */
+  async openNewestProductionOrderAfterPurchase(): Promise<string> {
+    const purchasedStatuses =
+      /^\s*(Đã mua hàng|Đang SX|Đã SX|Đang giao hàng|Đã giao hàng|Đang lắp đặt|Đã lắp đặt|Đã quyết toán|Đã hoàn tất)\s*$/i;
+    const targetRow = this.page
+      .locator('main table tbody tr')
+      .filter({ has: this.page.locator('td').filter({ hasText: purchasedStatuses }) })
+      .first();
+
+    await expect(targetRow, 'Không có lệnh SX nào đã mua hàng').toBeVisible({ timeout: 20_000 });
+
+    const detailLink = targetRow.locator('a[href*="production-details"]').first();
+    const productionCode = (await detailLink.innerText()).replace(/\s+/g, '');
+
+    await detailLink.click();
+
+    await expect(this.currentStatusValue).toBeVisible({ timeout: 20_000 });
+
+    return productionCode;
+  }
+
+  async openPurchaseOrdersTab(): Promise<void> {
+    await expect(this.purchaseOrderTab).toBeVisible({ timeout: 15_000 });
+    await this.purchaseOrderTab.click();
+
+    await expect(this.page.getByRole('tabpanel').locator('a[href*="purchase-order-view"]').first()).toBeVisible({
+      timeout: 20_000,
+    });
+  }
+
+  /** Link đơn mua hàng của nhà cung cấp `supplier` trong tab Đơn mua hàng của lệnh SX. */
+  purchaseOrderLinkBySupplier(supplier: string): Locator {
+    return this.page
+      .getByRole('tabpanel')
+      .locator('tbody tr')
+      .filter({ has: this.page.locator('a[href*="purchase-order-view"]') })
+      .filter({ hasText: supplier })
+      .first()
+      .locator('a[href*="purchase-order-view"]')
+      .first();
+  }
+
   async openProductionOrder(productionCode: string): Promise<void> {
     const detailLink = this.page.locator('main a[href*="production-details"]').filter({ hasText: productionCode }).first();
 

@@ -8,6 +8,10 @@ import { escapeRegExp } from '../../helpers/text.helper';
  * là `div.editable-cell`; bấm vào thì hiện select (đội) hoặc datepicker có
  * nút `button.p-datepicker-dropdown`. Chọn xong app tự lưu
  * (mutation updateProductionLine), không có nút Lưu.
+ * Thanh công cụ: "Kế hoạch GH&LĐ" (dialog "Theo ngày": Ngày kế hoạch + Xuất
+ * Excel), "Cột" (dialog "Hiển thị / ẩn cột", checkbox theo nhóm + "Hiện tất
+ * cả"), "100%" (thu phóng). Bộ lọc: Mã BH, ĐNSX, Từ/Đến ngày, Chi nhánh,
+ * Trạng thái + nút "Tìm kiếm".
  */
 export class ProductionSupervisionPage {
   readonly page: Page;
@@ -15,6 +19,11 @@ export class ProductionSupervisionPage {
   readonly productionMenu: Locator;
   readonly supervisionMenu: Locator;
   readonly heading: Locator;
+  readonly table: Locator;
+  readonly planButton: Locator;
+  readonly columnsButton: Locator;
+  readonly searchButton: Locator;
+  readonly dialog: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,6 +31,11 @@ export class ProductionSupervisionPage {
     this.productionMenu = page.getByRole('link', { name: /^\W*sản xuất\W*$/i }).first();
     this.supervisionMenu = page.locator('a[href="/work-orders/production-supervision"]');
     this.heading = page.getByText(/^\s*giám sát tiến độ sx\s*$/i).first();
+    this.table = page.locator('main table').first();
+    this.planButton = page.locator('main').getByRole('button', { name: /kế hoạch gh/i });
+    this.columnsButton = page.locator('main').getByRole('button', { name: /^\W*cột\W*$/i });
+    this.searchButton = page.locator('main').getByRole('button', { name: /tìm kiếm/i });
+    this.dialog = page.locator('.p-dialog:visible');
   }
 
   async open(): Promise<void> {
@@ -35,6 +49,38 @@ export class ProductionSupervisionPage {
 
     await expect(this.heading).toBeVisible({ timeout: 20_000 });
     await expect(this.page.locator('main table tbody tr').first()).toBeVisible({ timeout: 20_000 });
+  }
+
+  filterDropdown(label: RegExp): Locator {
+    return this.page
+      .locator('main .c-component')
+      .filter({ has: this.page.locator('label', { hasText: label }) })
+      .locator('.p-select, .p-multiselect')
+      .first();
+  }
+
+  async filterByStatus(status: string): Promise<void> {
+    await this.filterDropdown(/trạng thái/i).click();
+
+    const option = this.page
+      .locator('[role="option"]:visible')
+      .filter({ hasText: new RegExp(`^\\s*${escapeRegExp(status)}\\s*$`, 'i') })
+      .first();
+
+    await expect(option).toBeVisible({ timeout: 10_000 });
+    await option.click();
+    await this.page.keyboard.press('Escape');
+    await this.searchButton.click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** Checkbox nhóm cột (chữ đậm) trong dialog "Hiển thị / ẩn cột". */
+  columnGroupCheckbox(group: string): Locator {
+    return this.dialog
+      .locator('.d-flex.align-items-center')
+      .filter({ has: this.page.locator('strong', { hasText: new RegExp(`^\\s*${escapeRegExp(group)}\\s*$`) }) })
+      .locator('.p-checkbox')
+      .first();
   }
 
   private row(productionCode: string): Locator {

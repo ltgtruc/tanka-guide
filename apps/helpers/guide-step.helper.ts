@@ -37,6 +37,40 @@ function sanitizeFileName(value: string): string {
     .toLowerCase();
 }
 
+/**
+ * Ghi mốc thời gian (giây, tính từ lúc bắt đầu quay video) của từng bước vào
+ * user-guide-output/videos/<guideId>/timeline.json để cắt clip theo bước.
+ * Thời điểm bắt đầu quay lấy từ thời gian tạo file video tạm của Playwright.
+ */
+async function recordStepTime(
+  page: Page,
+  testInfo: TestInfo,
+  guideId: string,
+  stepNumber: number,
+  fileName: string,
+): Promise<void> {
+  const videoPath = await page.video()?.path().catch(() => undefined);
+
+  if (!videoPath) {
+    return;
+  }
+
+  const videoStart = (await fs.stat(videoPath)).birthtimeMs;
+  const directory = path.resolve('user-guide-output', 'videos', guideId);
+  const timelinePath = path.join(directory, 'timeline.json');
+
+  await fs.mkdir(directory, { recursive: true });
+
+  const timeline =
+    stepNumber === 1
+      ? { outputDir: testInfo.outputDir, steps: [] as { step: number; image: string; at: number }[] }
+      : JSON.parse(await fs.readFile(timelinePath, 'utf8').catch(() => '{"steps":[]}'));
+
+  timeline.outputDir = testInfo.outputDir;
+  timeline.steps.push({ step: stepNumber, image: fileName, at: (Date.now() - videoStart) / 1000 });
+  await fs.writeFile(timelinePath, JSON.stringify(timeline, null, 2));
+}
+
 export async function captureGuideStep(
   options: CaptureGuideStepOptions,
 ): Promise<string> {
@@ -62,6 +96,12 @@ export async function captureGuideStep(
     recursive: true,
   });
 
+  const fileName =
+    `${String(stepNumber).padStart(2, '0')}-` +
+    `${sanitizeFileName(title)}.png`;
+
+  await recordStepTime(page, testInfo, guideId, stepNumber, fileName);
+
   if (target) {
     await highlightElement(target);
   }
@@ -74,10 +114,6 @@ export async function captureGuideStep(
   if (pauseBefore > 0) {
     await page.waitForTimeout(pauseBefore);
   }
-
-  const fileName =
-    `${String(stepNumber).padStart(2, '0')}-` +
-    `${sanitizeFileName(title)}.png`;
 
   const filePath = path.join(directory, fileName);
 

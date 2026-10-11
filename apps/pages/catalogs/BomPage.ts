@@ -89,13 +89,41 @@ export class BomPage extends BasePage {
     await expect(searchInput).toBeVisible({ timeout: 15_000 });
     await searchInput.fill(searchCode);
     await searchInput.press('Enter');
-    await expect(rows.filter({ hasText: new RegExp(escapeRegExp(searchCode), 'i') }).first()).toBeVisible({
-      timeout: 15_000,
-    });
 
-    const codes = (await rows.filter({ hasText: site }).allInnerTexts())
-      .map((text) => text.match(/[A-Z]{2}-\d{2}-[A-Z0-9-]+?-\d\.\d/)?.[0] ?? '')
-      .filter(Boolean);
+    // Chờ kết quả lọc thay cho danh sách cũ: mọi dòng đều chứa từ khoá.
+    const allRowsMatch = async () => {
+      const texts = await rows.allInnerTexts();
+
+      return texts.length > 0 && texts.every((text) => text.toUpperCase().includes(searchCode.toUpperCase()));
+    };
+
+    await expect.poll(allRowsMatch, { timeout: 15_000 }).toBe(true);
+
+    // Danh sách phân trang 20 dòng/trang — đọc hết các trang, không chỉ trang đầu.
+    const nextButton = this.page.locator('main .p-paginator-next').first();
+    const codes: string[] = [];
+
+    for (;;) {
+      codes.push(
+        ...(await rows.filter({ hasText: site }).allInnerTexts())
+          .map((text) => text.match(/[A-Z]{2}-\d{2}-[A-Z0-9-]+?-\d\.\d/)?.[0] ?? '')
+          .filter(Boolean),
+      );
+
+      if (!(await nextButton.isVisible().catch(() => false)) || (await nextButton.isDisabled())) {
+        break;
+      }
+
+      const selectedPage = this.page.locator('main .p-paginator-page-selected').first();
+      const currentPage = Number(await selectedPage.innerText());
+      // Bảng đổi STT (21, 22...) trước rồi mới nạp dữ liệu trang mới — so sánh nội dung đã bỏ STT.
+      const rowData = async () => (await rows.allInnerTexts()).map((text) => text.replace(/^\s*\d+\s*/, '')).join('|');
+      const pageText = await rowData();
+
+      await nextButton.click();
+      await expect(selectedPage).toHaveText(String(currentPage + 1), { timeout: 15_000 });
+      await expect.poll(rowData, { timeout: 15_000 }).not.toBe(pageText);
+    }
 
     await searchInput.fill('');
     await searchInput.press('Enter');
