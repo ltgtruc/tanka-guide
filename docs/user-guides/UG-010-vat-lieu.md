@@ -4,14 +4,27 @@
 **Mục tiêu:** Khai báo một vật liệu (hàng tồn kho — HTK) mới với mã, tên, nhóm HTK và đơn vị tính lưu kho.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo vật liệu minh họa.
+**Cần có sẵn:**
+
+- Đã có Nhóm hàng tồn kho (UG-014) và Đơn vị tính (UG-015) phù hợp.
+- Đã thống nhất quy ước đặt mã mặt hàng trong công ty.
+
+**Nên đọc trước:** UG-014, UG-015.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Danh mục** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| Mã | ITEM-1791468715035 |
-| Tên | Vật liệu Demo 1791468715035 |
+| Mã | AL-XF55-K01 |
+| Tên | Thanh khung bao Xingfa 55 - 1.4mm |
 | Nhóm HTK | ALU |
 | ĐVT lưu kho | mm |
 
@@ -29,6 +42,8 @@ BẮT ĐẦU → Mở Danh mục > Hàng tồn kho → Bấm Tạo mới → Nh�
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-010-vat-lieu/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Danh mục
 
 Ở menu bên trái, bấm vào **Danh mục** để xổ ra các chức năng con.
@@ -36,6 +51,8 @@ BẮT ĐẦU → Mở Danh mục > Hàng tồn kho → Bấm Tạo mới → Nh�
 ![Hình 2: Mở menu Danh mục.](images/UG-010-vat-lieu/02-chon-module-danh-muc.png)
 
 *Hình 2: Mở menu Danh mục.*
+
+<video src="videos/UG-010-vat-lieu/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn Hàng tồn kho
 
@@ -45,6 +62,8 @@ Bấm **Hàng tồn kho**. Màn hình **Danh sách hàng tồn kho** hiện ra v
 
 *Hình 3: Chọn chức năng Hàng tồn kho.*
 
+<video src="videos/UG-010-vat-lieu/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Trước khi tạo mới, có thể dùng ô **Từ khóa tìm kiếm** để kiểm tra mã đã tồn tại chưa. Nếu chưa có, bấm **Tạo mới** để mở **Chi tiết hàng tồn kho**.
@@ -52,6 +71,8 @@ Trước khi tạo mới, có thể dùng ô **Từ khóa tìm kiếm** để ki
 ![Hình 4: Bấm nút Tạo mới.](images/UG-010-vat-lieu/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-010-vat-lieu/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Nhập Mã vật liệu
 
@@ -61,6 +82,8 @@ Nhập **Mã *** — mã duy nhất của vật liệu.
 
 *Hình 5: Nhập Mã vật liệu.*
 
+<video src="videos/UG-010-vat-lieu/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Nhập Tên vật liệu
 
 Nhập **Tên *** của vật liệu.
@@ -68,6 +91,8 @@ Nhập **Tên *** của vật liệu.
 ![Hình 6: Nhập Tên vật liệu.](images/UG-010-vat-lieu/06-nhap-ten-vat-lieu.png)
 
 *Hình 6: Nhập Tên vật liệu.*
+
+<video src="videos/UG-010-vat-lieu/06.webm" controls muted width="100%"></video>
 
 ### Bước 7. Chọn Nhóm HTK và ĐVT lưu kho
 
@@ -82,6 +107,8 @@ Nhập **Tên *** của vật liệu.
 
 *Hình 7: Chọn Nhóm HTK và ĐVT lưu kho.*
 
+<video src="videos/UG-010-vat-lieu/07.webm" controls muted width="100%"></video>
+
 ### Bước 8. Bấm Lưu
 
 Kiểm tra lại các ô bắt buộc rồi bấm **Lưu** đúng một lần.
@@ -90,6 +117,8 @@ Kiểm tra lại các ô bắt buộc rồi bấm **Lưu** đúng một lần.
 
 *Hình 8: Bấm nút Lưu.*
 
+<video src="videos/UG-010-vat-lieu/08.webm" controls muted width="100%"></video>
+
 ### Bước 9. Kiểm tra kết quả
 
 Thông báo xanh **"Thành công — Lưu thành công"** hiện ra. Màn hình **vẫn ở lại form chi tiết** với dữ liệu vừa lưu; bấm **Trở lại** để về danh sách và tìm lại vật liệu theo mã.
@@ -97,6 +126,8 @@ Thông báo xanh **"Thành công — Lưu thành công"** hiện ra. Màn hình 
 ![Hình 9: Vật liệu được tạo thành công.](images/UG-010-vat-lieu/09-vat-lieu-duoc-tao-thanh-cong.png)
 
 *Hình 9: Vật liệu được tạo thành công.*
+
+<video src="videos/UG-010-vat-lieu/09.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

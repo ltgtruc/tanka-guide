@@ -4,9 +4,22 @@
 **Mục tiêu:** Tạo định mức NVL cho một thành phẩm (HTK cửa) tại một chi nhánh, gồm số lượng kích thước W/H mặc định và ít nhất một thành phần NVL.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa.
+**Cần có sẵn:**
+
+- Đã có mặt hàng thành phẩm (HTK) cần lập định mức và các vật tư thành phần (UG-010).
+- Đã có Chi nhánh (UG-016). Mỗi cặp HTK + Chi nhánh chỉ có một định mức.
+
+**Nên đọc trước:** UG-010, UG-016.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Danh mục** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
@@ -31,6 +44,8 @@ BẮT ĐẦU → Mở Danh mục > Định mức NVL → Bấm Tạo mới → C
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-013-dinh-muc-nvl/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Danh mục
 
 Ở menu bên trái, bấm vào **Danh mục**.
@@ -38,6 +53,8 @@ BẮT ĐẦU → Mở Danh mục > Định mức NVL → Bấm Tạo mới → C
 ![Hình 2: Mở menu Danh mục.](images/UG-013-dinh-muc-nvl/02-chon-module-danh-muc.png)
 
 *Hình 2: Mở menu Danh mục.*
+
+<video src="videos/UG-013-dinh-muc-nvl/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn Định mức NVL
 
@@ -47,6 +64,8 @@ Bấm **Định mức NVL**. Màn hình **Danh sách định mức NVL** hiện 
 
 *Hình 3: Chọn chức năng Định mức NVL.*
 
+<video src="videos/UG-013-dinh-muc-nvl/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Bấm **Tạo mới** để mở **Chi tiết định mức NVL**.
@@ -54,6 +73,8 @@ Bấm **Tạo mới** để mở **Chi tiết định mức NVL**.
 ![Hình 4: Bấm nút Tạo mới.](images/UG-013-dinh-muc-nvl/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-013-dinh-muc-nvl/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Chọn Định mức - HTK
 
@@ -63,6 +84,8 @@ Bấm ô **Định mức - HTK ***, gõ một phần mã (ví dụ `TDA-55`) và
 
 *Hình 5: Chọn Định mức - HTK.*
 
+<video src="videos/UG-013-dinh-muc-nvl/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Chọn Chi nhánh
 
 Bấm ô **Chi nhánh *** và chọn chi nhánh áp dụng định mức (ví dụ **Quận 12**). Trường này thay cho ô "Kho hàng" ở phiên bản trước.
@@ -70,6 +93,8 @@ Bấm ô **Chi nhánh *** và chọn chi nhánh áp dụng định mức (ví d�
 ![Hình 6: Chọn Chi nhánh.](images/UG-013-dinh-muc-nvl/06-chon-chi-nhanh.png)
 
 *Hình 6: Chọn Chi nhánh.*
+
+<video src="videos/UG-013-dinh-muc-nvl/06.webm" controls muted width="100%"></video>
 
 ### Bước 7. Nhập Tổng số W/H mặc định
 
@@ -79,6 +104,8 @@ Nhập **Tổng số W mặc định *** và **Tổng số H mặc định ***. 
 
 *Hình 7: Nhập Tổng số W/H mặc định.*
 
+<video src="videos/UG-013-dinh-muc-nvl/07.webm" controls muted width="100%"></video>
+
 ### Bước 8. Thêm thành phần NVL ở tab Profile
 
 Ở nhóm tab thành phần (Profile, Đố, Nẹp ghép, PKSX, PKLĐ, VTPSX, VTPLĐ, Gioăng, Kính / Lá nhôm, Chi phí), tab **Profile** đang được chọn. Bấm **Thêm** để thêm một dòng, rồi ở ô **Thành phần HTK** gõ mã (ví dụ `TDA`) và chọn thanh profile cùng hệ với thành phẩm.
@@ -86,6 +113,8 @@ Nhập **Tổng số W mặc định *** và **Tổng số H mặc định ***. 
 ![Hình 8: Bấm nút Thêm ở tab Profile.](images/UG-013-dinh-muc-nvl/08-bam-nut-them-o-tab-profile.png)
 
 *Hình 8: Bấm nút Thêm ở tab Profile.*
+
+<video src="videos/UG-013-dinh-muc-nvl/08.webm" controls muted width="100%"></video>
 
 ### Bước 9. Bấm Lưu
 
@@ -95,6 +124,8 @@ Kiểm tra lại thông tin rồi bấm **Lưu** đúng một lần. Sau khi lư
 
 *Hình 9: Bấm nút Lưu.*
 
+<video src="videos/UG-013-dinh-muc-nvl/09.webm" controls muted width="100%"></video>
+
 ### Bước 10. Trở lại danh sách
 
 Bấm **Trở lại** để về **Danh sách định mức NVL**.
@@ -103,6 +134,8 @@ Bấm **Trở lại** để về **Danh sách định mức NVL**.
 
 *Hình 10: Bấm Trở lại.*
 
+<video src="videos/UG-013-dinh-muc-nvl/10.webm" controls muted width="100%"></video>
+
 ### Bước 11. Kiểm tra kết quả
 
 Định mức vừa tạo xuất hiện trong danh sách với đúng HTK và Chi nhánh.
@@ -110,6 +143,8 @@ Bấm **Trở lại** để về **Danh sách định mức NVL**.
 ![Hình 11: Định mức NVL vừa tạo xuất hiện trong danh sách.](images/UG-013-dinh-muc-nvl/11-dinh-muc-nvl-vua-tao-xuat-hien-trong-danh-sach.png)
 
 *Hình 11: Định mức NVL vừa tạo xuất hiện trong danh sách.*
+
+<video src="videos/UG-013-dinh-muc-nvl/11.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

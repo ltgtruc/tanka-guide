@@ -4,9 +4,22 @@
 **Mục tiêu:** Tạo một Đơn bán hàng mới với đầy đủ thông tin bắt buộc và ít nhất một dòng hàng tồn kho (HTK), lưu thành công và kiểm tra lại kết quả.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo đơn bán hàng minh họa (mã hệ thống sinh ra: BH_202610_0013). Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác — cứ chọn giá trị phù hợp trong dropdown.
+**Cần có sẵn:**
+
+- Đã có Khách hàng (UG-020) và Nhân viên (UG-082).
+- Mặt hàng cửa đã có Định mức NVL (UG-013) và Giá bán (UG-023) ở chi nhánh.
+
+**Nên đọc trước:** UG-021.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Bán hàng** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác — cứ chọn giá trị phù hợp trong dropdown.
 
 | Trường | Giá trị |
 | --- | --- |
@@ -33,6 +46,8 @@ BẮT ĐẦU → Mở Bán hàng > Đơn bán hàng → Bấm Tạo mới, chọ
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-022-don-ban-hang/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Bán hàng
 
 Ở menu bên trái, bấm vào mục **Bán hàng** để xổ ra các chức năng con.
@@ -41,6 +56,8 @@ BẮT ĐẦU → Mở Bán hàng > Đơn bán hàng → Bấm Tạo mới, chọ
 
 *Hình 2: Mở menu Bán hàng.*
 
+<video src="videos/UG-022-don-ban-hang/02.webm" controls muted width="100%"></video>
+
 ### Bước 3. Chọn chức năng Đơn bán hàng
 
 Trong danh sách con vừa xổ ra (Báo giá, **Đơn bán hàng**, Giá bán, Nhóm giá bán, Khách hàng), bấm vào **Đơn bán hàng**.
@@ -48,6 +65,8 @@ Trong danh sách con vừa xổ ra (Báo giá, **Đơn bán hàng**, Giá bán, 
 ![Hình 3: Chọn chức năng Đơn bán hàng.](images/UG-022-don-ban-hang/03-chon-chuc-nang-don-ban-hang.png)
 
 *Hình 3: Chọn chức năng Đơn bán hàng.*
+
+<video src="videos/UG-022-don-ban-hang/03.webm" controls muted width="100%"></video>
 
 > Kiểm tra trước khi tiếp tục: trang Đơn bán hàng đã hiển thị bảng danh sách và các ô lọc (Mã, Khách hàng, Trạng thái, Ngày tạo, Chi nhánh) phía trên.
 
@@ -58,6 +77,8 @@ Trước khi tạo mới, có thể dùng các ô lọc phía trên bảng (Mã,
 ![Hình 4: Bấm nút Tạo mới trên trang danh sách.](images/UG-022-don-ban-hang/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới trên trang danh sách.*
+
+<video src="videos/UG-022-don-ban-hang/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Nhập các thông tin bắt buộc
 
@@ -71,6 +92,8 @@ Hệ thống mở màn hình **Chi tiết đơn BH**. Các ô có dấu ***** l�
 ![Hình 5: Form Chi tiết đơn BH với các ô bắt buộc.](images/UG-022-don-ban-hang/05-chon-cac-thong-tin-bat-buoc.png)
 
 *Hình 5: Form Chi tiết đơn BH với các ô bắt buộc.*
+
+<video src="videos/UG-022-don-ban-hang/05.webm" controls muted width="100%"></video>
 
 ### Bước 6. Bấm nút Thêm để thêm dòng HTK
 
@@ -87,6 +110,8 @@ Cuộn xuống khu vực tab **Các dòng**, bấm nút **Thêm** ở góc phả
 
 *Hình 6: Bấm nút Thêm ở tab Các dòng.*
 
+<video src="videos/UG-022-don-ban-hang/06.webm" controls muted width="100%"></video>
+
 ### Bước 7. Rà soát rồi bấm Lưu
 
 Cuộn lên đầu form, kiểm tra lại các ô có dấu * và dòng HTK vừa thêm không còn viền đỏ/thông báo lỗi. Bấm nút **Lưu** ở góc phải phía trên đúng một lần.
@@ -94,6 +119,8 @@ Cuộn lên đầu form, kiểm tra lại các ô có dấu * và dòng HTK vừ
 ![Hình 7: Rà soát rồi bấm nút Lưu.](images/UG-022-don-ban-hang/07-chon-nut-luu.png)
 
 *Hình 7: Rà soát rồi bấm nút Lưu.*
+
+<video src="videos/UG-022-don-ban-hang/07.webm" controls muted width="100%"></video>
 
 ### Bước 8. Xác nhận lưu thành công
 
@@ -103,15 +130,19 @@ Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"** �
 
 *Hình 8: Thông báo Lưu thành công, bấm Trở lại.*
 
+<video src="videos/UG-022-don-ban-hang/08.webm" controls muted width="100%"></video>
+
 > Việc chuyển trạng thái tiếp theo (từ Nháp sang các trạng thái duyệt/yêu cầu sản xuất) là nghiệp vụ riêng — xem hướng dẫn "Quản lý sản xuất và chuyển trạng thái".
 
 ### Bước 9. Kiểm tra đơn bán hàng vừa tạo
 
-Ở màn hình danh sách **Đơn bán hàng**, dòng vừa tạo nằm trên cùng với mã hệ thống tự sinh (ví dụ `BH_202610_0013`), khách hàng, ngày tạo đúng như đã nhập, và cột **Trạng thái** hiển thị **Nháp**. Bấm vào mã đơn để mở lại và đối chiếu từng giá trị đã nhập nếu cần.
+Ở màn hình danh sách **Đơn bán hàng**, dòng vừa tạo nằm trên cùng với mã hệ thống tự sinh (ví dụ `BH_202610_0014`), khách hàng, ngày tạo đúng như đã nhập, và cột **Trạng thái** hiển thị **Nháp**. Bấm vào mã đơn để mở lại và đối chiếu từng giá trị đã nhập nếu cần.
 
 ![Hình 9: Đơn vừa tạo xuất hiện trong danh sách.](images/UG-022-don-ban-hang/09-kiem-tra-don-ban-hang-vua-tao.png)
 
 *Hình 9: Đơn vừa tạo xuất hiện trong danh sách.*
+
+<video src="videos/UG-022-don-ban-hang/09.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

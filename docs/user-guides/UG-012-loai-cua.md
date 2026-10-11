@@ -4,13 +4,23 @@
 **Mục tiêu:** Khai báo một loại cửa mới và gắn đúng Loại báo cáo để dùng cho thiết kế/chứng từ.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo loại cửa minh họa trong tài liệu này.
+**Cần có sẵn:**
+
+- Biết loại cửa mới thuộc kiểu báo cáo nào (Hình thể...).
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Danh mục** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| Tên | Loại cửa tự động 1791468748956 |
+| Tên | Cửa đi xếp trượt |
 | Loại báo cáo | Hình thể |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -27,6 +37,8 @@ BẮT ĐẦU → Mở Danh mục > Loại cửa → Bấm Tạo mới, nhập T�
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-012-loai-cua/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Danh mục
 
 Ở menu bên trái, bấm vào mục **Danh mục** để xổ ra các chức năng con.
@@ -34,6 +46,8 @@ BẮT ĐẦU → Mở Danh mục > Loại cửa → Bấm Tạo mới, nhập T�
 ![Hình 2: Mở menu Danh mục.](images/UG-012-loai-cua/02-chon-module-danh-muc.png)
 
 *Hình 2: Mở menu Danh mục.*
+
+<video src="videos/UG-012-loai-cua/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn chức năng Loại cửa
 
@@ -43,6 +57,8 @@ Trong danh sách con, bấm vào **Loại cửa**.
 
 *Hình 3: Chọn chức năng Loại cửa.*
 
+<video src="videos/UG-012-loai-cua/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Trước khi tạo mới, có thể tìm trong danh sách để tránh trùng. Nếu chưa có, bấm **Tạo mới**.
@@ -50,6 +66,8 @@ Trước khi tạo mới, có thể tìm trong danh sách để tránh trùng. N
 ![Hình 4: Bấm nút Tạo mới.](images/UG-012-loai-cua/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-012-loai-cua/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Nhập Tên và chọn Loại báo cáo
 
@@ -59,6 +77,8 @@ Hệ thống mở màn hình **Chi tiết loại cửa** với các ô: **Tên *
 
 *Hình 5: Nhập Tên và chọn Loại báo cáo.*
 
+<video src="videos/UG-012-loai-cua/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Bấm Lưu
 
 Rà soát lại hai ô bắt buộc (Tên, Loại báo cáo), sau đó bấm nút **Lưu** đúng một lần.
@@ -67,6 +87,8 @@ Rà soát lại hai ô bắt buộc (Tên, Loại báo cáo), sau đó bấm nú
 
 *Hình 6: Bấm nút Lưu.*
 
+<video src="videos/UG-012-loai-cua/06.webm" controls muted width="100%"></video>
+
 ### Bước 7. Xác nhận lưu thành công và trở lại danh sách
 
 Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"**. Bấm nút **Trở lại** để quay về danh sách Loại cửa và kiểm tra bản ghi vừa tạo.
@@ -74,6 +96,8 @@ Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"**. B
 ![Hình 7: Thông báo Lưu thành công, bấm Trở lại.](images/UG-012-loai-cua/07-tro-lai-danh-sach-loai-cua.png)
 
 *Hình 7: Thông báo Lưu thành công, bấm Trở lại.*
+
+<video src="videos/UG-012-loai-cua/07.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

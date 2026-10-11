@@ -4,9 +4,22 @@
 **Mục tiêu:** Lập một báo giá mới với đầy đủ thông tin bắt buộc và ít nhất một dòng hàng tồn kho (HTK), lưu thành công.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo báo giá minh họa (mã hệ thống sinh ra: BG_202610_0003/L1). Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác vì phụ thuộc dữ liệu thực tế — cứ chọn giá trị phù hợp trong dropdown.
+**Cần có sẵn:**
+
+- Đã có Khách hàng (UG-020), Nhân viên báo giá/kinh doanh/thiết kế (UG-082).
+- Mặt hàng cửa (HTK) đã có Định mức NVL (UG-013) và Giá bán (UG-023) ở chi nhánh báo giá.
+
+**Nên đọc trước:** UG-020, UG-023.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Bán hàng** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Tên khách hàng/nhân viên có thể khác khi bạn tự thao tác vì phụ thuộc dữ liệu thực tế — cứ chọn giá trị phù hợp trong dropdown.
 
 | Trường | Giá trị |
 | --- | --- |
@@ -33,6 +46,8 @@ BẮT ĐẦU → Mở Bán hàng > Báo giá → Bấm Tạo mới, chọn Khác
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-021-bao-gia/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Bán hàng
 
 Ở menu bên trái, bấm vào mục **Bán hàng**.
@@ -40,6 +55,8 @@ BẮT ĐẦU → Mở Bán hàng > Báo giá → Bấm Tạo mới, chọn Khác
 ![Hình 2: Mở menu Bán hàng.](images/UG-021-bao-gia/02-chon-module-ban-hang.png)
 
 *Hình 2: Mở menu Bán hàng.*
+
+<video src="videos/UG-021-bao-gia/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn chức năng Báo giá
 
@@ -49,6 +66,8 @@ Trong danh sách con (Báo giá, Đơn bán hàng, Giá bán, Nhóm giá bán, K
 
 *Hình 3: Chọn chức năng Báo giá.*
 
+<video src="videos/UG-021-bao-gia/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Trước khi tạo mới, có thể dùng các ô lọc phía trên bảng để kiểm tra báo giá đã tồn tại chưa. Nếu chưa có, bấm **Tạo mới**.
@@ -56,6 +75,8 @@ Trước khi tạo mới, có thể dùng các ô lọc phía trên bảng để
 ![Hình 4: Bấm nút Tạo mới.](images/UG-021-bao-gia/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-021-bao-gia/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Chọn các thông tin bắt buộc
 
@@ -68,6 +89,8 @@ Hệ thống mở màn hình **Chi tiết báo giá**. Các ô có dấu ***** l
 ![Hình 5: Form Chi tiết báo giá — bắt đầu chọn Khách hàng.](images/UG-021-bao-gia/05-chon-cac-thong-tin-bat-buoc.png)
 
 *Hình 5: Form Chi tiết báo giá — bắt đầu chọn Khách hàng.*
+
+<video src="videos/UG-021-bao-gia/05.webm" controls muted width="100%"></video>
 
 ### Bước 6. Bấm nút Thêm để thêm dòng HTK
 
@@ -83,6 +106,8 @@ Sau khi chọn đủ Khách hàng, Chi nhánh và các nhân viên, cuộn xuố
 
 *Hình 6: Bấm nút Thêm ở tab Các dòng.*
 
+<video src="videos/UG-021-bao-gia/06.webm" controls muted width="100%"></video>
+
 ### Bước 7. Rà soát rồi bấm Lưu
 
 Cuộn lên đầu form, kiểm tra lại các ô bắt buộc và dòng HTK vừa thêm không còn viền đỏ. Bấm **Lưu** đúng một lần.
@@ -90,6 +115,8 @@ Cuộn lên đầu form, kiểm tra lại các ô bắt buộc và dòng HTK v�
 ![Hình 7: Form đã điền đủ, bấm nút Lưu.](images/UG-021-bao-gia/07-chon-nut-luu.png)
 
 *Hình 7: Form đã điền đủ, bấm nút Lưu.*
+
+<video src="videos/UG-021-bao-gia/07.webm" controls muted width="100%"></video>
 
 ### Bước 8. Trở lại danh sách báo giá
 
@@ -99,6 +126,8 @@ Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"**, �
 
 *Hình 8: Bấm Trở lại danh sách báo giá.*
 
+<video src="videos/UG-021-bao-gia/08.webm" controls muted width="100%"></video>
+
 ### Bước 9. Kiểm tra báo giá vừa tạo
 
 Báo giá mới xuất hiện ở đầu danh sách với mã hệ thống tự sinh (dạng BG_YYYYMM_xxxx/Lx) và trạng thái Nháp.
@@ -106,6 +135,8 @@ Báo giá mới xuất hiện ở đầu danh sách với mã hệ thống tự 
 ![Hình 9: Báo giá vừa tạo xuất hiện trong danh sách.](images/UG-021-bao-gia/09-kiem-tra-bao-gia-vua-tao.png)
 
 *Hình 9: Báo giá vừa tạo xuất hiện trong danh sách.*
+
+<video src="videos/UG-021-bao-gia/09.webm" controls muted width="100%"></video>
 
 > Việc chuyển trạng thái tiếp theo (Chờ duyệt, Đã duyệt...) và tạo Đơn bán hàng từ báo giá là nghiệp vụ riêng, không thuộc phạm vi hướng dẫn tạo mới này.
 

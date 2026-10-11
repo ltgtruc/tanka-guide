@@ -4,13 +4,25 @@
 **Mục tiêu:** Khai báo một kho hàng mới thuộc một chi nhánh, dùng làm kho nhận/xuất hàng trong các phiếu kho (nhận hàng, xuất vật tư sản xuất...).  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo kho hàng minh họa trong tài liệu này.
+**Cần có sẵn:**
+
+- Đã có Chi nhánh mà kho trực thuộc (UG-016).
+
+**Nên đọc trước:** UG-016.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Danh mục** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| Tên kho | Kho tự động 1791468733180 |
+| Tên kho | Kho thành phẩm Hóc Môn |
 | Chi nhánh | Hóc Môn |
 
 > Từ phiên bản hiện tại, **Kho hàng** chỉ còn Tên, Chi nhánh và Hoạt động. Các thông tin Địa chỉ 1, Địa chỉ 2, Thành phố, Số ĐT được khai báo ở **Danh mục > Chi nhánh**. Các chứng từ (báo giá, đơn bán hàng, lệnh sản xuất...) giờ chọn **Chi nhánh** thay cho Kho hàng.
@@ -29,6 +41,8 @@ BẮT ĐẦU → Mở Danh mục > Kho hàng → Bấm Tạo mới → Nhập T�
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-011-kho-hang/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Danh mục
 
 Ở menu bên trái, bấm vào mục **Danh mục** để xổ ra các chức năng con.
@@ -36,6 +50,8 @@ BẮT ĐẦU → Mở Danh mục > Kho hàng → Bấm Tạo mới → Nhập T�
 ![Hình 2: Mở menu Danh mục.](images/UG-011-kho-hang/02-chon-module-danh-muc.png)
 
 *Hình 2: Mở menu Danh mục.*
+
+<video src="videos/UG-011-kho-hang/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn chức năng Kho hàng
 
@@ -45,6 +61,8 @@ Trong danh sách con, bấm vào **Kho hàng** (nằm ngay dưới **Chi nhánh*
 
 *Hình 3: Chọn chức năng Kho hàng.*
 
+<video src="videos/UG-011-kho-hang/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Trước khi tạo mới, có thể dùng ô Từ khóa tìm kiếm phía trên bảng để kiểm tra kho đã tồn tại chưa. Nếu chưa có, bấm **Tạo mới**. Màn hình **Chi tiết kho hàng** mở ra.
@@ -52,6 +70,8 @@ Trước khi tạo mới, có thể dùng ô Từ khóa tìm kiếm phía trên 
 ![Hình 4: Bấm nút Tạo mới.](images/UG-011-kho-hang/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-011-kho-hang/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Nhập Tên kho
 
@@ -61,6 +81,8 @@ Nhập **Tên *** — ô bắt buộc duy nhất trên form này. Ô **Hoạt đ
 
 *Hình 5: Nhập Tên kho.*
 
+<video src="videos/UG-011-kho-hang/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Chọn Chi nhánh
 
 Bấm vào ô **Chi nhánh** và chọn chi nhánh quản lý kho này (ví dụ **Hóc Môn**). Danh sách chi nhánh lấy từ **Danh mục > Chi nhánh**.
@@ -68,6 +90,8 @@ Bấm vào ô **Chi nhánh** và chọn chi nhánh quản lý kho này (ví dụ
 ![Hình 6: Chọn Chi nhánh cho kho.](images/UG-011-kho-hang/06-chon-chi-nhanh.png)
 
 *Hình 6: Chọn Chi nhánh cho kho.*
+
+<video src="videos/UG-011-kho-hang/06.webm" controls muted width="100%"></video>
 
 ### Bước 7. Rà soát rồi bấm Lưu
 
@@ -77,6 +101,8 @@ Kiểm tra lại Tên và Chi nhánh, sau đó bấm nút **Lưu** ở góc ph�
 
 *Hình 7: Bấm nút Lưu.*
 
+<video src="videos/UG-011-kho-hang/07.webm" controls muted width="100%"></video>
+
 ### Bước 8. Xác nhận lưu thành công và trở lại danh sách
 
 Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"** ở góc phải màn hình. Bấm nút **Trở lại** để quay về danh sách và kiểm tra kho vừa tạo.
@@ -84,6 +110,8 @@ Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"** �
 ![Hình 8: Thông báo Lưu thành công, bấm Trở lại.](images/UG-011-kho-hang/08-chon-nut-tro-lai.png)
 
 *Hình 8: Thông báo Lưu thành công, bấm Trở lại.*
+
+<video src="videos/UG-011-kho-hang/08.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

@@ -6,16 +6,29 @@
 
 > Hướng dẫn này nối tiếp **UG-030 Tạo lệnh sản xuất**. Sau khi lệnh SX "Đã mua hàng", làm tiếp **UG-040 Duyệt đơn mua hàng và nhận hàng nhập kho**, rồi **UG-033 Sản xuất, giao hàng và lắp đặt**.
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Khi tự thao tác, hãy dùng đúng mã lệnh sản xuất bạn đang xử lý.
+**Cần có sẵn:**
+
+- Có lệnh sản xuất đang **Nháp** (UG-030).
+- Vật tư đã có Nhà cung cấp (UG-042).
+
+**Nên đọc trước:** UG-030, UG-042.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Sản xuất** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Khi tự thao tác, hãy dùng đúng mã lệnh sản xuất bạn đang xử lý.
 
 | Trường | Giá trị |
 | --- | --- |
-| Lệnh SX nguồn | SX_202610_0012 (trạng thái ban đầu: Nháp, đơn BH_202610_0013) |
+| Lệnh SX nguồn | SX_202610_0013 (trạng thái ban đầu: Nháp, đơn BH_202610_0014) |
 | Giá bán phế liệu (đồng/kg) | 5.000 |
-| Yêu cầu mua hàng sinh ra | YCMH_202610_0011 |
-| Đơn mua hàng sinh ra | MH_202610_0031, MH_202610_0032, MH_202610_0033, MH_202610_0034 (mỗi nhà cung cấp một đơn) |
+| Yêu cầu mua hàng sinh ra | YCMH_202610_0012 |
+| Đơn mua hàng sinh ra | MH_202610_0035, MH_202610_0036, MH_202610_0037, MH_202610_0038 (mỗi nhà cung cấp một đơn) |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -34,6 +47,9 @@ BẮT ĐẦU (lệnh SX ở trạng thái Nháp) → Tab Tối ưu: nhập Giá 
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/01.webm" controls muted width="100%"></video>
+
+
 ### Bước 2. Mở Quản lý sản xuất
 
 Ở menu bên trái, mở **Sản xuất**, trong danh sách sổ xuống bấm **Quản lý sản xuất**.
@@ -41,6 +57,9 @@ BẮT ĐẦU (lệnh SX ở trạng thái Nháp) → Tab Tối ưu: nhập Giá 
 ![Hình 2: Mở menu Sản xuất, chọn Quản lý sản xuất.](images/UG-032-quy-trinh-san-xuat/02-mo-module-san-xuat-chon-quan-ly-san-xuat.png)
 
 *Hình 2: Mở menu Sản xuất, chọn Quản lý sản xuất.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/02.webm" controls muted width="100%"></video>
+
 
 ### Bước 3. Màn hình Quản lý SX
 
@@ -50,13 +69,19 @@ Màn hình **Quản lý SX** hiện danh sách các lệnh sản xuất đã có
 
 *Hình 3: Danh sách Quản lý SX.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/03.webm" controls muted width="100%"></video>
+
+
 ### Bước 4. Chọn mã sản xuất có trạng thái Nháp
 
-Bấm vào mã lệnh sản xuất (ví dụ `SX_202610_0012`) đang ở trạng thái **Nháp** để mở màn hình **Chi tiết SX**.
+Bấm vào mã lệnh sản xuất (ví dụ `SX_202610_0013`) đang ở trạng thái **Nháp** để mở màn hình **Chi tiết SX**.
 
 ![Hình 4: Chi tiết SX, trạng thái hiện tại là Nháp.](images/UG-032-quy-trinh-san-xuat/04-mo-lenh-san-xuat-dang-o-trang-thai-nhap.png)
 
 *Hình 4: Chi tiết SX, trạng thái hiện tại là Nháp.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/04.webm" controls muted width="100%"></video>
+
 
 ### Bước 5. Mở tab Tối ưu
 
@@ -66,6 +91,9 @@ Bấm tab **Tối ưu** ở giữa màn hình để tính tối ưu cắt vật 
 
 *Hình 5: Mở tab Tối ưu.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/05.webm" controls muted width="100%"></video>
+
+
 ### Bước 6. Nhập Giá bán phế liệu
 
 Nhập giá trị vào ô **Giá phế liệu (đồng/kg)**, ví dụ `5000`.
@@ -74,6 +102,9 @@ Nhập giá trị vào ô **Giá phế liệu (đồng/kg)**, ví dụ `5000`.
 
 *Hình 6: Nhập Giá bán phế liệu.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/06.webm" controls muted width="100%"></video>
+
+
 ### Bước 7. Bấm Tính tối ưu
 
 Bấm nút **Tính tối ưu** ở bên phải màn hình. Hệ thống tính toán và hiển thị chi tiết độ dài thanh cắt cho từng loại vật tư.
@@ -81,6 +112,9 @@ Bấm nút **Tính tối ưu** ở bên phải màn hình. Hệ thống tính to
 ![Hình 7: Bấm Tính tối ưu.](images/UG-032-quy-trinh-san-xuat/07-bam-tinh-toi-uu.png)
 
 *Hình 7: Bấm Tính tối ưu.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/07.webm" controls muted width="100%"></video>
+
 
 > Nếu muốn thay đổi dữ liệu (ví dụ nhập lại giá bán phế liệu), bấm nút **Làm lại dữ liệu** rồi nhập lại và bấm Tính tối ưu lại.
 
@@ -92,6 +126,9 @@ Bấm nút **Lưu** ở góc trên bên phải màn hình.
 
 *Hình 8: Bấm Lưu.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/08.webm" controls muted width="100%"></video>
+
+
 > Bắt buộc phải bấm Lưu để lưu dữ liệu đã tính toán — nếu chưa Lưu sẽ không chuyển được sang bước tiếp theo.
 
 ### Bước 9. Chuyển trạng thái sang Đã duyệt
@@ -102,6 +139,9 @@ Bấm nút **Lưu** ở góc trên bên phải màn hình.
 
 *Hình 9: Chuyển trạng thái sang Đã duyệt.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/09.webm" controls muted width="100%"></video>
+
+
 ### Bước 10. Chuyển trạng thái sang Đã kế hoạch
 
 Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã kế hoạch**, nhập ghi chú, bấm Cập nhật rồi Đồng ý.
@@ -109,6 +149,9 @@ Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã kế ho�
 ![Hình 10: Chuyển trạng thái sang Đã kế hoạch.](images/UG-032-quy-trinh-san-xuat/11-chuyen-trang-thai-sang-da-ke-hoach.png)
 
 *Hình 10: Chuyển trạng thái sang Đã kế hoạch.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/11.webm" controls muted width="100%"></video>
+
 
 ### Bước 11. Tạo yêu cầu mua hàng
 
@@ -118,6 +161,9 @@ Bấm tab **Đơn mua hàng**, bấm nút **Tạo yêu cầu mua hàng**.
 
 *Hình 11: Bấm Tạo yêu cầu mua hàng.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/13.webm" controls muted width="100%"></video>
+
+
 ### Bước 12. Xác nhận tạo yêu cầu mua hàng
 
 Popup **Xác nhận** hiện ra: _"Tạo yêu cầu mua hàng cho lệnh sản xuất này? Tồn kho và đơn đang đặt được trừ tại thời điểm này."_ Bấm **Đồng ý**. Hệ thống tạo phiếu **Yêu cầu mua hàng** (mã YCMH_YYYYMM_xxxx, trạng thái Nháp) và mở màn hình phiếu đó. Số lượng **Cần mua** đã trừ tồn kho khả dụng và hàng đang đặt.
@@ -125,6 +171,9 @@ Popup **Xác nhận** hiện ra: _"Tạo yêu cầu mua hàng cho lệnh sản x
 ![Hình 12: Bấm Đồng ý để tạo yêu cầu mua hàng.](images/UG-032-quy-trinh-san-xuat/14-bam-dong-y-de-tao-yeu-cau-mua-hang.png)
 
 *Hình 12: Bấm Đồng ý để tạo yêu cầu mua hàng.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/14.webm" controls muted width="100%"></video>
+
 
 ### Bước 13. Duyệt yêu cầu mua hàng
 
@@ -134,6 +183,9 @@ Trên màn hình **Yêu cầu mua hàng**, kiểm tra các tab vật tư (Profil
 
 *Hình 13: Bấm Duyệt yêu cầu mua hàng.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/15.webm" controls muted width="100%"></video>
+
+
 ### Bước 14. Mở màn hình lập đơn mua hàng
 
 Sau khi duyệt, bấm nút **Lập đơn mua hàng**. Màn hình **Chọn nhà cung cấp và lập đơn mua hàng** mở ra.
@@ -141,6 +193,9 @@ Sau khi duyệt, bấm nút **Lập đơn mua hàng**. Màn hình **Chọn nhà 
 ![Hình 14: Bấm Lập đơn mua hàng.](images/UG-032-quy-trinh-san-xuat/16-bam-lap-don-mua-hang.png)
 
 *Hình 14: Bấm Lập đơn mua hàng.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/16.webm" controls muted width="100%"></video>
+
 
 ### Bước 15. Chọn nhà cung cấp cho từng nhóm vật tư
 
@@ -156,6 +211,9 @@ Lựa chọn được giữ khi chuyển tab, nên chỉ cần bấm "Lập đơ
 
 *Hình 15: Tích chọn các dòng và chọn nhà cung cấp.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/17.webm" controls muted width="100%"></video>
+
+
 ### Bước 16. Bấm Lập đơn mua hàng để hoàn thành
 
 Cuộn xuống cuối trang, bấm **Lập đơn mua hàng**. Hệ thống tạo **mỗi nhà cung cấp một đơn mua hàng** và quay lại phiếu Yêu cầu mua hàng.
@@ -163,6 +221,9 @@ Cuộn xuống cuối trang, bấm **Lập đơn mua hàng**. Hệ thống tạo
 ![Hình 16: Bấm Lập đơn mua hàng để hoàn thành.](images/UG-032-quy-trinh-san-xuat/18-bam-lap-don-mua-hang-de-hoan-thanh.png)
 
 *Hình 16: Bấm Lập đơn mua hàng để hoàn thành.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/18.webm" controls muted width="100%"></video>
+
 
 ### Bước 17. Kiểm tra các đơn mua hàng đã lập
 
@@ -172,6 +233,9 @@ Thông báo **"Thành công — Đã lập đơn mua hàng"** hiện ra. Phiếu
 
 *Hình 17: Các đơn mua hàng đã được lập từ yêu cầu mua hàng.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/19.webm" controls muted width="100%"></video>
+
+
 ### Bước 18. Chuyển trạng thái sang Đã mua hàng
 
 Trên lệnh SX, bấm nút chuyển trạng thái, chọn **Đã mua hàng**, nhập ghi chú, bấm **Cập nhật** rồi **Đồng ý**.
@@ -180,6 +244,9 @@ Trên lệnh SX, bấm nút chuyển trạng thái, chọn **Đã mua hàng**, n
 
 *Hình 18: Chuyển trạng thái sang Đã mua hàng.*
 
+<video src="videos/UG-032-quy-trinh-san-xuat/20.webm" controls muted width="100%"></video>
+
+
 ### Bước 19. Xác nhận trạng thái Đã mua hàng
 
 Ô Trạng thái hiển thị **Đã mua hàng**. Bước tiếp theo là duyệt các đơn mua hàng và nhận hàng vào kho (UG-040) — lệnh SX chỉ chuyển được sang "Đang SX" khi vật tư đã có trong kho.
@@ -187,6 +254,9 @@ Trên lệnh SX, bấm nút chuyển trạng thái, chọn **Đã mua hàng**, n
 ![Hình 19: Trạng thái đã chuyển sang Đã mua hàng.](images/UG-032-quy-trinh-san-xuat/21-trang-thai-da-chuyen-sang-da-mua-hang.png)
 
 *Hình 19: Trạng thái đã chuyển sang Đã mua hàng.*
+
+<video src="videos/UG-032-quy-trinh-san-xuat/21.webm" controls muted width="100%"></video>
+
 
 ## 4. Khi không thao tác được
 

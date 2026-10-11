@@ -6,17 +6,29 @@
 
 > Hướng dẫn này nối tiếp **UG-031 Yêu cầu sản xuất từ đơn bán hàng**. Lệnh SX tạo ra ở trạng thái Nháp; xử lý tiếp theo **UG-032 Tối ưu và mua hàng cho lệnh SX**.
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa.
+**Cần có sẵn:**
+
+- Có đơn bán hàng đã chuyển trạng thái **Đã yêu cầu SX** (UG-031).
+
+**Nên đọc trước:** UG-031.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Sản xuất** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| Diễn giải | Đơn theo dõi sản xuất tự động 1791469380905 |
+| Diễn giải | Sản xuất cửa công trình Anh Kỳ - đợt 1 |
 | Ngày tạo SX | Tự điền ngày hiện tại |
 | Chi nhánh | Hóc Môn |
-| Đơn BH đưa vào sản xuất | BH_202610_0013 (Anh Kỳ) — 1 dòng SQ-03-XF-55-1.4 |
-| Mã lệnh SX sinh ra | SX_202610_0012 |
+| Đơn BH đưa vào sản xuất | BH_202610_0014 (Anh Kỳ) — 1 dòng SQ-03-XF-55-1.4 |
+| Mã lệnh SX sinh ra | SX_202610_0013 |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
@@ -32,6 +44,8 @@ BẮT ĐẦU → Mở Sản xuất > Quản lý SX → Bấm Tạo mới → Ch�
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Sản xuất
 
 Ở menu bên trái, bấm vào **Sản xuất** để xổ ra các chức năng con.
@@ -39,6 +53,8 @@ BẮT ĐẦU → Mở Sản xuất > Quản lý SX → Bấm Tạo mới → Ch�
 ![Hình 2: Mở menu Sản xuất.](images/UG-030-tao-lenh-san-xuat/02-chon-module-san-xuat.png)
 
 *Hình 2: Mở menu Sản xuất.*
+
+<video src="videos/UG-030-tao-lenh-san-xuat/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn Quản lý SX
 
@@ -48,6 +64,8 @@ Bấm **Quản lý SX**. Màn hình danh sách lệnh sản xuất hiện ra.
 
 *Hình 3: Chọn chức năng Quản lý SX.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Bấm **Tạo mới** ở góc phải phía trên để mở màn hình **Chi tiết SX**.
@@ -55,6 +73,8 @@ Bấm **Tạo mới** ở góc phải phía trên để mở màn hình **Chi ti
 ![Hình 4: Bấm nút Tạo mới.](images/UG-030-tao-lenh-san-xuat/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-030-tao-lenh-san-xuat/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Chọn Chi nhánh và nhập Diễn giải
 
@@ -66,6 +86,8 @@ Bấm **Tạo mới** ở góc phải phía trên để mở màn hình **Chi ti
 
 *Hình 5: Chọn Chi nhánh và nhập Diễn giải.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Bấm Chọn các đơn BH
 
 Ở tab **Các dòng**, bấm nút **Chọn các đơn BH**. Popup **"Chọn các dòng đơn BH để SX"** mở ra, liệt kê các đơn BH đang "Đã yêu cầu SX" còn dòng chưa đưa vào sản xuất.
@@ -74,15 +96,19 @@ Bấm **Tạo mới** ở góc phải phía trên để mở màn hình **Chi ti
 
 *Hình 6: Bấm Chọn các đơn BH.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/06.webm" controls muted width="100%"></video>
+
 ### Bước 7. Tích chọn đơn hàng cần sản xuất
 
-Mỗi đơn BH là một nhóm có dòng tiêu đề màu cam dạng **"#1 - BH_202610_0013, Anh Kỳ"**. Tích ô ở dòng tiêu đề để chọn **tất cả** dòng của đơn đó, hoặc tích từng dòng nếu chỉ sản xuất một phần. Cột **SL cho SX** cho phép sửa số lượng đưa vào lệnh này.
+Mỗi đơn BH là một nhóm có dòng tiêu đề màu cam dạng **"#1 - BH_202610_0014, Anh Kỳ"**. Tích ô ở dòng tiêu đề để chọn **tất cả** dòng của đơn đó, hoặc tích từng dòng nếu chỉ sản xuất một phần. Cột **SL cho SX** cho phép sửa số lượng đưa vào lệnh này.
 
 > Chỉ tích các dòng của đúng đơn cần sản xuất. Gộp dòng của nhiều đơn vào một lệnh SX sẽ khiến lệnh giữ vật tư cho tất cả các đơn đó, dễ bị thiếu tồn kho khi chuyển sang "Đang SX".
 
 ![Hình 7: Tích chọn đơn hàng cần sản xuất.](images/UG-030-tao-lenh-san-xuat/07-tich-chon-don-hang-can-san-xuat.png)
 
 *Hình 7: Tích chọn đơn hàng cần sản xuất.*
+
+<video src="videos/UG-030-tao-lenh-san-xuat/07.webm" controls muted width="100%"></video>
 
 ### Bước 8. Bấm Chọn
 
@@ -92,6 +118,8 @@ Bấm nút **Chọn** ở cuối popup. Popup đóng lại và các dòng vừa 
 
 *Hình 8: Bấm Chọn để đưa dòng vào lệnh SX.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/08.webm" controls muted width="100%"></video>
+
 ### Bước 9. Bấm Lưu
 
 Kiểm tra lại bảng Các dòng (đúng Đơn BH, khách hàng, số lượng) rồi bấm **Lưu** đúng một lần. Hệ thống sinh mã lệnh SX dạng **SX_YYYYMM_xxxx**, trạng thái ban đầu là **Nháp**.
@@ -100,6 +128,8 @@ Kiểm tra lại bảng Các dòng (đúng Đơn BH, khách hàng, số lượng
 
 *Hình 9: Bấm Lưu lệnh sản xuất.*
 
+<video src="videos/UG-030-tao-lenh-san-xuat/09.webm" controls muted width="100%"></video>
+
 ### Bước 10. Trở lại danh sách Quản lý SX
 
 Bấm **Trở lại** để về danh sách. Lệnh SX vừa tạo nằm đầu danh sách với trạng thái **Nháp**.
@@ -107,6 +137,8 @@ Bấm **Trở lại** để về danh sách. Lệnh SX vừa tạo nằm đầu 
 ![Hình 10: Trở lại danh sách Quản lý SX.](images/UG-030-tao-lenh-san-xuat/10-tro-lai-danh-sach-quan-ly-sx.png)
 
 *Hình 10: Trở lại danh sách Quản lý SX.*
+
+<video src="videos/UG-030-tao-lenh-san-xuat/10.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

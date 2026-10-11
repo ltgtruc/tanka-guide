@@ -4,15 +4,25 @@
 **Mục tiêu:** Tạo một khách hàng mới với thông tin liên hệ để dùng khi lập báo giá, đơn bán hàng.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để tạo khách hàng minh họa. Mã số thuế và Diễn giải để trống vì không bắt buộc.
+**Cần có sẵn:**
+
+- Thông tin khách hàng: tên, số điện thoại, email (mã số thuế nếu xuất hoá đơn).
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Bán hàng** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Mã số thuế và Diễn giải để trống vì không bắt buộc.
 
 | Trường | Giá trị |
 | --- | --- |
-| Tên | Khách hàng tự động 1791468788772 |
+| Tên | Công ty TNHH Xây dựng An Phát |
 | Số ĐT | 0901234567 |
-| Email | customer1791468788772@test.com |
+| Email | lienhe@anphat.vn |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
@@ -28,6 +38,8 @@ BẮT ĐẦU → Mở Bán hàng > Khách hàng → Bấm Tạo mới, nhập T�
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-020-khach-hang/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở menu Bán hàng
 
 Ở menu bên trái, bấm vào mục **Bán hàng** để xổ ra các chức năng con (Báo giá, Đơn bán hàng, Giá bán, Nhóm giá bán, Khách hàng).
@@ -35,6 +47,8 @@ BẮT ĐẦU → Mở Bán hàng > Khách hàng → Bấm Tạo mới, nhập T�
 ![Hình 2: Mở menu Bán hàng.](images/UG-020-khach-hang/02-chon-module-ban-hang.png)
 
 *Hình 2: Mở menu Bán hàng.*
+
+<video src="videos/UG-020-khach-hang/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Chọn chức năng Khách hàng
 
@@ -44,6 +58,8 @@ Trong danh sách con, bấm vào **Khách hàng**.
 
 *Hình 3: Chọn chức năng Khách hàng.*
 
+<video src="videos/UG-020-khach-hang/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Trước khi tạo mới, có thể dùng ô Từ khóa tìm kiếm phía trên bảng để tránh tạo trùng. Nếu chưa có, bấm **Tạo mới**.
@@ -51,6 +67,8 @@ Trước khi tạo mới, có thể dùng ô Từ khóa tìm kiếm phía trên 
 ![Hình 4: Bấm nút Tạo mới.](images/UG-020-khach-hang/04-chon-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-020-khach-hang/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Nhập Tên khách hàng
 
@@ -60,6 +78,8 @@ Hệ thống mở màn hình **Chi tiết khách hàng** gồm 2 tab: **Thông t
 
 *Hình 5: Nhập Tên khách hàng.*
 
+<video src="videos/UG-020-khach-hang/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Nhập Email khách hàng
 
 Nhập **Email** liên hệ (không bắt buộc nhưng nên điền để gửi báo giá/chứng từ).
@@ -67,6 +87,8 @@ Nhập **Email** liên hệ (không bắt buộc nhưng nên điền để gửi
 ![Hình 6: Nhập Email khách hàng.](images/UG-020-khach-hang/06-nhap-email-khach-hang.png)
 
 *Hình 6: Nhập Email khách hàng.*
+
+<video src="videos/UG-020-khach-hang/06.webm" controls muted width="100%"></video>
 
 ### Bước 7. Nhập Số điện thoại
 
@@ -78,6 +100,8 @@ Nhập **Số ĐT** liên hệ. Các ô Mã số thuế, Diễn giải là tùy 
 
 *Hình 7: Nhập Số điện thoại.*
 
+<video src="videos/UG-020-khach-hang/07.webm" controls muted width="100%"></video>
+
 ### Bước 8. Bấm nút Lưu
 
 Sau khi nhập đủ thông tin liên hệ, bấm nút **Lưu** ở góc phải phía trên đúng một lần.
@@ -86,6 +110,8 @@ Sau khi nhập đủ thông tin liên hệ, bấm nút **Lưu** ở góc phải 
 
 *Hình 8: Bấm nút Lưu.*
 
+<video src="videos/UG-020-khach-hang/08.webm" controls muted width="100%"></video>
+
 ### Bước 9. Trở lại danh sách để kiểm tra kết quả
 
 Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"**. Bấm nút **Trở lại** để quay về danh sách Khách hàng và kiểm tra bản ghi vừa tạo.
@@ -93,6 +119,8 @@ Hệ thống hiện thông báo xanh **"Thành công — Lưu thành công"**. B
 ![Hình 9: Thông báo Lưu thành công, bấm Trở lại.](images/UG-020-khach-hang/09-tro-lai-danh-sach-khach-hang-de-kiem-tra-ket-qua-luu-thanh-cong.png)
 
 *Hình 9: Thông báo Lưu thành công, bấm Trở lại.*
+
+<video src="videos/UG-020-khach-hang/09.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

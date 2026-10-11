@@ -4,14 +4,25 @@
 **Mục tiêu:** Đăng nhập đúng cách bằng tài khoản được cấp và xác nhận đã vào được Trang chủ.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là tài khoản thật đã dùng để kiểm chứng hướng dẫn này.
+**Cần có sẵn:**
+
+- Địa chỉ hệ thống, Email và mật khẩu do quản trị viên cấp (UG-060).
+- Máy tính có trình duyệt Chrome/Edge mới, kết nối Internet.
+
+**Quyền cần có:** Tài khoản chưa bị khoá. Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| URL | https://door-v1.test.tankasoft.com/ |
-| Email | admin1@client1.com |
+| Địa chỉ hệ thống | Do công ty cung cấp (ảnh chụp dùng https://door-v1.test.tankasoft.com/) |
+| Email | Email công ty cấp cho bạn (ảnh chụp dùng admin1@client1.com) |
 | Mật khẩu | Mật khẩu được quản trị viên cấp cho tài khoản của bạn |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -22,11 +33,15 @@ BẮT ĐẦU → Mở trang đăng nhập → Nhập Email và Mật khẩu → 
 
 ### Bước 1. Mở trang đăng nhập Tanka
 
-Mở trình duyệt, truy cập `https://door-v1.test.tankasoft.com/`. Màn hình hiện khung "Đăng nhập để vào quản trị" với hai ô Email, Mật khẩu và nút Đăng nhập.
+Mở trình duyệt, truy cập địa chỉ hệ thống do công ty cung cấp (trong ảnh: `https://door-v1.test.tankasoft.com/`). Màn hình hiện khung "Đăng nhập để vào quản trị" với hai ô Email, Mật khẩu và nút Đăng nhập.
 
 ![Hình 1: Màn hình đăng nhập.](images/UG-001-dang-nhap/01-mo-trang-dang-nhap-tanka.png)
 
 *Hình 1: Màn hình đăng nhập.*
+
+<video src="videos/UG-001-dang-nhap/01.webm" controls muted width="100%"></video>
+
+
 
 ### Bước 2. Nhập địa chỉ Email
 
@@ -36,6 +51,10 @@ Bấm vào ô Email và nhập đúng email được cấp, ví dụ `admin1@cli
 
 *Hình 2: Nhập Email.*
 
+<video src="videos/UG-001-dang-nhap/02.webm" controls muted width="100%"></video>
+
+
+
 ### Bước 3. Nhập Mật khẩu
 
 Bấm vào ô Mật khẩu và nhập đúng mật khẩu được cấp. Kiểm tra phím Caps Lock nếu nghi ngờ gõ sai ký tự.
@@ -43,6 +62,10 @@ Bấm vào ô Mật khẩu và nhập đúng mật khẩu được cấp. Kiểm
 ![Hình 3: Nhập Mật khẩu (ảnh được che để bảo mật).](images/UG-001-dang-nhap/03-nhap-mat-khau.png)
 
 *Hình 3: Nhập Mật khẩu (ảnh được che để bảo mật).*
+
+<video src="videos/UG-001-dang-nhap/03.webm" controls muted width="100%"></video>
+
+
 
 ### Bước 4. Bấm nút Đăng nhập
 
@@ -52,6 +75,10 @@ Kiểm tra lại Email/Mật khẩu rồi bấm nút **Đăng nhập** đúng m�
 
 *Hình 4: Bấm Đăng nhập.*
 
+<video src="videos/UG-001-dang-nhap/04.webm" controls muted width="100%"></video>
+
+
+
 ### Bước 5. Xác nhận đăng nhập thành công
 
 Hệ thống chuyển sang **Trang chủ** với menu bên trái (Danh mục, Bán hàng, Sản xuất, Mua hàng, Hệ thống...) và tên tài khoản ở góc phải trên — đây là dấu hiệu đăng nhập thành công.
@@ -59,6 +86,10 @@ Hệ thống chuyển sang **Trang chủ** với menu bên trái (Danh mục, B�
 ![Hình 5: Trang chủ sau khi đăng nhập.](images/UG-001-dang-nhap/05-dang-nhap-thanh-cong.png)
 
 *Hình 5: Trang chủ sau khi đăng nhập.*
+
+<video src="videos/UG-001-dang-nhap/05.webm" controls muted width="100%"></video>
+
+
 
 ## 4. Khi không thao tác được
 

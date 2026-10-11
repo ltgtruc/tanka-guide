@@ -4,15 +4,28 @@
 **Mục tiêu:** Tạo một quyết toán lắp đặt cho 1 đội lắp đặt từ các mã sản xuất đủ điều kiện, rồi chuyển trạng thái từ Nháp đến Hoàn thành.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa. Điều kiện "đã lắp đặt 100%, có ngày HTLĐ và HTVS" của mã sản xuất được ghi nhận ở màn hình **Sản xuất > Giám sát tiến độ SX** (bấm vào ô Đội LĐ / Ngày HTVS tương ứng để nhập) — xem hướng dẫn UG-033 "Sản xuất, giao hàng và lắp đặt".
+**Cần có sẵn:**
+
+- Lệnh sản xuất đã lắp đặt 100%, có Đội LĐ, ngày HTLĐ và HTVS trên Giám sát tiến độ SX (UG-033, UG-039).
+- Đã có đơn giá lắp đặt cho đội (UG-038).
+
+**Nên đọc trước:** UG-033, UG-038.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Sản xuất** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Điều kiện "đã lắp đặt 100%, có ngày HTLĐ và HTVS" của mã sản xuất được ghi nhận ở màn hình **Sản xuất > Giám sát tiến độ SX** (bấm vào ô Đội LĐ / Ngày HTVS tương ứng để nhập) — xem hướng dẫn UG-033 "Sản xuất, giao hàng và lắp đặt".
 
 | Trường | Giá trị |
 | --- | --- |
 | Đội lắp đặt | Đạt LD |
-| Mã sản xuất được chọn | SX_202610_0012 (đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội Đạt LD) |
-| Mã quyết toán sinh ra | QTLD_202610_0004 |
+| Mã sản xuất được chọn | SX_202610_0013 (đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội Đạt LD) |
+| Mã quyết toán sinh ra | QTLD_202610_0005 |
 | Ghi chú khi chuyển trạng thái | đã hoàn thành bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -29,6 +42,8 @@ BẮT ĐẦU → Tạo mới, chọn Đội lắp đặt và mã sản xuất đ
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở Quyết toán lắp đặt
 
 Ở menu bên trái, mở **Sản xuất**, trong danh sách sổ xuống bấm **Quyết toán lắp đặt**.
@@ -36,6 +51,8 @@ BẮT ĐẦU → Tạo mới, chọn Đội lắp đặt và mã sản xuất đ
 ![Hình 2: Mở menu Sản xuất, chọn Quyết toán lắp đặt.](images/UG-036-quyet-toan-lap-dat/02-mo-module-san-xuat-chon-quyet-toan-lap-dat.png)
 
 *Hình 2: Mở menu Sản xuất, chọn Quyết toán lắp đặt.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/02.webm" controls muted width="100%"></video>
 
 ### Bước 3. Màn hình Danh sách quyết toán lắp đặt
 
@@ -45,6 +62,8 @@ Màn hình hiện ra với danh sách các quyết toán lắp đặt đã có.
 
 *Hình 3: Danh sách quyết toán lắp đặt.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/03.webm" controls muted width="100%"></video>
+
 ### Bước 4. Bấm nút Tạo mới
 
 Bấm nút **Tạo mới** ở góc phải màn hình để mở màn hình **Chi tiết quyết toán lắp đặt**.
@@ -52,6 +71,8 @@ Bấm nút **Tạo mới** ở góc phải màn hình để mở màn hình **Ch
 ![Hình 4: Bấm nút Tạo mới.](images/UG-036-quyet-toan-lap-dat/04-bam-nut-tao-moi.png)
 
 *Hình 4: Bấm nút Tạo mới.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/04.webm" controls muted width="100%"></video>
 
 ### Bước 5. Chọn Đội lắp đặt
 
@@ -61,6 +82,8 @@ Bấm vào ô **Đội lắp đặt**, chọn 1 đội từ danh sách sổ xu�
 
 *Hình 5: Chọn Đội lắp đặt.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Chọn mã sản xuất
 
 Bấm vào ô **Chọn mã sản xuất** để chọn 1 mã sản xuất của đội vừa chọn.
@@ -68,6 +91,8 @@ Bấm vào ô **Chọn mã sản xuất** để chọn 1 mã sản xuất của 
 ![Hình 6: Chọn mã sản xuất.](images/UG-036-quyet-toan-lap-dat/06-bam-chon-ma-san-xuat-cua-doi-vua-chon.png)
 
 *Hình 6: Chọn mã sản xuất.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/06.webm" controls muted width="100%"></video>
 
 > Chỉ chọn được mã SX có dòng đã lắp đặt 100%, có ngày HTLĐ và HTVS theo đội đã chọn — nếu danh sách hiện "No available options" nghĩa là đội này chưa có mã sản xuất nào đủ điều kiện. Để ghi nhận các điều kiện này, vào **Sản xuất > Giám sát tiến độ SX** (xem hướng dẫn UG-033), bấm vào ô Đội LĐ và Ngày HTVS tương ứng với dòng SX cần cập nhật.
 
@@ -79,6 +104,8 @@ Bấm nút **Thêm** bên cạnh mã sản xuất vừa chọn để đưa dòng
 
 *Hình 7: Bấm nút Thêm.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/07.webm" controls muted width="100%"></video>
+
 > Nếu có phụ thu thì bấm nút Thêm ở khung Phụ thu; nếu có giảm trừ thì bấm nút Thêm ở khung Giảm trừ.
 
 ### Bước 8. Bấm Lưu để hoàn thành tạo mới
@@ -88,6 +115,8 @@ Kiểm tra lại dòng vừa thêm rồi bấm nút **Lưu** đúng một lần 
 ![Hình 8: Bấm Lưu.](images/UG-036-quyet-toan-lap-dat/08-bam-nut-luu-de-hoan-thanh-viec-tao-moi-quyet-toan.png)
 
 *Hình 8: Bấm Lưu.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/08.webm" controls muted width="100%"></video>
 
 > Sau khi Lưu, màn hình hiện thêm khung Trạng thái với giá trị ban đầu là Nháp.
 
@@ -99,6 +128,8 @@ Kiểm tra lại dòng vừa thêm rồi bấm nút **Lưu** đúng một lần 
 
 *Hình 9: Chuyển trạng thái sang Đã gửi.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/09.webm" controls muted width="100%"></video>
+
 ### Bước 10. Xác nhận đã chuyển sang Đã gửi
 
 Ô Trạng thái nay hiển thị **Đã gửi**.
@@ -106,6 +137,8 @@ Kiểm tra lại dòng vừa thêm rồi bấm nút **Lưu** đúng một lần 
 ![Hình 10: Trạng thái đã là Đã gửi.](images/UG-036-quyet-toan-lap-dat/10-trang-thai-da-chuyen-sang-da-gui.png)
 
 *Hình 10: Trạng thái đã là Đã gửi.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/10.webm" controls muted width="100%"></video>
 
 ### Bước 11. Chuyển trạng thái sang Đã duyệt
 
@@ -115,6 +148,8 @@ Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã duyệt*
 
 *Hình 11: Chuyển trạng thái sang Đã duyệt.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/11.webm" controls muted width="100%"></video>
+
 ### Bước 12. Xác nhận đã chuyển sang Đã duyệt
 
 Ô Trạng thái nay hiển thị **Đã duyệt**.
@@ -122,6 +157,8 @@ Lặp lại thao tác: bấm nút chuyển trạng thái, chọn **Đã duyệt*
 ![Hình 12: Trạng thái đã là Đã duyệt.](images/UG-036-quyet-toan-lap-dat/12-trang-thai-da-chuyen-sang-da-duyet.png)
 
 *Hình 12: Trạng thái đã là Đã duyệt.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/12.webm" controls muted width="100%"></video>
 
 ### Bước 13. Chuyển trạng thái sang Hoàn thành
 
@@ -131,6 +168,8 @@ Lặp lại thao tác lần cuối: bấm nút chuyển trạng thái, chọn **
 
 *Hình 13: Chuyển trạng thái sang Hoàn thành.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/13.webm" controls muted width="100%"></video>
+
 ### Bước 14. Xác nhận đã Hoàn thành
 
 Ô Trạng thái nay hiển thị **Hoàn thành** — quyết toán lắp đặt đã xử lý xong.
@@ -138,6 +177,8 @@ Lặp lại thao tác lần cuối: bấm nút chuyển trạng thái, chọn **
 ![Hình 14: Trạng thái đã là Hoàn thành.](images/UG-036-quyet-toan-lap-dat/14-trang-thai-da-chuyen-sang-hoan-thanh.png)
 
 *Hình 14: Trạng thái đã là Hoàn thành.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/14.webm" controls muted width="100%"></video>
 
 ### Bước 15. Bấm nút Trở lại
 
@@ -147,6 +188,8 @@ Bấm nút **Trở lại** ở góc trên bên phải để quay về danh sách
 
 *Hình 15: Bấm Trở lại.*
 
+<video src="videos/UG-036-quyet-toan-lap-dat/15.webm" controls muted width="100%"></video>
+
 ### Bước 16. Kiểm tra kết quả trong danh sách
 
 Bản ghi quyết toán lắp đặt vừa tạo xuất hiện trong danh sách với trạng thái **Hoàn thành**.
@@ -154,6 +197,8 @@ Bản ghi quyết toán lắp đặt vừa tạo xuất hiện trong danh sách 
 ![Hình 16: Danh sách sau khi hoàn thành.](images/UG-036-quyet-toan-lap-dat/16-danh-sach-quyet-toan-lap-dat-sau-khi-hoan-thanh.png)
 
 *Hình 16: Danh sách sau khi hoàn thành.*
+
+<video src="videos/UG-036-quyet-toan-lap-dat/16.webm" controls muted width="100%"></video>
 
 ## 4. Khi không thao tác được
 

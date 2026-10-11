@@ -6,13 +6,25 @@
 
 > Hướng dẫn này nối tiếp **UG-022 Đơn bán hàng**. Sau khi đơn ở trạng thái "Đã yêu cầu SX", làm tiếp **UG-030 Tạo lệnh sản xuất** để tạo lệnh SX từ đơn này.
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa (đơn bán hàng BH_202610_0013, tạo bằng hướng dẫn "Đơn bán hàng"). Khi tự thao tác, hãy dùng đúng mã đơn bán hàng bạn vừa tạo.
+**Cần có sẵn:**
+
+- Có đơn bán hàng đang **Nháp** (UG-022).
+
+**Nên đọc trước:** UG-022.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Bán hàng** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác. Khi tự thao tác, hãy dùng đúng mã đơn bán hàng bạn vừa tạo.
 
 | Trường | Giá trị |
 | --- | --- |
-| Đơn BH nguồn | BH_202610_0013 (Khách hàng: Anh Kỳ, Chi nhánh: Hóc Môn) |
+| Đơn BH nguồn | BH_202610_0014 (Khách hàng: Anh Kỳ, Chi nhánh: Hóc Môn) |
 | Ghi chú khi chuyển trạng thái | đã thực hiện bước này |
 
 ## 2. Sơ đồ quy trình tóm tắt
@@ -29,6 +41,8 @@ BẮT ĐẦU → Mở Bán hàng > Đơn bán hàng → Mở đơn đang Nháp �
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-031-quan-ly-san-xuat/01.webm" controls muted width="100%"></video>
+
 ### Bước 2. Mở danh sách Đơn bán hàng
 
 Ở menu bên trái, mở **Bán hàng > Đơn bán hàng**.
@@ -37,15 +51,19 @@ BẮT ĐẦU → Mở Bán hàng > Đơn bán hàng → Mở đơn đang Nháp �
 
 *Hình 2: Mở danh sách Đơn bán hàng.*
 
+<video src="videos/UG-031-quan-ly-san-xuat/02.webm" controls muted width="100%"></video>
+
 ### Bước 3. Mở đơn bán hàng cần chuyển trạng thái
 
-Bấm vào **mã đơn BH** (ví dụ `BH_202610_0013`) có cột Trạng thái là **Nháp** để mở màn hình **Chi tiết đơn BH**.
+Bấm vào **mã đơn BH** (ví dụ `BH_202610_0014`) có cột Trạng thái là **Nháp** để mở màn hình **Chi tiết đơn BH**.
 
 > Đơn tạo từ báo giá có thêm cột **Từ báo giá** (mã BG_...) đứng trước mã đơn — bấm đúng vào mã **BH_...**, không bấm mã BG.
 
 ![Hình 3: Mở đơn bán hàng, trạng thái hiện tại là Nháp.](images/UG-031-quan-ly-san-xuat/03-mo-don-ban-hang-moi-tao.png)
 
 *Hình 3: Mở đơn bán hàng, trạng thái hiện tại là Nháp.*
+
+<video src="videos/UG-031-quan-ly-san-xuat/03.webm" controls muted width="100%"></video>
 
 ### Bước 4. Chuyển trạng thái sang Đã gửi
 
@@ -55,6 +73,8 @@ Bấm nút mũi tên (⇄) cạnh ô **Trạng thái**, chọn **Đã gửi**, c
 
 *Hình 4: Chuyển trạng thái sang Đã gửi.*
 
+<video src="videos/UG-031-quan-ly-san-xuat/04.webm" controls muted width="100%"></video>
+
 ### Bước 5. Chuyển trạng thái sang Đã duyệt
 
 Lặp lại thao tác: bấm nút mũi tên trạng thái, chọn **Đã duyệt**, nhập ghi chú (nếu cần) rồi bấm **Cập nhật** và **Đồng ý**.
@@ -63,6 +83,8 @@ Lặp lại thao tác: bấm nút mũi tên trạng thái, chọn **Đã duyệt
 
 *Hình 5: Chuyển trạng thái sang Đã duyệt.*
 
+<video src="videos/UG-031-quan-ly-san-xuat/05.webm" controls muted width="100%"></video>
+
 ### Bước 6. Chuyển trạng thái sang Đã yêu cầu SX
 
 Tiếp tục chuyển trạng thái sang **Đã yêu cầu SX**. Đơn bán hàng lúc này đã đủ điều kiện để tạo lệnh sản xuất — các dòng của đơn sẽ xuất hiện trong popup "Chọn các dòng đơn BH để SX" ở màn hình **Sản xuất > Quản lý SX** (xem UG-030).
@@ -70,6 +92,8 @@ Tiếp tục chuyển trạng thái sang **Đã yêu cầu SX**. Đơn bán hàn
 ![Hình 6: Chuyển trạng thái sang Đã yêu cầu SX.](images/UG-031-quan-ly-san-xuat/06-chuyen-trang-thai-sang-da-yeu-cau-sx.png)
 
 *Hình 6: Chuyển trạng thái sang Đã yêu cầu SX.*
+
+<video src="videos/UG-031-quan-ly-san-xuat/06.webm" controls muted width="100%"></video>
 
 > Mỗi lần chuyển trạng thái, hệ thống hiện popup xác nhận — phải bấm Cập nhật rồi bấm Đồng ý ở popup tiếp theo mới hoàn tất một bước chuyển. Không thể nhảy cóc trạng thái.
 

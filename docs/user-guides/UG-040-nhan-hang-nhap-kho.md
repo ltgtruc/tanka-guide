@@ -4,17 +4,30 @@
 **Mục tiêu:** Duyệt các đơn mua hàng đã lập cho một lệnh sản xuất và ghi sổ phiếu nhận hàng để nhập vật tư vào kho.  
 **Dành cho:** Người mới sử dụng TANKA Door
 
-> Hướng dẫn này nối tiếp **UG-032** (lệnh SX đã "Đã mua hàng"). Vật tư phải được nhập kho đầy đủ thì lệnh SX mới chuyển được sang "Đang SX" ở **UG-033** — khi chuyển "Đang SX", hệ thống tự xuất kho vật tư cho sản xuất.
+> Hướng dẫn này nối tiếp **UG-032** (lệnh SX đã "Đã mua hàng"). Các trường hợp nhận hàng ngoài đơn, trả hàng NCC và đảo phiếu xem **UG-041**. Vật tư phải được nhập kho đầy đủ thì lệnh SX mới chuyển được sang "Đang SX" ở **UG-033** — khi chuyển "Đang SX", hệ thống tự xuất kho vật tư cho sản xuất.
 
-## 1. Dữ liệu mẫu dùng trong hướng dẫn
+## Trước khi bắt đầu
 
-Dữ liệu dưới đây là dữ liệu thật đã dùng để minh họa.
+**Cần có sẵn:**
+
+- Có đơn mua hàng đang **Nháp** lập từ yêu cầu mua hàng (UG-032).
+- Hàng đã về kho và đã kiểm đếm số lượng thực nhận.
+
+**Nên đọc trước:** UG-032.
+
+**Quyền cần có:** Tài khoản thuộc nhóm có quyền Xem/Tạo/Sửa module **Mua hàng** (UG-063). Nếu không thấy menu hoặc nút như trong ảnh, liên hệ quản trị hệ thống.
+
+> Ảnh minh họa được chụp bằng tài khoản quản trị trên hệ thống thử nghiệm. Thuật ngữ viết tắt (HTK, NVL, BH, SX, YCMH...) và thứ tự các nghiệp vụ: xem **UG-000 Tổng quan**.
+
+## 1. Ví dụ dữ liệu nhập
+
+Ví dụ dưới đây giúp bạn hình dung cách nhập. Hãy nhập dữ liệu thật của công ty bạn; tên/mã có hậu tố số trong ảnh là dữ liệu thử nghiệm, mã chứng từ (BG_, BH_, SX_, MH_...) do hệ thống tự sinh nên của bạn sẽ khác.
 
 | Trường | Giá trị |
 | --- | --- |
-| Lệnh SX | SX_202610_0012 |
-| Đơn mua hàng (Nháp) | MH_202610_0031, MH_202610_0032, MH_202610_0033, MH_202610_0034 |
-| Phiếu nhận hàng sinh ra | NH_202610_0036 → NH_202610_0040 (đơn MH_202610_0033 nhận vào 2 kho nên có 2 phiếu) |
+| Lệnh SX | SX_202610_0013 |
+| Đơn mua hàng (Nháp) | MH_202610_0035, MH_202610_0036, MH_202610_0037, MH_202610_0038 |
+| Phiếu nhận hàng sinh ra | NH_202610_0049 → NH_202610_0053 (đơn MH_202610_0037 nhận vào 2 kho nên có 2 phiếu) |
 
 ## 2. Sơ đồ quy trình tóm tắt
 
@@ -30,6 +43,9 @@ BẮT ĐẦU → Mở Mua hàng > Đơn mua hàng → Mở đơn MH đang Nháp 
 
 *Hình 1: Trang chủ sau khi đăng nhập.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/01.webm" controls muted width="100%"></video>
+
+
 ### Bước 2. Mở danh sách Đơn mua hàng
 
 Ở menu bên trái, mở **Mua hàng > Đơn mua hàng**.
@@ -38,21 +54,30 @@ BẮT ĐẦU → Mở Mua hàng > Đơn mua hàng → Mở đơn MH đang Nháp 
 
 *Hình 2: Mở Mua hàng > Đơn mua hàng.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/02.webm" controls muted width="100%"></video>
+
+
 ### Bước 3. Tìm các đơn mua hàng nháp của lệnh SX
 
-Danh sách hiển thị cột **Sản xuất** (mã lệnh SX) và **Trạng thái**. Các đơn lập từ cùng một yêu cầu mua hàng có cùng mã lệnh SX (ví dụ `SX_202610_0012`) và đang ở trạng thái **Nháp**. Có thể dùng ô lọc **Sản xuất** phía trên để chỉ hiện đơn của lệnh SX cần xử lý.
+Danh sách hiển thị cột **Sản xuất** (mã lệnh SX) và **Trạng thái**. Các đơn lập từ cùng một yêu cầu mua hàng có cùng mã lệnh SX (ví dụ `SX_202610_0013`) và đang ở trạng thái **Nháp**. Có thể dùng ô lọc **Sản xuất** phía trên để chỉ hiện đơn của lệnh SX cần xử lý.
 
-![Hình 3: Các đơn mua hàng nháp của lệnh SX_202610_0012.](images/UG-040-nhan-hang-nhap-kho/03-cac-don-mua-hang-nhap-cua-lenh-sx-202610-0012.png)
+![Hình 3: Các đơn mua hàng nháp của lệnh SX.](images/UG-040-nhan-hang-nhap-kho/03-cac-don-mua-hang-nhap-cua-lenh-sx-202610-0012.png)
 
-*Hình 3: Các đơn mua hàng nháp của lệnh SX_202610_0012.*
+*Hình 3: Các đơn mua hàng nháp của lệnh SX.*
+
+<video src="videos/UG-040-nhan-hang-nhap-kho/03.webm" controls muted width="100%"></video>
+
 
 ### Bước 4. Mở một đơn mua hàng
 
-Bấm vào mã đơn (ví dụ `MH_202610_0034`) để mở **Chi tiết đơn mua hàng**. Kiểm tra nhà cung cấp, danh sách hàng hóa và mục **Nhận hàng** — mỗi dòng đã có sẵn **kho nhận** (có thể đổi trước khi duyệt).
+Bấm vào mã đơn (ví dụ `MH_202610_0038`) để mở **Chi tiết đơn mua hàng**. Kiểm tra nhà cung cấp, danh sách hàng hóa và mục **Nhận hàng** — mỗi dòng đã có sẵn **kho nhận** (có thể đổi trước khi duyệt).
 
-![Hình 4: Mở đơn mua hàng MH_202610_0034.](images/UG-040-nhan-hang-nhap-kho/04-mo-don-mua-hang-mh-202610-0034.png)
+![Hình 4: Mở đơn mua hàng (mã MH_...).](images/UG-040-nhan-hang-nhap-kho/04-mo-don-mua-hang-mh-202610-0034.png)
 
-*Hình 4: Mở đơn mua hàng MH_202610_0034.*
+*Hình 4: Mở đơn mua hàng (mã MH_...).*
+
+<video src="videos/UG-040-nhan-hang-nhap-kho/04.webm" controls muted width="100%"></video>
+
 
 ### Bước 5. Chuyển đơn mua hàng sang Đã duyệt
 
@@ -62,13 +87,19 @@ Bấm nút mũi tên (⇄) cạnh ô **Trạng thái**, chọn **Đã duyệt**,
 
 *Hình 5: Chuyển trạng thái đơn mua hàng sang Đã duyệt.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/05.webm" controls muted width="100%"></video>
+
+
 ### Bước 6. Mở phiếu nhận hàng
 
-Cuộn xuống mục **Phiếu nhận hàng**, bấm vào mã phiếu (ví dụ `NH_202610_0036`). Màn hình **Phiếu nhận hàng** mở ra ở trạng thái **Nháp** với Ngày nhận, Nhà cung cấp, Kho nhận và số lượng nhận đã điền sẵn theo đơn mua hàng.
+Cuộn xuống mục **Phiếu nhận hàng**, bấm vào mã phiếu (ví dụ `NH_202610_0049`). Màn hình **Phiếu nhận hàng** mở ra ở trạng thái **Nháp** với Ngày nhận, Nhà cung cấp, Kho nhận và số lượng nhận đã điền sẵn theo đơn mua hàng.
 
-![Hình 6: Mở phiếu nhận hàng NH_202610_0036.](images/UG-040-nhan-hang-nhap-kho/06-mo-phieu-nhan-hang-nh-202610-0036.png)
+![Hình 6: Mở phiếu nhận hàng (mã NH_...).](images/UG-040-nhan-hang-nhap-kho/06-mo-phieu-nhan-hang-nh-202610-0036.png)
 
-*Hình 6: Mở phiếu nhận hàng NH_202610_0036.*
+*Hình 6: Mở phiếu nhận hàng (mã NH_...).*
+
+<video src="videos/UG-040-nhan-hang-nhap-kho/06.webm" controls muted width="100%"></video>
+
 
 ### Bước 7. Bấm Ghi sổ để nhập kho
 
@@ -78,21 +109,30 @@ Kiểm tra **Số lượng nhận** của từng dòng (sửa nếu hàng về t
 
 *Hình 7: Bấm Ghi sổ để nhập kho.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/07.webm" controls muted width="100%"></video>
+
+
 ### Bước 8. Đơn mua hàng có nhiều phiếu nhận hàng
 
-Nếu các dòng của đơn nhận vào nhiều kho khác nhau, mục **Phiếu nhận hàng** sẽ có **một phiếu cho mỗi kho** (ví dụ đơn `MH_202610_0033` có `NH_202610_0037` và `NH_202610_0038`). Lặp lại bước 6–7 cho **từng** phiếu.
+Nếu các dòng của đơn nhận vào nhiều kho khác nhau, mục **Phiếu nhận hàng** sẽ có **một phiếu cho mỗi kho** (ví dụ đơn `MH_202610_0037` có `NH_202610_0050` và `NH_202610_0051`). Lặp lại bước 6–7 cho **từng** phiếu.
 
 ![Hình 8: Mở phiếu nhận hàng thứ hai của cùng đơn mua hàng.](images/UG-040-nhan-hang-nhap-kho/12-mo-phieu-nhan-hang-nh-202610-0038.png)
 
 *Hình 8: Mở phiếu nhận hàng thứ hai của cùng đơn mua hàng.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/12.webm" controls muted width="100%"></video>
+
+
 ![Hình 9: Ghi sổ phiếu nhận hàng thứ hai.](images/UG-040-nhan-hang-nhap-kho/13-bam-ghi-so-de-nhap-kho-nh-202610-0038.png)
 
 *Hình 9: Ghi sổ phiếu nhận hàng thứ hai.*
 
+<video src="videos/UG-040-nhan-hang-nhap-kho/13.webm" controls muted width="100%"></video>
+
+
 ### Bước 9. Lặp lại cho các đơn mua hàng còn lại
 
-Quay lại **Mua hàng > Đơn mua hàng**, lần lượt làm bước 4–8 cho từng đơn còn **Nháp** của cùng lệnh SX (trong ví dụ: MH_202610_0032 và MH_202610_0031).
+Quay lại **Mua hàng > Đơn mua hàng**, lần lượt làm bước 4–8 cho từng đơn còn **Nháp** của cùng lệnh SX (trong ví dụ: MH_202610_0036 và MH_202610_0035).
 
 ### Bước 10. Kiểm tra kết quả
 
@@ -101,6 +141,9 @@ Sau khi ghi sổ hết các phiếu, mở lại đơn mua hàng: trạng thái h
 ![Hình 10: Đơn mua hàng đã duyệt và nhận hàng vào kho.](images/UG-040-nhan-hang-nhap-kho/22-don-mua-hang-da-duyet-va-nhan-hang-vao-kho.png)
 
 *Hình 10: Đơn mua hàng đã duyệt và nhận hàng vào kho.*
+
+<video src="videos/UG-040-nhan-hang-nhap-kho/22.webm" controls muted width="100%"></video>
+
 
 ## 4. Khi không thao tác được
 
