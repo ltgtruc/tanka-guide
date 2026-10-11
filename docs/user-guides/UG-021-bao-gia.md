@@ -138,6 +138,13 @@ Báo giá mới xuất hiện ở đầu danh sách với mã hệ thống tự 
 
 <video src="videos/UG-021-bao-gia/09.webm" controls muted width="100%"></video>
 
+### Video tổng hợp toàn bộ thao tác
+
+Video dưới đây ghép liền toàn bộ các bước ở trên, từ lúc mở chức năng đến khi hoàn thành — xem lại một lượt trước khi tự thao tác.
+
+<video src="videos/UG-021-bao-gia/full.webm" controls muted width="100%"></video>
+
+
 > Việc chuyển trạng thái tiếp theo (Chờ duyệt, Đã duyệt...) và tạo Đơn bán hàng từ báo giá là nghiệp vụ riêng, không thuộc phạm vi hướng dẫn tạo mới này.
 
 ## 4. Khi không thao tác được

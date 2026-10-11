@@ -95,6 +95,13 @@ Tiếp tục chuyển trạng thái sang **Đã yêu cầu SX**. Đơn bán hàn
 
 <video src="videos/UG-031-quan-ly-san-xuat/06.webm" controls muted width="100%"></video>
 
+### Video tổng hợp toàn bộ thao tác
+
+Video dưới đây ghép liền toàn bộ các bước ở trên, từ lúc mở chức năng đến khi hoàn thành — xem lại một lượt trước khi tự thao tác.
+
+<video src="videos/UG-031-quan-ly-san-xuat/full.webm" controls muted width="100%"></video>
+
+
 > Mỗi lần chuyển trạng thái, hệ thống hiện popup xác nhận — phải bấm Cập nhật rồi bấm Đồng ý ở popup tiếp theo mới hoàn tất một bước chuyển. Không thể nhảy cóc trạng thái.
 
 ## 4. Khi không thao tác được

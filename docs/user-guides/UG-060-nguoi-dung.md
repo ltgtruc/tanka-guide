@@ -148,6 +148,12 @@ Bấm **thùng rác** → **Đồng ý**. Thao tác không hoàn tác được.
 
 <video src="videos/UG-060-nguoi-dung/11.webm" controls muted width="100%"></video>
 
+### Video tổng hợp toàn bộ thao tác
+
+Video dưới đây ghép liền toàn bộ các bước ở trên, từ lúc mở chức năng đến khi hoàn thành — xem lại một lượt trước khi tự thao tác.
+
+<video src="videos/UG-060-nguoi-dung/full.webm" controls muted width="100%"></video>
+
 ## 4. Khi không thao tác được
 
 | Hiện tượng | Cách xử lý ngay |

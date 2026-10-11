@@ -88,6 +88,12 @@ Nút **Khóa kỳ** ở góc phải dùng để chốt sổ kỳ. Chỉ bấm kh
 
 <video src="videos/UG-076-ky-kho/06.webm" controls muted width="100%"></video>
 
+### Video tổng hợp toàn bộ thao tác
+
+Video dưới đây ghép liền toàn bộ các bước ở trên, từ lúc mở chức năng đến khi hoàn thành — xem lại một lượt trước khi tự thao tác.
+
+<video src="videos/UG-076-ky-kho/full.webm" controls muted width="100%"></video>
+
 ## 3. Checklist trước khi khóa kỳ (dành cho người phụ trách)
 
 - [ ] Không còn phiếu kho, phiếu nhận hàng, phiếu giao hàng ở trạng thái Nháp trong tháng.

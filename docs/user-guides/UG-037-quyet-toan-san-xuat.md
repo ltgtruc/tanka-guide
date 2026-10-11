@@ -201,6 +201,13 @@ Bản ghi quyết toán sản xuất vừa tạo xuất hiện trong danh sách 
 
 <video src="videos/UG-037-quyet-toan-san-xuat/16.webm" controls muted width="100%"></video>
 
+### Video tổng hợp toàn bộ thao tác
+
+Video dưới đây ghép liền toàn bộ các bước ở trên, từ lúc mở chức năng đến khi hoàn thành — xem lại một lượt trước khi tự thao tác.
+
+<video src="videos/UG-037-quyet-toan-san-xuat/full.webm" controls muted width="100%"></video>
+
+
 ## 4. Khi không thao tác được
 
 | Hiện tượng | Cách xử lý ngay |
